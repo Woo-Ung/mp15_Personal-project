@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("집중모드");
         StageManager.Instance.StateUpdate(GameState.집중);
     }
+    
 
     //private void Undo(InputAction.CallbackContext context)
     //{
