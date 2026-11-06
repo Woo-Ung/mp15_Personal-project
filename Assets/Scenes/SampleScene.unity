@@ -880,6 +880,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   _PlayerState: 0
   _focusAction: {fileID: 1849905619191669113, guid: cdd01ce6a0f5a3e40aad58a9c49d8cff, type: 3}
+  _attackAction: {fileID: 7520176361902193732, guid: cdd01ce6a0f5a3e40aad58a9c49d8cff, type: 3}
   _directionAction: {fileID: 2459678351085388295, guid: cdd01ce6a0f5a3e40aad58a9c49d8cff, type: 3}
   _distanceAction: {fileID: -4884029557276584604, guid: cdd01ce6a0f5a3e40aad58a9c49d8cff, type: 3}
   _undoAction: {fileID: 8913434135651166316, guid: cdd01ce6a0f5a3e40aad58a9c49d8cff, type: 3}
@@ -897,6 +898,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAction
   _attackRouteCanvas: {fileID: 1901421250281526570, guid: aea3efc4f19e5e1499515ea8f13e3b5f, type: 3}
   _pointList: []
+  _waitTime: 1.5
 --- !u!54 &889124791
 Rigidbody:
   m_ObjectHideFlags: 0

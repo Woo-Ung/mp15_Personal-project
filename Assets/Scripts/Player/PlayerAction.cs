@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,9 +9,16 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 {
     [SerializeField] private Canvas _attackRouteCanvas;
     [SerializeField] private List<PlayerAttackPoint> _pointList = new();
+    [SerializeField] private float _waitTime;
+    private WaitForSeconds _wait;
     private GameState _charaState;
 
     private int testnum;
+
+    private void Awake()
+    {
+        Init();
+    }
 
     private void Start()
     {
@@ -19,19 +27,24 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse2))
-        {
-            if (_pointList != null)
-            {
-                if (testnum != 0)
-                {
-                    transform.position = _pointList[testnum]._transform.position;
-                    transform.rotation = _pointList[testnum - 1]._transform.rotation;
-                }
+        //if(Input.GetKeyDown(KeyCode.Mouse2))
+        //{
+        //    if (_pointList != null)
+        //    {
+        //        if (testnum != 0)
+        //        {
+        //            transform.position = _pointList[testnum]._transform.position;
+        //            transform.rotation = _pointList[testnum - 1]._transform.rotation;
+        //        }
 
-                testnum++;             
-            }
-        }
+        //        testnum++;             
+        //    }
+        //}
+    }
+
+    private void Init()
+    {        
+        _wait = new WaitForSeconds(_waitTime);
     }
 
     private void CacheComponents()
@@ -65,7 +78,8 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 
     public void AttackState()
     {
-
+        StartCoroutine(Attack());
+        
     }
     public void DeadState()
     {
@@ -76,4 +90,21 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 
     }
 
+    private IEnumerator Attack()
+    {
+        if (_pointList != null)
+        {
+            for (int i = 0; i < _pointList.Count; i++)
+            {
+                if (i > 0)
+                {
+                    transform.position = _pointList[i]._transform.position;
+                    transform.rotation = _pointList[i - 1]._transform.rotation;
+                }                
+                yield return _wait;
+                _waitTime -= 0.2f;
+                _wait = new WaitForSeconds(_waitTime);
+            }
+        }        
+    }
 }

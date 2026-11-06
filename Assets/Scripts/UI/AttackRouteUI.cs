@@ -14,6 +14,7 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
 
     private PlayerAction _playerAction;
     private GameObject _ground;
+    private bool _isSelectNow = false;
     
 
     [SerializeField] private AttackRouteUI attackPoint;
@@ -42,6 +43,7 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
         size.y = _maxDistance;
         _distanceImage.rectTransform.sizeDelta = size;
         _playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
+        _isSelectNow = true;
         AttackPointSave();
     }
 
@@ -49,6 +51,7 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
     {
         PlayerAttackPoint point = new();
         point.SetPosition(_testPointImage.GetComponentInParent<AttackRouteUI>().gameObject.transform);
+        point.SetCanvas(gameObject.GetComponent<Canvas>());
         _playerAction.AddAttackPoint(point);
     }
 
@@ -85,6 +88,7 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
             AttackRouteUI a = Instantiate(attackPoint, _testPointImage.gameObject.transform.position, attackPoint.transform.rotation);
             _testPointImage.gameObject.SetActive(false);
             _isRotate = false;
+            _isSelectNow = false;
             a._isRotate = true;
         }
     }
@@ -104,7 +108,14 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
     }
     public void AttackState()
     {
-        
+        if(_isSelectNow == true)
+        {
+            _distanceImage.gameObject.SetActive(false);
+            _testPointImage.gameObject.SetActive(false);           
+        }
+        _isRotate = false;
+        _directionImage.color = new Color(1f, 0.5f, 0.5f, 1f);
+        _distanceImage.color = new Color(1f, 0.5f, 0.5f, 1f);
     }
     public void DeadState()
     {
