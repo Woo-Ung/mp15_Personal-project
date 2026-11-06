@@ -12,6 +12,7 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private float _maxDistance;
 
+    private PlayerAction _playerAction;
     private GameObject _ground;
     
 
@@ -29,17 +30,26 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
         if (_isRotate == true)
         {
             SetAttackRoute();
-        }
-      
+        }      
     }
 
     private void CacheComponents()
     {
         StageManager.Instance.Subscribe(this);
-        _ground = GameObject.Find("Ground");
+        _isRotate = true;
+         _ground = GameObject.Find("Ground");
         Vector2 size = _distanceImage.rectTransform.sizeDelta;
         size.y = _maxDistance;
         _distanceImage.rectTransform.sizeDelta = size;
+        _playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
+        AttackPointSave();
+    }
+
+    public void AttackPointSave()
+    {
+        PlayerAttackPoint point = new();
+        point.SetPosition(_testPointImage.GetComponentInParent<AttackRouteUI>().gameObject.transform);
+        _playerAction.AddAttackPoint(point);
     }
 
     public void SetAttackRoute()
@@ -71,7 +81,7 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
             }                     
         }
         if (Input.GetMouseButtonDown(0))
-        {
+        {            
             AttackRouteUI a = Instantiate(attackPoint, _testPointImage.gameObject.transform.position, attackPoint.transform.rotation);
             _testPointImage.gameObject.SetActive(false);
             _isRotate = false;
@@ -81,13 +91,10 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
 
     public void IdleState()
     {
-        _directionImage.gameObject.SetActive(false);
-        _distanceImage.gameObject.SetActive(false);
+        
     }
     public void FocusState()
-    {
-        _directionImage.gameObject.SetActive(true);
-        _distanceImage.gameObject.SetActive(true);
+    {       
         _distanceImage.fillAmount = 0;
         _isRotate = true;      
     }
