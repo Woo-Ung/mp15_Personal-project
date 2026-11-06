@@ -6,8 +6,14 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
 {
     [SerializeField] private Image _directionImage;
     [SerializeField] private Image _distanceImage;
-    [SerializeField] private LayerMask _groundLayer;
 
+    [SerializeField] private Image _testPointImage;
+
+    [SerializeField] private LayerMask _groundLayer;
+    [SerializeField] private float _maxDistance;
+
+    private GameObject _ground;
+    
 
     [SerializeField] private AttackRouteUI attackPoint;
 
@@ -30,27 +36,46 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
     private void CacheComponents()
     {
         StageManager.Instance.Subscribe(this);
+        _ground = GameObject.Find("Ground");
+        Vector2 size = _distanceImage.rectTransform.sizeDelta;
+        size.y = _maxDistance;
+        _distanceImage.rectTransform.sizeDelta = size;
     }
 
     public void SetAttackRoute()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Plane plane = new Plane(Vector3.up, Vector3.zero);
+        Plane plane = new Plane(Vector3.up, _ground.transform.position);
 
         if (plane.Raycast(ray, out float distance))
         {            
             Vector3 direction = ray.GetPoint(distance) - transform.position;
-            _distanceImage.fillAmount = Vector3.Distance(ray.GetPoint(distance), transform.position)/ 15;
-            transform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));          
+            
+            _distanceImage.fillAmount = Vector3.Distance(ray.GetPoint(distance), transform.position)/ _maxDistance;
+            direction.y = 0f;
+
+            float direction2 = direction.magnitude;
+
+            if (direction2 > _maxDistance)
+            {                
+                _testPointImage.gameObject.transform.position = transform.position + direction.normalized * _maxDistance;
+            }
+            else
+            {
+                _testPointImage.gameObject.transform.position = ray.GetPoint(distance);
+            }
+
+            if (direction.sqrMagnitude > 0.0001f)
+            {
+                transform.rotation = Quaternion.LookRotation(direction);
+            }                     
         }
         if (Input.GetMouseButtonDown(0))
         {
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _groundLayer))
-            {
-                AttackRouteUI a = Instantiate(attackPoint, hit.point, attackPoint.transform.rotation);
-                _isRotate = false;
-                a._isRotate = true;
-            }
+            AttackRouteUI a = Instantiate(attackPoint, _testPointImage.gameObject.transform.position, attackPoint.transform.rotation);
+            _testPointImage.gameObject.SetActive(false);
+            _isRotate = false;
+            a._isRotate = true;
         }
     }
 

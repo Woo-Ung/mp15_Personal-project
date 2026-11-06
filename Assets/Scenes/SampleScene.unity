@@ -808,6 +808,10 @@ PrefabInstance:
       propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5905114767320508067, guid: aea3efc4f19e5e1499515ea8f13e3b5f, type: 3}
+      propertyPath: _maxDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8622464952742381062, guid: aea3efc4f19e5e1499515ea8f13e3b5f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
