@@ -1,12 +1,11 @@
-using UnityEditor.SceneManagement;
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class StageManager : MonoBehaviour
-{
-    [SerializeField] private Image _focusImage;
-    [SerializeField] private Camera _charaCamera;
+{    
+    private List<IStateObserver> _subscriber = new();
 
     public static StageManager Instance { get; private set; }
 
@@ -15,25 +14,69 @@ public class StageManager : MonoBehaviour
         SetSingleton();
         Init();
     }
-        
+
+    private void Start()
+    {
+        CasheComponent();
+    }
+
     private void Init()
     {
-        _focusImage.gameObject.SetActive(false);
-        _charaCamera.gameObject.SetActive(false);
-    }
 
-    public void OnFocusMode()
+    }       
+
+    private void CasheComponent()
     {
-        _focusImage.gameObject.SetActive(true);
-        _charaCamera.gameObject.SetActive(true);
+        StateUpdate(GameState.기본);
     }
 
-    public void OffFocusMode()
+    public void Subscribe(IStateObserver observer)
     {
-        _focusImage.gameObject.SetActive(false);
-        _charaCamera.gameObject.SetActive(false);
+        _subscriber.Add(observer);
     }
 
+    public void StateUpdate(GameState state)
+    {
+        switch (state)
+        {
+            case GameState.기본:
+                for(int i = 0; i < _subscriber.Count; i++)
+                {
+                    _subscriber[i].IdleState();
+                }
+                break;
+            case GameState.집중:
+                for (int i = 0; i < _subscriber.Count; i++)
+                {
+                    _subscriber[i].FocusState();
+                }
+                break;
+            case GameState.공격:
+                for (int i = 0; i < _subscriber.Count; i++)
+                {
+                    _subscriber[i].AttackState();
+                }
+                break;
+            case GameState.응징:
+                for (int i = 0; i < _subscriber.Count; i++)
+                {
+                    _subscriber[i].PunishState();
+                }
+                break;
+            case GameState.사망:
+                for (int i = 0; i < _subscriber.Count; i++)
+                {
+                    _subscriber[i].DeadState();
+                }
+                break;
+            case GameState.클리어:
+                for (int i = 0; i < _subscriber.Count; i++)
+                {
+                    _subscriber[i].ClearState();
+                }
+                break;
+        }
+    }
 
     private void SetSingleton()
     {

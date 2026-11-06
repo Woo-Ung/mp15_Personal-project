@@ -1,10 +1,9 @@
-enum GameState
+public enum GameState
 {
-    관찰,
+    기본,
     집중,
     공격,
     응징,
-    공격종료,
     사망,
     클리어
 }

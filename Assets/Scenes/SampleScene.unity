@@ -628,6 +628,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 474500257}
+  - component: {fileID: 474500258}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -652,6 +653,19 @@ Transform:
   - {fileID: 1886660483}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &474500258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474500256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8694afb35d7ad974b9b47e93458f149f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraController
+  _charaCamera: {fileID: 1886660479}
 --- !u!1 &516038408
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,6 +678,7 @@ GameObject:
   - component: {fileID: 516038411}
   - component: {fileID: 516038410}
   - component: {fileID: 516038409}
+  - component: {fileID: 516038413}
   m_Layer: 10
   m_Name: FocusCanvas
   m_TagString: Untagged
@@ -754,6 +769,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &516038413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516038408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d089c6534c5e647418a52af69043ac82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIController
+  _focusImage: {fileID: 1623232438}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,8 +910,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279becc62f8a28b4d830eff1946cd153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageManager
-  _focusImage: {fileID: 1623232438}
-  _charaCamera: {fileID: 1886660479}
 --- !u!4 &925394324
 Transform:
   m_ObjectHideFlags: 0
@@ -1211,9 +1237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1886660483}
   - component: {fileID: 1886660479}
-  - component: {fileID: 1886660482}
   - component: {fileID: 1886660481}
-  - component: {fileID: 1886660480}
   m_Layer: 0
   m_Name: Chara Camera
   m_TagString: MainCamera
@@ -1272,18 +1296,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &1886660480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886660478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6ebd82e6ee71bf4cb559927f9454827, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameManager
 --- !u!114 &1886660481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1328,14 +1340,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!81 &1886660482
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886660478}
-  m_Enabled: 1
 --- !u!4 &1886660483
 Transform:
   m_ObjectHideFlags: 0

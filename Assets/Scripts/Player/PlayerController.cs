@@ -9,11 +9,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputActionReference _distanceAction;
     [SerializeField] private InputActionReference _undoAction;
     
-    private StageManager _stageManager;
-
     private void Start()
     {
-        _stageManager = StageManager.Instance;
+        
     }
 
     private void OnEnable()
@@ -46,24 +44,24 @@ public class PlayerController : MonoBehaviour
     private void BindInputEvent()
     {
         _focusAction.action.performed += FocusMode;
-        _undoAction.action.performed += Undo;
+        //_undoAction.action.performed += Undo;
     }
 
     private void UnbindInputEvent()
     {
         _focusAction.action.performed -= FocusMode;
-        _undoAction.action.performed -= Undo;
+        //_undoAction.action.performed -= Undo;
     }
 
     private void FocusMode(InputAction.CallbackContext context)
     {
         Debug.Log("집중모드");
-        _stageManager.OnFocusMode();
+        StageManager.Instance.StateUpdate(GameState.집중);
     }
 
-    private void Undo(InputAction.CallbackContext context)
-    {
-        Debug.Log("취소");
-        _stageManager.OffFocusMode();
-    }
+    //private void Undo(InputAction.CallbackContext context)
+    //{
+    //    Debug.Log("취소");
+    //    _stageManager.OffFocusMode();
+    //}
 }
