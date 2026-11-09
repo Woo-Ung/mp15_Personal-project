@@ -6,20 +6,22 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
 {
     [SerializeField] private Image _directionImage;
     [SerializeField] private Image _distanceImage;
-
     [SerializeField] private Image _testPointImage;
 
-    [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private float _maxDistance;
 
     private PlayerAction _playerAction;
-    private GameObject _ground;
-    private bool _isSelectNow = false;
+    private GameObject _ground;    
     
-
     [SerializeField] private AttackRouteUI attackPoint;
 
-    private bool _isRotate;
+    public bool _isRotate { get; private set; }
+    public bool _isSelectNow { get; private set; }
+
+    private void Awake()
+    {
+        _isSelectNow = false;
+    }
 
     private void Start()
     {
@@ -47,6 +49,12 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
         AttackPointSave();
     }
 
+    public void CanSelect()
+    {
+        _isSelectNow = true;
+        _isRotate = true;
+        _testPointImage.gameObject.SetActive(true);
+    }
     public void AttackPointSave()
     {
         PlayerAttackPoint point = new();
@@ -98,8 +106,9 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
         
     }
     public void FocusState()
-    {       
-        _distanceImage.fillAmount = 0;             
+    {
+        _distanceImage.fillAmount = 0;
+        
     }
     public void PunishState()
     {
@@ -123,5 +132,10 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
     public void ClearState()
     {
         
+    }
+
+    private void OnDestroy()
+    {
+        StageManager.Instance.Unsubscribe(this);
     }
 }

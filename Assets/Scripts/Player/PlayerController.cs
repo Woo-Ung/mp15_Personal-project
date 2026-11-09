@@ -3,7 +3,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private GameState _PlayerState;
     [SerializeField] private InputActionReference _focusAction;
     [SerializeField] private InputActionReference _attackAction;
     [SerializeField] private InputActionReference _directionAction;
@@ -68,11 +67,5 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("공격모드");
         StageManager.Instance.StateUpdate(GameState.공격);
-    }
-
-    //private void Undo(InputAction.CallbackContext context)
-    //{
-    //    Debug.Log("취소");
-    //    _stageManager.OffFocusMode();
-    //}
+    }  
 }

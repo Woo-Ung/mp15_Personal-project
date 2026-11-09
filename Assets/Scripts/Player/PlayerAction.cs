@@ -12,8 +12,8 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     [SerializeField] private float _waitTime;
     //[SerializeField] private Transform _rayPoint;
     [SerializeField] private LayerMask _wallLayer;
+    [SerializeField] private LayerMask _enemyLayer;
     private WaitForSeconds _wait;
-    private GameState _charaState;
 
 
     private void Awake()
@@ -28,7 +28,10 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 
     private void Update()
     {
-        
+        if (Input.GetMouseButtonDown(1))
+        {
+            Undo();
+        }
     }
 
     private void Init()
@@ -48,11 +51,10 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 
     public void IdleState()
     { 
-        _charaState = GameState.기본;
+        
     }
     public void FocusState()
-    {
-        _charaState = GameState.집중;
+    {        
         Instantiate(_attackRouteCanvas, transform.position + new Vector3(0,0.1f,0), transform.rotation);        
     }
     
@@ -86,10 +88,11 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 
                 if (_pointList[i]._transform.position == hitPosition)
                 {
-
+                    ScanEnemy(_pointList[i]._transform, out RaycastHit[] hits);
                     transform.position = _pointList[i]._transform.position;
                     transform.rotation = _pointList[i - 1]._transform.rotation;
 
+                    
                     if (!(i == _pointList.Count - 1))
                     {
                         yield return _wait;
@@ -105,11 +108,23 @@ public class PlayerAction : MonoBehaviour, IStateObserver
                     break;
                 }
             }
+
             for (int i = 0; i < _pointList.Count; i++)
             {
                 Destroy(_pointList[i]._transform.gameObject);
             }
             ResetAttack();
+        }
+
+    }
+
+    private void Undo()
+    {
+        if (_pointList.Count > 0 && StageManager.Instance.PlayerState == GameState.집중)
+        {
+            Destroy(_pointList[(_pointList.Count - 1)]._transform.gameObject);
+            _pointList.RemoveAt(_pointList.Count - 1);
+            _pointList[(_pointList.Count - 1)]._attackPoint.GetComponent<AttackRouteUI>().CanSelect();
         }
     }
 
@@ -135,5 +150,15 @@ public class PlayerAction : MonoBehaviour, IStateObserver
         {
             hitPosition = nextPoint.position;
         }        
+    }
+
+    private void ScanEnemy(Transform nextPoint, out RaycastHit[] hits)
+    {
+        float distance = Vector3.Distance(transform.position, nextPoint.position);
+        hits = Physics.SphereCastAll(transform.position, 0.5f, ((nextPoint.position - transform.position).normalized), distance, _enemyLayer);
+        if (hits.Length > 0)
+        {
+            Debug.Log(hits.Length);
+        }
     }
 }
