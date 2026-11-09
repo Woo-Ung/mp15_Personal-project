@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// FocusCanvas 컨트롤러
 public class UIController : MonoBehaviour, IStateObserver
 {
     [SerializeField] private Image _focusImage;

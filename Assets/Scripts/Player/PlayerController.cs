@@ -3,8 +3,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private GameState _PlayerState;
     [SerializeField] private InputActionReference _focusAction;
+    [SerializeField] private InputActionReference _attackAction;
     [SerializeField] private InputActionReference _directionAction;
     [SerializeField] private InputActionReference _distanceAction;
     [SerializeField] private InputActionReference _undoAction;
@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private void OnInputAction()
     {
         _focusAction.action.Enable();
+        _attackAction.action.Enable();
         _directionAction.action.Enable();
         _distanceAction.action.Enable();
         _undoAction.action.Enable();
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private void OffInputAction()
     {
         _focusAction.action.Disable();
+        _attackAction.action.Disable();
         _directionAction.action.Disable();
         _distanceAction.action.Disable();
         _undoAction.action.Disable();
@@ -43,25 +45,25 @@ public class PlayerController : MonoBehaviour
 
     private void BindInputEvent()
     {
-        _focusAction.action.performed += FocusMode;
+        _focusAction.action.performed += FocusState;
+        _attackAction.action.performed += AttackState;
         //_undoAction.action.performed += Undo;
     }
 
     private void UnbindInputEvent()
     {
-        _focusAction.action.performed -= FocusMode;
+        _focusAction.action.performed -= FocusState;
+        _attackAction.action.performed -= AttackState;
         //_undoAction.action.performed -= Undo;
     }
 
-    private void FocusMode(InputAction.CallbackContext context)
-    {
-        Debug.Log("집중모드");
+    private void FocusState(InputAction.CallbackContext context)
+    {        
         StageManager.Instance.StateUpdate(GameState.집중);
     }
-
-    //private void Undo(InputAction.CallbackContext context)
-    //{
-    //    Debug.Log("취소");
-    //    _stageManager.OffFocusMode();
-    //}
+    
+    private void AttackState(InputAction.CallbackContext context)
+    {        
+        StageManager.Instance.StateUpdate(GameState.공격);
+    }  
 }

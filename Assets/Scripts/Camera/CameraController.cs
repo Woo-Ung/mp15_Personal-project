@@ -4,7 +4,6 @@ using UnityEngine;
 public class CameraController : MonoBehaviour, IStateObserver
 {
     [SerializeField] private Camera _charaCamera;
-
     private void Start()
     {
         CacheComponents();
