@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour, IDamageable, IStateObserver
 {
-    public bool canPunish { get; private set; }
+    [field:SerializeField] public bool canPunish { get; private set; }
 
     private void Awake()
     {
@@ -30,10 +30,9 @@ public class EnemyController : MonoBehaviour, IDamageable, IStateObserver
         canPunish = can;
     }
 
-    private IEnumerator PunishAttack()
+    private void PunishAttack()
     { 
         StageManager.Instance.StateUpdate(GameState.사망);
-        yield return new WaitForSeconds(3f);
     }
 
     public void Damaged()
@@ -54,7 +53,7 @@ public class EnemyController : MonoBehaviour, IDamageable, IStateObserver
         if (canPunish)
         {
             Debug.Log("공격가능");
-            StartCoroutine(PunishAttack());
+            PunishAttack();
         }
     }
     public void AttackState()

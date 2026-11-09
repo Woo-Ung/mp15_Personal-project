@@ -71,6 +71,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     public void DeadState()
     {
         StopAllCoroutines();
+        Debug.Log("죽음ㅠㅠ");
         Time.timeScale = 0f;
     }
     public void ClearState()
@@ -100,9 +101,9 @@ public class PlayerAction : MonoBehaviour, IStateObserver
                 }
                 else
                 {
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.05f);
                     StageManager.Instance.StateUpdate(GameState.응징);
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.05f);
                 }
 
                 if (!isWallExit)

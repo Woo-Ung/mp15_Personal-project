@@ -8,7 +8,7 @@ public class StageManager : MonoBehaviour
 {    
     private List<IStateObserver> _subscriber = new();
     public static StageManager Instance { get; private set; }
-    public GameState PlayerState { get; private set; }
+    [field: SerializeField] public GameState PlayerState { get; private set; }
 
     private void Awake()
     {
