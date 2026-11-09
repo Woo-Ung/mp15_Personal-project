@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
@@ -69,7 +70,8 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     }
     public void DeadState()
     {
-
+        StopAllCoroutines();
+        Time.timeScale = 0f;
     }
     public void ClearState()
     {
@@ -87,11 +89,20 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 
                 ScanEnemy(hitPosition, out RaycastHit[] hits);
                 transform.position = hitPosition;
-                transform.rotation = _pointList[i - 1]._transform.rotation;                
+                transform.rotation = _pointList[i - 1]._transform.rotation;
 
-                for (int j = 0; j < hits.Length; j++)
+                if (hits.Length > 0)
                 {
-                    hits[j].transform.GetComponent<EnemyController>().Damaged();
+                    for (int j = 0; j < hits.Length; j++)
+                    {
+                        hits[j].transform.GetComponent<EnemyController>().Damaged();
+                    }
+                }
+                else
+                {
+                    yield return new WaitForSeconds(0.5f);
+                    StageManager.Instance.StateUpdate(GameState.응징);
+                    yield return new WaitForSeconds(0.5f);
                 }
 
                 if (!isWallExit)
@@ -115,6 +126,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
             {
                 Destroy(_pointList[i]._transform.gameObject);
             }
+
             ResetAttack();
         }
         StageManager.Instance.StateUpdate(GameState.기본);
@@ -162,7 +174,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
         hits = Physics.SphereCastAll(transform.position, 0.5f, ((nextPoint - transform.position).normalized), distance, _enemyLayer);
         if (hits.Length > 0)
         {
-            Debug.Log(hits.Length);
-        }
+            Debug.Log($"적 수:{hits.Length}");
+        }        
     }
 }
