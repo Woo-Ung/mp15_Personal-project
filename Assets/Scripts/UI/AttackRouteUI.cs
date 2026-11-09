@@ -56,7 +56,7 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
     }
 
     public void SetAttackRoute()
-    {
+    {      
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Plane plane = new Plane(Vector3.up, _ground.transform.position);
 
@@ -84,8 +84,8 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
             }                     
         }
         if (Input.GetMouseButtonDown(0))
-        {            
-            AttackRouteUI a = Instantiate(attackPoint, _testPointImage.gameObject.transform.position, attackPoint.transform.rotation);
+        {
+            AttackRouteUI a = Instantiate(attackPoint, _testPointImage.gameObject.transform.position + new Vector3(0, 0.1f, 0), attackPoint.transform.rotation);
             _testPointImage.gameObject.SetActive(false);
             _isRotate = false;
             _isSelectNow = false;
@@ -99,8 +99,7 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
     }
     public void FocusState()
     {       
-        _distanceImage.fillAmount = 0;
-        _isRotate = true;      
+        _distanceImage.fillAmount = 0;             
     }
     public void PunishState()
     {
