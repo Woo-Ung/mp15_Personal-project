@@ -46,8 +46,9 @@ public class StageManager : MonoBehaviour
         switch (state)
         {
             case GameState.기본:
-                for(int i = 0; i < _subscriber.Count; i++)
-                {
+                Debug.Log("기본상태");
+                for (int i = 0; i < _subscriber.Count; i++)
+                {                    
                     PlayerState = GameState.기본;
                     _subscriber[i].IdleState();
                 }
@@ -55,6 +56,7 @@ public class StageManager : MonoBehaviour
             case GameState.집중:
                 if (PlayerState == GameState.기본)
                 {
+                    Debug.Log("집중상태");
                     for (int i = 0; i < _subscriber.Count; i++)
                     {
                         PlayerState = GameState.집중;
@@ -64,7 +66,8 @@ public class StageManager : MonoBehaviour
                 break;
             case GameState.공격:
                 if (PlayerState == GameState.집중)
-                {
+                {                  
+                    Debug.Log("공격상태");
                     for (int i = 0; i < _subscriber.Count; i++)
                     {
                         PlayerState = GameState.공격;
@@ -73,6 +76,7 @@ public class StageManager : MonoBehaviour
                 }
                 break;
             case GameState.응징:
+                Debug.Log("응징상태");
                 for (int i = 0; i < _subscriber.Count; i++)
                 {
                     PlayerState = GameState.응징;
@@ -82,6 +86,7 @@ public class StageManager : MonoBehaviour
             case GameState.사망:
                 for (int i = 0; i < _subscriber.Count; i++)
                 {
+                    Debug.Log("사망상태");
                     PlayerState = GameState.사망;
                     _subscriber[i].DeadState();
                 }
@@ -89,6 +94,7 @@ public class StageManager : MonoBehaviour
             case GameState.클리어:
                 for (int i = 0; i < _subscriber.Count; i++)
                 {
+                    Debug.Log("클리어");
                     PlayerState = GameState.클리어;
                     _subscriber[i].ClearState();
                 }

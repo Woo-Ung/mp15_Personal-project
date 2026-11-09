@@ -65,8 +65,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 
     public void AttackState()
     {
-        StartCoroutine(Attack());
-        
+        StartCoroutine(Attack());        
     }
     public void DeadState()
     {
@@ -84,15 +83,19 @@ public class PlayerAction : MonoBehaviour, IStateObserver
             yield return _wait;
             for (int i = 1; i < _pointList.Count; i++)
             {
-                ScanRoute(_pointList[i]._transform, out Vector3 hitPosition);
+                ScanRoute(_pointList[i]._transform.position, out Vector3 hitPosition, out bool isWallExit);
 
-                if (_pointList[i]._transform.position == hitPosition)
+                ScanEnemy(hitPosition, out RaycastHit[] hits);
+                transform.position = hitPosition;
+                transform.rotation = _pointList[i - 1]._transform.rotation;                
+
+                for (int j = 0; j < hits.Length; j++)
                 {
-                    ScanEnemy(_pointList[i]._transform, out RaycastHit[] hits);
-                    transform.position = _pointList[i]._transform.position;
-                    transform.rotation = _pointList[i - 1]._transform.rotation;
+                    hits[j].transform.GetComponent<EnemyController>().Damaged();
+                }
 
-                    
+                if (!isWallExit)
+                {
                     if (!(i == _pointList.Count - 1))
                     {
                         yield return _wait;
@@ -101,12 +104,11 @@ public class PlayerAction : MonoBehaviour, IStateObserver
                         _wait = new WaitForSeconds(_waitTime);
                     }
                 }
+                
                 else
                 {
-                    transform.position = hitPosition;
-                    transform.rotation = _pointList[i - 1]._transform.rotation;
                     break;
-                }
+                }               
             }
 
             for (int i = 0; i < _pointList.Count; i++)
@@ -115,7 +117,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
             }
             ResetAttack();
         }
-
+        StageManager.Instance.StateUpdate(GameState.기본);
     }
 
     private void Undo()
@@ -134,28 +136,30 @@ public class PlayerAction : MonoBehaviour, IStateObserver
         _pointList.Clear();
     }
 
-    private void ScanRoute(Transform nextPoint, out Vector3 hitPosition)
+    private void ScanRoute(Vector3 nextPoint, out Vector3 hitPosition, out bool isWallExit)
     {
-        Ray ray = new Ray(transform.position + new Vector3(0, 1f, 0), (nextPoint.position - transform.position).normalized);
-        Debug.DrawRay(transform.position + new Vector3(0, 1f, 0), (nextPoint.position - transform.position), Color.red, 5f);
-        float distance = Vector3.Distance(transform.position, nextPoint.position);
+        Ray ray = new Ray(transform.position + new Vector3(0, 1f, 0), (nextPoint - transform.position).normalized);
+        Debug.DrawRay(transform.position + new Vector3(0, 1f, 0), (nextPoint - transform.position), Color.red, 5f);
+        float distance = Vector3.Distance(transform.position, nextPoint);
 
         if(Physics.Raycast(ray,out RaycastHit hit, distance, _wallLayer))
         {
             hitPosition = hit.point + hit.normal * 0.7f; //벽의 표면에서 0.7f만큼 떨어진 위치
             hitPosition = new Vector3(hitPosition.x, transform.position.y, hitPosition.z);
+            isWallExit = true;
             Debug.Log("장애물있음");
         }
         else
         {
-            hitPosition = nextPoint.position;
+            isWallExit = false;
+            hitPosition = nextPoint;
         }        
     }
 
-    private void ScanEnemy(Transform nextPoint, out RaycastHit[] hits)
+    private void ScanEnemy(Vector3 nextPoint, out RaycastHit[] hits)
     {
-        float distance = Vector3.Distance(transform.position, nextPoint.position);
-        hits = Physics.SphereCastAll(transform.position, 0.5f, ((nextPoint.position - transform.position).normalized), distance, _enemyLayer);
+        float distance = Vector3.Distance(transform.position, nextPoint);
+        hits = Physics.SphereCastAll(transform.position, 0.5f, ((nextPoint - transform.position).normalized), distance, _enemyLayer);
         if (hits.Length > 0)
         {
             Debug.Log(hits.Length);

@@ -58,14 +58,12 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FocusState(InputAction.CallbackContext context)
-    {
-        Debug.Log("집중모드");
+    {        
         StageManager.Instance.StateUpdate(GameState.집중);
     }
     
     private void AttackState(InputAction.CallbackContext context)
-    {
-        Debug.Log("공격모드");
+    {        
         StageManager.Instance.StateUpdate(GameState.공격);
     }  
 }
