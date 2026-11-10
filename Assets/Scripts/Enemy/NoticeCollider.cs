@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NocticeCollider : MonoBehaviour
+public class NoticeCollider : MonoBehaviour
 {
     [SerializeField] private EnemyController _enemyController;
     private SphereCollider _noticeCollider => GetComponent<SphereCollider>();

@@ -12,6 +12,8 @@ public class EnemyController : MonoBehaviour, IDamageable, IStateObserver
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private float _setAttackRange;
     [SerializeField] private float _addAttackRange;
+    [SerializeField] private AttackCollider _attackCollider;
+
     public float _attackRange { get; private set; }
 
     private EnemyMovement _enemyMovement;   
@@ -44,10 +46,12 @@ public class EnemyController : MonoBehaviour, IDamageable, IStateObserver
             if (StageManager.Instance.PlayerState == GameState.±âº»)
             {
                 _attackRange = Mathf.Min(_attackRange + Time.deltaTime * _addAttackRange, _noticeRange);
+                _attackCollider.SetAttackCollider(_attackRange);
             }
             yield return null;
         }
         _attackRange = _setAttackRange;
+        _attackCollider.SetAttackCollider(_attackRange);
     }
 
     public void SetInRange(bool inR)

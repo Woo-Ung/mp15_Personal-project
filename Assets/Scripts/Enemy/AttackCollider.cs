@@ -5,13 +5,9 @@ public class AttackCollider : MonoBehaviour
     [SerializeField] private EnemyController _enemyController;
     private SphereCollider _attackCollider => GetComponent<SphereCollider>();
 
-    private void Update()
+    public void SetAttackCollider(float radius)
     {
-        //if(!_enemyController._isInRange)
-        //{
-        //    return;
-        //}
-        _attackCollider.radius = _enemyController._attackRange;
+        _attackCollider.radius = radius;
     }
 
     private void OnTriggerEnter(Collider other)
