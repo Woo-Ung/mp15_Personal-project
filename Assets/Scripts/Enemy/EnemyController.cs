@@ -14,9 +14,11 @@ public class EnemyController : MonoBehaviour, IDamageable, IStateObserver
     [SerializeField] private float _addAttackRange;
     [SerializeField] private AttackCollider _attackCollider;
 
-    public float _attackRange { get; private set; }
+    private EnemyMovement _enemyMovement;
+    private Quaternion _prevRotation;
 
-    private EnemyMovement _enemyMovement;   
+
+    public float _attackRange { get; private set; } 
 
     private void Awake()
     {
@@ -56,8 +58,27 @@ public class EnemyController : MonoBehaviour, IDamageable, IStateObserver
 
     public void SetInRange(bool inR)
     {
-        _isInRange = inR;
-        _enemyMovement?.SetCanMove(!inR);
+        if(_isInRange == inR)
+        {
+            return;
+        }
+
+        if(inR)
+        {
+            _prevRotation = transform.rotation;
+            _isInRange = true;
+            LookPlayer();
+        }
+
+        else
+        {
+            _isInRange = false;
+            transform.rotation = _prevRotation;
+        }
+
+        bool canMove = (StageManager.Instance.PlayerState == GameState.±âº» && !_isInRange);
+
+        _enemyMovement?.SetCanMove(canMove);
     }
 
     private void PunishAttack()
@@ -84,12 +105,12 @@ public class EnemyController : MonoBehaviour, IDamageable, IStateObserver
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                Debug.Log("Å¸°ÙÈ®ÀÎ");
+                Debug.Log("AttackRay: Å¸°ÙÈ®ÀÎ");
                 PunishAttack();
             }
             else
             {
-                Debug.Log($"Å¸°Ù³õÄ§:{hit.transform.name}");
+                Debug.Log($"AttackRay: Å¸°Ù³õÄ§:{hit.transform.name}");
             }
         }
     }
@@ -108,14 +129,13 @@ public class EnemyController : MonoBehaviour, IDamageable, IStateObserver
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                Debug.Log("Notice: Å¸°Ù°¨Áö");
+                Debug.Log("NoticeRay: Å¸°Ù°¨Áö");
                 SetInRange(true);
-                LookPlayer();
                 StartCoroutine(SetAttackRange());
             }
             else
             {
-                Debug.Log("Notice: Å¸°Ù¾Èº¸ÀÓ");
+                Debug.Log("NoticeRay: Å¸°Ù¾Èº¸ÀÓ");
                 SetInRange(false);
             }
         }

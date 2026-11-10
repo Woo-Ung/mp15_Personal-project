@@ -14,7 +14,7 @@ public class AttackCollider : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            Debug.Log("Attack: Player감지");
+            Debug.Log("AttackCol: Player감지");
             _enemyController.ShootAttackRay();
         }
     }
@@ -23,7 +23,7 @@ public class AttackCollider : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            Debug.Log("Attack: Player나감");
+            Debug.Log("AttackCol: Player나감");
         }
     }
 }

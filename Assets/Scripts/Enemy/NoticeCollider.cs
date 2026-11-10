@@ -19,7 +19,7 @@ public class NoticeCollider : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            Debug.Log("Notice: Player감지");
+            Debug.Log("NoticeCol: Player감지");
             _enemyController.ShootNoticeRay();
         }
     }
@@ -28,7 +28,7 @@ public class NoticeCollider : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            Debug.Log("Notice: Player나감");
+            Debug.Log("NoticeCol: Player나감");
             _enemyController.SetInRange(false);
         }
     }
