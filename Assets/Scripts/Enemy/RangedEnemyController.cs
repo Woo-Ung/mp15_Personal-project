@@ -44,7 +44,7 @@ public class RangedEnemyController : MonoBehaviour, IDamageable, IStateObserver
     {
         if (_player.transform != null)
         {
-            transform.LookAt(_player.transform);
+            transform.LookAt(new Vector3(_player.transform.position.x, transform.position.y, _player.transform.position.z));
         }
     }
     public void FocusState()
@@ -55,7 +55,7 @@ public class RangedEnemyController : MonoBehaviour, IDamageable, IStateObserver
     {
         if (_player.transform != null)
         {
-            transform.LookAt(_player.transform);
+            transform.LookAt(new Vector3(_player.transform.position.x, transform.position.y, _player.transform.position.z));
         }
 
         Ray ray = new Ray(transform.position + new Vector3(0, 1f, 0), (_player.transform.position - transform.position).normalized);

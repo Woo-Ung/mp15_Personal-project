@@ -96,14 +96,16 @@ public class PlayerAction : MonoBehaviour, IStateObserver
                 {
                     for (int j = 0; j < hits.Length; j++)
                     {
-                        hits[j].transform.GetComponent<EnemyController>().Damaged();
+                        hits[j].transform.GetComponent<IDamageable>().Damaged();
                     }
                 }
                 else
                 {
-                    yield return new WaitForSeconds(0.05f);
+                    //yield return new WaitForSeconds(0.05f);
+                    yield return null;
                     StageManager.Instance.StateUpdate(GameState.응징);
-                    yield return new WaitForSeconds(0.05f);
+                    yield return null;
+                    //yield return new WaitForSeconds(0.05f);
                 }
 
                 if (!isWallExit)
