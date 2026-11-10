@@ -74,9 +74,9 @@ public class EnemyController : MonoBehaviour, IDamageable, IStateObserver
         Vector3 direction = (target - origin).normalized;
 
         Ray ray = new Ray(origin, direction);
-        Debug.DrawRay(origin, direction * (_attackRange + 0.1f), Color.blue, 5f);
+        Debug.DrawRay(origin, direction * (_attackRange + 0.05f), Color.blue, 5f);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, (_attackRange + 0.1f), _layerMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, (_attackRange + 0.05f), _layerMask))
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
@@ -98,15 +98,15 @@ public class EnemyController : MonoBehaviour, IDamageable, IStateObserver
         Vector3 direction = (target - origin).normalized;
 
         Ray ray = new Ray(origin, direction);
-        Debug.DrawRay(origin, direction * _noticeRange, Color.red, 5f);
+        Debug.DrawRay(origin, direction * (_noticeRange + 0.05f), Color.red, 5f);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, _noticeRange, _layerMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, (_noticeRange + 0.05f), _layerMask))
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 Debug.Log("Notice: Å¸°Ù°¨Áö");
                 SetInRange(true);
-                LookPlayer();                
+                LookPlayer();
                 StartCoroutine(SetAttackRange());
             }
             else
@@ -127,7 +127,7 @@ public class EnemyController : MonoBehaviour, IDamageable, IStateObserver
 
     public void IdleState()
     {
-        _enemyMovement?.SetCanMove(true);
+        _enemyMovement?.SetCanMove(!_isInRange);
     }
     public void FocusState()
     {
