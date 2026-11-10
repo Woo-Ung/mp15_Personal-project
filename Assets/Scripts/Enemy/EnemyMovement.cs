@@ -6,20 +6,37 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float speed = 5f;
     [SerializeField] private float waitTime = 0.3f;
     [SerializeField] private float turnSpeed = 90f;
-
     [SerializeField] private Transform _pathHolder;
-    
-    private void Start()
+
+    private bool _canMove;
+    private float _remainingWaitTime;
+   
+
+    private void Awake()
+    {
+        Init();
+    }
+
+    private void Init()
+    {
+        _canMove = false;
+    }
+
+    public void SetCanMove(bool can)
+    {
+        _canMove = can;
+    }
+
+
+    public void Start()
     {
         Vector3[] waypoints = new Vector3[_pathHolder.childCount];
-        for(int i =0; i<waypoints.Length; i++)
+        for (int i = 0; i < waypoints.Length; i++)
         {
             waypoints[i] = _pathHolder.GetChild(i).position;
             waypoints[i] = new Vector3(waypoints[i].x, transform.position.y, waypoints[i].z);
         }
-
         StartCoroutine(FollowPath(waypoints));
-
     }
 
     private IEnumerator FollowPath(Vector3[] waypoints)
@@ -31,12 +48,27 @@ public class EnemyMovement : MonoBehaviour
 
         while(true)
         {
+            if(!_canMove)
+            {
+                yield return null;
+                continue;
+            }
+
             transform.position = Vector3.MoveTowards(transform.position, targetWaypoint, speed * Time.deltaTime);
             if(transform.position == targetWaypoint)
             {
                 targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
                 targetWaypoint = waypoints[targetWaypointIndex];
-                yield return new WaitForSeconds(waitTime);
+               
+                _remainingWaitTime = waitTime;
+                while(_remainingWaitTime > 0f)
+                {
+                    if(_canMove)
+                    {
+                        _remainingWaitTime -= Time.deltaTime;
+                    }
+                    yield return null;
+                }
                 yield return StartCoroutine(TurnToFace(targetWaypoint));
             }
             yield return null;
@@ -50,6 +82,12 @@ public class EnemyMovement : MonoBehaviour
 
         while (Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.y, targetAngle)) > 0.05f)
         {
+            if (!_canMove)
+            {
+                yield return null;
+                continue;
+            }
+
             float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetAngle, turnSpeed * Time.deltaTime);
             transform.eulerAngles = Vector3.up * angle;
             yield return null;

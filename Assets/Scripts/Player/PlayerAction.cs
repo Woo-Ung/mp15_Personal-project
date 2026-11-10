@@ -56,7 +56,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     }
     public void FocusState()
     {        
-        Instantiate(_attackRouteCanvas, transform.position + new Vector3(0,0.1f,0), transform.rotation);        
+        Instantiate(_attackRouteCanvas, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);        
     }
     
     public void PunishState()
@@ -101,11 +101,9 @@ public class PlayerAction : MonoBehaviour, IStateObserver
                 }
                 else
                 {
-                    //yield return new WaitForSeconds(0.05f);
-                    yield return null;
+                    yield return new WaitForSeconds(0.05f);
                     StageManager.Instance.StateUpdate(GameState.응징);
-                    yield return null;
-                    //yield return new WaitForSeconds(0.05f);
+                    yield return new WaitForSeconds(0.05f);
                 }
 
                 if (!isWallExit)
@@ -178,6 +176,10 @@ public class PlayerAction : MonoBehaviour, IStateObserver
         if (hits.Length > 0)
         {
             Debug.Log($"적 수:{hits.Length}");
+            for (int i = 0; i < hits.Length; i++)
+            {
+                Debug.Log(hits[i].transform.name);
+            }
         }        
     }
 }
