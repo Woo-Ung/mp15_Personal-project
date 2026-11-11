@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEditor.Rendering;
 
 public class RangedEnemyController : EnemyController
 {
@@ -9,9 +10,11 @@ public class RangedEnemyController : EnemyController
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private float _attackCoolTime;
 
-    private bool _isCharge;
-    private EnemyMovement _enemyMovement;
+    [SerializeField] private LineRendererAtoB _attackLine;
+
+      private EnemyMovement _enemyMovement;
     private Quaternion _prevRotation;
+    private Coroutine _attackCoroutine;
 
     public float _attackRange { get; private set; }
 
@@ -30,7 +33,6 @@ public class RangedEnemyController : EnemyController
         _isInRange = false;
         _attackRange = _noticeRange;
         _enemyMovement = transform?.GetComponent<EnemyMovement>();
-        _isCharge = false;
     }
 
     protected override void CacheComponents()
@@ -41,14 +43,15 @@ public class RangedEnemyController : EnemyController
     private IEnumerator StartAttackCoolTime()
     {
         float currentTime = 0f;
-        _isCharge = true;
+        float width = 0f;
 
         while (_isInRange)
         {
             if (StageManager.Instance.PlayerState == GameState.기본)
             {
                 currentTime += Time.deltaTime;
-
+                width = Mathf.Lerp(0f, 0.2f, currentTime / _attackCoolTime);
+                _attackLine.SetLineWidth(width);
                 if (currentTime > _attackCoolTime)
                 {
                     PunishAttack();
@@ -57,8 +60,8 @@ public class RangedEnemyController : EnemyController
             }
             yield return null;
         }
-        
-        _isCharge = false;
+        _attackLine.SetLineWidth(0);
+        _attackLine.Stop();
     }
 
     public override void SetInRange(bool inR)
@@ -88,6 +91,7 @@ public class RangedEnemyController : EnemyController
 
     protected override void PunishAttack()
     {
+        LookPlayer();
         StageManager.Instance.StateUpdate(GameState.사망);
     }
 
@@ -111,6 +115,12 @@ public class RangedEnemyController : EnemyController
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 Debug.Log("AttackRay: 타겟확인");
+                if (_attackCoroutine != null)
+                {
+                    StopCoroutine(_attackCoroutine);
+                    _attackLine.Stop();
+                    _attackCoroutine = null;
+                }
                 PunishAttack();
             }
             else
@@ -134,12 +144,20 @@ public class RangedEnemyController : EnemyController
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                Debug.Log($"{transform.name}_NoticeRay: 타겟감지aaaaaaaaaaaaaaaaaaa");
+                Debug.Log($"{transform.name}_NoticeRay: 타겟감지aaaaaaaaaaaaaaaaaaa");                
                 SetInRange(true);
-              
-                StartCoroutine(StartAttackCoolTime());
-                
+
+                if(_attackCoroutine != null)
+                {
+                    StopCoroutine(_attackCoroutine);
+                    _attackLine.Stop();
+                    _attackCoroutine = null;
+                }
+
+                _attackLine.Play(origin, target);
+                _attackCoroutine = StartCoroutine(StartAttackCoolTime());
             }
+
             else
             {
                 Debug.Log($"{transform.name}_NoticeRay: 타겟안보임");
@@ -169,9 +187,10 @@ public class RangedEnemyController : EnemyController
     {
         ShootAttackRay();
     }
+
     //public override void AttackState()
     //{
-
+        
     //}
     //public override void DeadState()
     //{
@@ -181,7 +200,6 @@ public class RangedEnemyController : EnemyController
     //{
 
     //}
-
     //protected override void OnDestroy()
     //{
     //    base.OnDestroy();
