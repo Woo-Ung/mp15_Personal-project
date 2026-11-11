@@ -123,11 +123,13 @@ public class PlayerAction : MonoBehaviour, IStateObserver
                 else
                 {
                     break;
-                }               
+                }
             }
 
             ResetAttack();
         }
+
+        Physics.SyncTransforms(); // 물리좌표 동기화
         StageManager.Instance.StateUpdate(GameState.기본);
     }
 
