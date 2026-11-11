@@ -10,8 +10,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 {
     [SerializeField] private Canvas _attackRouteCanvas;
     [SerializeField] private List<PlayerAttackPoint> _pointList = new();
-    [SerializeField] private float _waitTime;
-    //[SerializeField] private Transform _rayPoint;
+    [SerializeField] private float _waitTime;    
     [SerializeField] private LayerMask _wallLayer;
     [SerializeField] private LayerMask _enemyLayer;
     private WaitForSeconds _wait;

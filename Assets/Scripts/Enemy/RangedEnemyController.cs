@@ -1,99 +1,187 @@
 using UnityEngine;
+using System.Collections;
 
-public class RangedEnemyController : MonoBehaviour, IDamageable, IStateObserver
+public class RangedEnemyController : EnemyController
 {
-    [field: SerializeField] public bool canPunish { get; private set; }
+    //[field: SerializeField] public float _noticeRange { get; protected set; } 부모클래스에서 정의
+    [field: SerializeField] public bool _isInRange { get; private set; }
     [SerializeField] private PlayerAction _player;
     [SerializeField] private LayerMask _layerMask;
+    [SerializeField] private float _attackCoolTime;
+
+    private bool _isCharge;
+    private EnemyMovement _enemyMovement;
+    private Quaternion _prevRotation;
+
+    public float _attackRange { get; private set; }
 
     private void Awake()
     {
         Init();
     }
 
-    private void Start()
+    protected override void Start()
     {
-        CacheComponents();
+        base.Start(); // 부모 클래스에 CacheComponents 등록됨
     }
 
     private void Init()
     {
-        canPunish = false;
-    }
-    private void CacheComponents()
-    {
-        StageManager.Instance.Subscribe(this);        
-    }
-
-    public void SetPunish(bool can)
-    {
-        canPunish = can;
+        _isInRange = false;
+        _attackRange = _noticeRange;
+        _enemyMovement = transform?.GetComponent<EnemyMovement>();
+        _isCharge = false;
     }
 
-    private void PunishAttack()
+    protected override void CacheComponents()
+    {
+        base.CacheComponents(); // 부모 클래스에서 옵저버 구독함
+    }
+
+    private IEnumerator StartAttackCoolTime()
+    {
+        float currentTime = 0f;
+        _isCharge = true;
+
+        while (_isInRange)
+        {
+            if (StageManager.Instance.PlayerState == GameState.기본)
+            {
+                currentTime += Time.deltaTime;
+
+                if (currentTime > _attackCoolTime)
+                {
+                    PunishAttack();
+                    break;
+                }
+            }
+            yield return null;
+        }
+
+        _isCharge = false;
+    }
+
+    public override void SetInRange(bool inR)
+    {
+        if (_isInRange == inR)
+        {
+            return;
+        }
+
+        if (inR)
+        {
+            _prevRotation = transform.rotation;
+            _isInRange = true;
+            LookPlayer();
+        }
+
+        else
+        {
+            _isInRange = false;
+            transform.rotation = _prevRotation;
+        }
+
+        bool canMove = (StageManager.Instance.PlayerState == GameState.기본) && !_isInRange;
+
+        _enemyMovement?.SetCanMove(canMove);
+    }
+
+    protected override void PunishAttack()
     {
         StageManager.Instance.StateUpdate(GameState.사망);
     }
 
-    public void Damaged()
+    public override void Damaged()
     {
         Destroy(gameObject);
     }
 
-    public void IdleState()
+    public override void ShootAttackRay()
+    {
+        Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z); // Ray 나가는 높이 조절
+        Vector3 target = _player.transform.position + Vector3.up;
+
+        Vector3 direction = (target - origin).normalized;
+
+        Ray ray = new Ray(origin, direction);
+        Debug.DrawRay(origin, direction * (_attackRange + 0.05f), Color.blue, 5f);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, (_attackRange + 0.05f), _layerMask))
+        {
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                Debug.Log("AttackRay: 타겟확인");
+                PunishAttack();
+            }
+            else
+            {
+                Debug.Log($"AttackRay: 타겟놓침:{hit.transform.name}");
+            }
+        }
+    }
+
+    public override void ShootNoticeRay()
+    {
+        Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z); // Ray 나가는 높이 조절
+        Vector3 target = _player.transform.position + Vector3.up;
+
+        Vector3 direction = (target - origin).normalized;
+
+        Ray ray = new Ray(origin, direction);
+        Debug.DrawRay(origin, direction * (_noticeRange + 0.05f), Color.red, 5f);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, (_noticeRange + 0.05f), _layerMask))
+        {
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                Debug.Log("NoticeRay: 타겟감지");
+                SetInRange(true);
+                StartCoroutine(StartAttackCoolTime());
+            }
+            else
+            {
+                Debug.Log("NoticeRay: 타겟안보임");
+                SetInRange(false);
+            }
+        }
+    }
+
+    private void LookPlayer()
     {
         if (_player.transform != null)
         {
             transform.LookAt(new Vector3(_player.transform.position.x, transform.position.y, _player.transform.position.z));
         }
     }
-    public void FocusState()
+
+    public override void IdleState()
     {
-
+        _enemyMovement?.SetCanMove(!_isInRange);
+        ShootNoticeRay();
     }
-    public void PunishState()
+    public override void FocusState()
     {
-        if (_player.transform != null)
-        {
-            transform.LookAt(new Vector3(_player.transform.position.x, transform.position.y, _player.transform.position.z));
-        }
-
-        Ray ray = new Ray(transform.position + new Vector3(0, 1f, 0), (_player.transform.position - transform.position).normalized);
-
-        if (Physics.Raycast(ray, out RaycastHit hit, 300f, _layerMask))
-        {
-            if(hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
-            {
-                Debug.Log("타겟확인");
-                canPunish = true;
-            }
-            else 
-            {
-                Debug.Log("타겟놓침");
-                canPunish = false;
-            }
-        }
-        if (canPunish)
-        {
-            Debug.Log("공격가능");
-            PunishAttack();
-        }
+        _enemyMovement?.SetCanMove(false);
     }
-    public void AttackState()
+    public override void PunishState()
     {
-
+        ShootAttackRay();
     }
-    public void DeadState()
-    {
+    //public override void AttackState()
+    //{
 
-    }
-    public void ClearState()
-    {
+    //}
+    //public override void DeadState()
+    //{
 
-    }
+    //}
+    //public override void ClearState()
+    //{
 
-    private void OnDestroy()
-    {
-        StageManager.Instance.Unsubscribe(this);
-    }
+    //}
+
+    //protected override void OnDestroy()
+    //{
+    //    base.OnDestroy();
+    //}
 }

@@ -24,7 +24,7 @@ public class StageManager : MonoBehaviour
     private void Init()
     {
 
-    }       
+    }
 
     private void CasheComponent()
     {

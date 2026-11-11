@@ -59,4 +59,9 @@ public class TextureChanger : MonoBehaviour, IStateObserver
             _meshRenderer.material = _idleMaterial;
         }
     }
+
+    private void OnDestroy()
+    {
+        StageManager.Instance.Unsubscribe(this);
+    }
 }
