@@ -8,10 +8,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputActionReference _directionAction;
     [SerializeField] private InputActionReference _distanceAction;
     [SerializeField] private InputActionReference _undoAction;
+
+    private PlayerAction _playerAction;
     
-    private void Start()
+    private void Awake()
     {
-        
+        Init();
+    }
+
+    private void Init()
+    {
+        _playerAction = GetComponent<PlayerAction>();
     }
 
     private void OnEnable()
@@ -47,14 +54,14 @@ public class PlayerController : MonoBehaviour
     {
         _focusAction.action.performed += FocusState;
         _attackAction.action.performed += AttackState;
-        //_undoAction.action.performed += Undo;
+        _undoAction.action.performed += Undo;
     }
 
     private void UnbindInputEvent()
     {
         _focusAction.action.performed -= FocusState;
         _attackAction.action.performed -= AttackState;
-        //_undoAction.action.performed -= Undo;
+        _undoAction.action.performed -= Undo;
     }
 
     private void FocusState(InputAction.CallbackContext context)
@@ -63,7 +70,12 @@ public class PlayerController : MonoBehaviour
     }
     
     private void AttackState(InputAction.CallbackContext context)
-    {        
+    {
         StageManager.Instance.StateUpdate(GameState.공격);
-    }  
+    }
+
+    private void Undo(InputAction.CallbackContext context)
+    {
+        _playerAction.Undo();
+    }
 }

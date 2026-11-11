@@ -29,10 +29,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
-            Undo();
-        }
+        
     }
 
     private void Init()
@@ -51,7 +48,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     }
 
     public void IdleState()
-    { 
+    {
         
     }
     public void FocusState()
@@ -66,7 +63,14 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 
     public void AttackState()
     {
-        StartCoroutine(Attack());        
+        if (_pointList.Count <= 1)
+        {
+            ResetAttack();
+            StageManager.Instance.StateUpdate(GameState.기본);
+            return;
+        }
+
+        StartCoroutine(Attack());
     }
     public void DeadState()
     {
@@ -123,28 +127,40 @@ public class PlayerAction : MonoBehaviour, IStateObserver
                 }               
             }
 
-            for (int i = 0; i < _pointList.Count; i++)
-            {
-                Destroy(_pointList[i]._transform.gameObject);
-            }
-
             ResetAttack();
         }
         StageManager.Instance.StateUpdate(GameState.기본);
     }
 
-    private void Undo()
+    public void Undo()
     {
-        if (_pointList.Count > 0 && StageManager.Instance.PlayerState == GameState.집중)
+        if(StageManager.Instance.PlayerState != GameState.집중)
         {
-            Destroy(_pointList[(_pointList.Count - 1)]._transform.gameObject);
-            _pointList.RemoveAt(_pointList.Count - 1);
-            _pointList[(_pointList.Count - 1)]._attackPoint.GetComponent<AttackRouteUI>().CanSelect();
+            return;
         }
+        if (_pointList.Count <= 1)
+        {
+            return;
+        }
+
+        Destroy(_pointList[(_pointList.Count - 1)]._transform.gameObject);
+        _pointList.RemoveAt(_pointList.Count - 1);
+        _pointList[(_pointList.Count - 1)]._attackPoint.GetComponent<AttackRouteUI>().CanSelect();
+        
     }
 
     private void ResetAttack()
     {
+        if (_pointList.Count < 1)
+        {
+            return;
+        }
+
+        for (int i = 0; i < _pointList.Count; i++)
+        {
+            Destroy(_pointList[i]._transform.gameObject);
+        }
+
         _waitTime = 1f;
         _pointList.Clear();
     }

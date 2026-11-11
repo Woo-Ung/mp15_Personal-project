@@ -27,7 +27,6 @@ public class EnemyMovement : MonoBehaviour
         _canMove = can;
     }
 
-
     public void Start()
     {
         Vector3[] waypoints = new Vector3[_pathHolder.childCount];
