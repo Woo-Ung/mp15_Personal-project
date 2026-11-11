@@ -113,5 +113,4 @@ public class StageManager : MonoBehaviour
             Instance = this;
         }
     }
-
 }

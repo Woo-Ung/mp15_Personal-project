@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 81401348}
   - component: {fileID: 81401347}
   - component: {fileID: 81401346}
+  - component: {fileID: 81401350}
   m_Layer: 8
   m_Name: Wall
   m_TagString: Untagged
@@ -321,7 +322,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4b882d3915e9bbd4c8dd2ac334d62708, type: 2}
+  - {fileID: 2100000, guid: f9b7db3cfeef8824db07df56f08d64d8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -368,6 +369,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &81401350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81401345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68be7a518d7c78469025b7d82876503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextureChanger
+  _idleMaterial: {fileID: 2100000, guid: 4b882d3915e9bbd4c8dd2ac334d62708, type: 2}
+  _focusMaterial: {fileID: 2100000, guid: f9b7db3cfeef8824db07df56f08d64d8, type: 2}
 --- !u!1 &82017372
 GameObject:
   m_ObjectHideFlags: 0
@@ -2201,7 +2216,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
