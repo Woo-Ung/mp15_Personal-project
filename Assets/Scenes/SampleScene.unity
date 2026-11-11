@@ -2684,6 +2684,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RangedEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6543046857255123050, guid: 19ba1e58deda9a740a769c0f2b542212, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6764336552214308843, guid: 19ba1e58deda9a740a769c0f2b542212, type: 3}
       propertyPath: _player
       value: 

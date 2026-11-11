@@ -81,7 +81,13 @@ public class MeleeEnemyController : EnemyController
     }
 
     protected override void PunishAttack()
-    { 
+    {
+        Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z); // Ray 나가는 높이 조절
+        Vector3 target = _player.transform.position + Vector3.up;
+        Vector3 direction = (target - origin).normalized;
+
+        transform.position = target + (direction * 1.2f);
+
         StageManager.Instance.StateUpdate(GameState.사망);
     }
 
