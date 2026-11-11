@@ -57,7 +57,7 @@ public class RangedEnemyController : EnemyController
             }
             yield return null;
         }
-
+        
         _isCharge = false;
     }
 
@@ -134,13 +134,15 @@ public class RangedEnemyController : EnemyController
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                Debug.Log("NoticeRay: 타겟감지");
+                Debug.Log($"{transform.name}_NoticeRay: 타겟감지aaaaaaaaaaaaaaaaaaa");
                 SetInRange(true);
+              
                 StartCoroutine(StartAttackCoolTime());
+                
             }
             else
             {
-                Debug.Log("NoticeRay: 타겟안보임");
+                Debug.Log($"{transform.name}_NoticeRay: 타겟안보임");
                 SetInRange(false);
             }
         }
@@ -155,7 +157,7 @@ public class RangedEnemyController : EnemyController
     }
 
     public override void IdleState()
-    {
+    {        
         _enemyMovement?.SetCanMove(!_isInRange);
         ShootNoticeRay();
     }

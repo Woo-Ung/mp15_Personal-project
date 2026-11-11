@@ -241,13 +241,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0fbc364448074843a457ee42c611076, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RangedEnemyController1
-  <_noticeRange>k__BackingField: 0
+  <_noticeRange>k__BackingField: 30
   <_isInRange>k__BackingField: 0
   _player: {fileID: 0}
   _layerMask:
     serializedVersion: 2
     m_Bits: 832
-  _setAttackRange: 20
   _attackCoolTime: 4
 --- !u!1 &8310117682244922037
 GameObject:
