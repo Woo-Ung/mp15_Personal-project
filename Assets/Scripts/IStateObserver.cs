@@ -5,5 +5,5 @@ public interface IStateObserver
     public void PunishState(); // 적 응징 시작
     public void AttackState(); // 플레이어 공격시작
     public void DeadState();
-    public void ClearState(); 
+    public void ClearState();
 }

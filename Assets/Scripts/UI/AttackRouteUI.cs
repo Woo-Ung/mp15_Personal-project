@@ -91,14 +91,20 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
                 transform.rotation = Quaternion.LookRotation(direction);
             }                     
         }
+
         if (Input.GetMouseButtonDown(0))
         {
-            AttackRouteUI a = Instantiate(attackPoint, _testPointImage.gameObject.transform.position + new Vector3(0, 0.1f, 0), attackPoint.transform.rotation);
-            _testPointImage.gameObject.SetActive(false);
-            _isRotate = false;
-            _isSelectNow = false;
-            a._isRotate = true;
+            ConfirmAttackRout();
         }
+    }
+
+    private void ConfirmAttackRout()
+    {
+        AttackRouteUI a = Instantiate(attackPoint, new Vector3(_testPointImage.transform.position.x, 0, _testPointImage.transform.position.z), attackPoint.transform.rotation);
+        _testPointImage.gameObject.SetActive(false);
+        _isRotate = false;
+        _isSelectNow = false;
+        a._isRotate = true;
     }
 
     public void IdleState()

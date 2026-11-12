@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
@@ -9,8 +10,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 {
     [SerializeField] private Canvas _attackRouteCanvas;
     [SerializeField] private List<PlayerAttackPoint> _pointList = new();
-    [SerializeField] private float _waitTime;
-    //[SerializeField] private Transform _rayPoint;
+    [SerializeField] private float _waitTime;    
     [SerializeField] private LayerMask _wallLayer;
     [SerializeField] private LayerMask _enemyLayer;
     private WaitForSeconds _wait;
@@ -28,10 +28,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
-            Undo();
-        }
+        
     }
 
     private void Init()
@@ -50,12 +47,12 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     }
 
     public void IdleState()
-    { 
+    {
         
     }
     public void FocusState()
     {        
-        Instantiate(_attackRouteCanvas, transform.position + new Vector3(0,0.1f,0), transform.rotation);        
+        Instantiate(_attackRouteCanvas, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);        
     }
     
     public void PunishState()
@@ -65,11 +62,20 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 
     public void AttackState()
     {
-        StartCoroutine(Attack());        
+        if (_pointList.Count <= 1)
+        {
+            ResetAttack();
+            StageManager.Instance.StateUpdate(GameState.기본);
+            return;
+        }
+
+        StartCoroutine(Attack());
     }
     public void DeadState()
     {
-
+        StopAllCoroutines();
+        Debug.Log("죽음ㅠㅠ");
+        Time.timeScale = 0f;
     }
     public void ClearState()
     {
@@ -87,11 +93,20 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 
                 ScanEnemy(hitPosition, out RaycastHit[] hits);
                 transform.position = hitPosition;
-                transform.rotation = _pointList[i - 1]._transform.rotation;                
+                transform.rotation = _pointList[i - 1]._transform.rotation;
 
-                for (int j = 0; j < hits.Length; j++)
+                if (hits.Length > 0)
                 {
-                    hits[j].transform.GetComponent<EnemyController>().Damaged();
+                    for (int j = 0; j < hits.Length; j++)
+                    {
+                        hits[j].transform.GetComponent<IDamageable>().Damaged();
+                    }
+                }
+                else
+                {
+                    yield return new WaitForSeconds(0.05f);
+                    StageManager.Instance.StateUpdate(GameState.응징);
+                    yield return new WaitForSeconds(0.05f);
                 }
 
                 if (!isWallExit)
@@ -108,30 +123,45 @@ public class PlayerAction : MonoBehaviour, IStateObserver
                 else
                 {
                     break;
-                }               
+                }
             }
 
-            for (int i = 0; i < _pointList.Count; i++)
-            {
-                Destroy(_pointList[i]._transform.gameObject);
-            }
             ResetAttack();
         }
+
+        Physics.SyncTransforms(); // 물리좌표 동기화
         StageManager.Instance.StateUpdate(GameState.기본);
     }
 
-    private void Undo()
+    public void Undo()
     {
-        if (_pointList.Count > 0 && StageManager.Instance.PlayerState == GameState.집중)
+        if(StageManager.Instance.PlayerState != GameState.집중)
         {
-            Destroy(_pointList[(_pointList.Count - 1)]._transform.gameObject);
-            _pointList.RemoveAt(_pointList.Count - 1);
-            _pointList[(_pointList.Count - 1)]._attackPoint.GetComponent<AttackRouteUI>().CanSelect();
+            return;
         }
+        if (_pointList.Count <= 1)
+        {
+            return;
+        }
+
+        Destroy(_pointList[(_pointList.Count - 1)]._transform.gameObject);
+        _pointList.RemoveAt(_pointList.Count - 1);
+        _pointList[(_pointList.Count - 1)]._attackPoint.GetComponent<AttackRouteUI>().CanSelect();
+        
     }
 
     private void ResetAttack()
     {
+        if (_pointList.Count < 1)
+        {
+            return;
+        }
+
+        for (int i = 0; i < _pointList.Count; i++)
+        {
+            Destroy(_pointList[i]._transform.gameObject);
+        }
+
         _waitTime = 1f;
         _pointList.Clear();
     }
@@ -162,7 +192,11 @@ public class PlayerAction : MonoBehaviour, IStateObserver
         hits = Physics.SphereCastAll(transform.position, 0.5f, ((nextPoint - transform.position).normalized), distance, _enemyLayer);
         if (hits.Length > 0)
         {
-            Debug.Log(hits.Length);
-        }
+            Debug.Log($"적 수:{hits.Length}");
+            for (int i = 0; i < hits.Length; i++)
+            {
+                Debug.Log(hits[i].transform.name);
+            }
+        }        
     }
 }
