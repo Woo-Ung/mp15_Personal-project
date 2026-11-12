@@ -1,67 +1,35 @@
 using UnityEngine;
 
-public class TextureChanger : MonoBehaviour, IStateObserver
+public class TextureChanger : MonoBehaviour
 {
-    [SerializeField] private Material _idleMaterial;
-    [SerializeField] private Material _focusMaterial;
+    [SerializeField] protected Material _baseMaterial;
+    [SerializeField] protected Material _changeMaterial;
 
-    private MeshRenderer _meshRenderer;
-      
-    private void Start()
+    protected MeshRenderer _meshRenderer;
+
+    protected virtual void Awake()
     {
-        CacheComponents();
+        Init();
     }
 
-    private void CacheComponents()
+    protected virtual void Init()
     {
-        _meshRenderer = GetComponent<MeshRenderer>();
-        StageManager.Instance.Subscribe(this);
-    }
+        _meshRenderer = GetComponent<MeshRenderer>();        
+    }        
 
-    public void IdleState()
+    public void ChangeMat()
     {
-        ChangeIdleMat();
-    }   
-    public void FocusState()
-    {
-        ChangeFocusMat();
-    }
-    public void PunishState()
-    {
-
-    }
-    public void AttackState()
-    {
-        ChangeIdleMat();
-    }
-    public void DeadState()
-    {
-
-    }
-    public void ClearState()
-    {
-
-    }
-    
-
-    private void ChangeFocusMat()
-    {
-        if (_meshRenderer != null && _focusMaterial)
+        if (_meshRenderer != null && _changeMaterial)
         {
-            _meshRenderer.material = _focusMaterial;
+            _meshRenderer.material = _changeMaterial;
         }
     }
 
-    private void ChangeIdleMat()
+    public void ChangeBaseMat()
     {
-        if (_meshRenderer != null && _idleMaterial)
+        if (_meshRenderer != null && _baseMaterial)
         {
-            _meshRenderer.material = _idleMaterial;
+            _meshRenderer.material = _baseMaterial;
         }
-    }
-
-    private void OnDestroy()
-    {
-        StageManager.Instance.Unsubscribe(this);
-    }
+    }        
 }

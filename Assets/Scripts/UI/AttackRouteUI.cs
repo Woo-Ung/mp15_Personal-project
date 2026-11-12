@@ -64,7 +64,7 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
     }
 
     public void SetAttackRoute()
-    {      
+    {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Plane plane = new Plane(Vector3.up, _ground.transform.position);
 
