@@ -4,7 +4,22 @@ public class SwordArray: MonoBehaviour
 {
     
     [SerializeField] private SwordObj[] _sword;
+    public SwordObj[] Sword 
+    {
+        get 
+        { 
+            return _sword;
+        } 
+    }
     [SerializeField] private BossController _bossController;
+    public BossController BossControllerA
+    {
+        get
+        {
+            return _bossController;
+        }
+    }
+
     [field: SerializeField] public int _destroySwordCount { get; private set; }
 
     public int _arrayNum { get; private set; }
@@ -47,6 +62,12 @@ public class SwordArray: MonoBehaviour
         {
             _bossController.AllBroken();
         }
+    }
+
+    public void WrongSwordSAttacked(SwordObj sword)
+    {
+       _bossController.SetPunishSword(sword);
+       _bossController.PlayPunishAttack();
     }
 
     private void SetArray()

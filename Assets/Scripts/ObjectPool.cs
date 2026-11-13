@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
@@ -27,6 +28,7 @@ public class ObjectPool : MonoBehaviour
         for (int i = 0; i < _poolSize; i++)
         {
             GameObject sword = Instantiate(_swordPrefab);
+            sword.transform.SetParent(transform);
             sword.SetActive(false);
 
             _swords[i] = sword;
