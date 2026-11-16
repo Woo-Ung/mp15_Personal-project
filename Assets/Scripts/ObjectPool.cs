@@ -4,7 +4,7 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
     [SerializeField] private GameObject _swordPrefab;
-    [SerializeField] private int _poolSize = 8;
+    [SerializeField] private int _poolSize = 10;
 
     private GameObject[] _swords;
     private int _count;
@@ -29,6 +29,7 @@ public class ObjectPool : MonoBehaviour
         {
             GameObject sword = Instantiate(_swordPrefab);
             sword.transform.SetParent(transform);
+            sword.GetComponent<SwordObj>().SetPoolSword();
             sword.SetActive(false);
 
             _swords[i] = sword;
@@ -57,8 +58,8 @@ public class ObjectPool : MonoBehaviour
 
     public void Return(GameObject sword)
     {
-        sword.SetActive(false);
-
+        sword.GetComponent<SwordObj>().SetDestroy(false);
+        sword.SetActive(false);        
         _swords[_count] = sword;
         _count++;
     }

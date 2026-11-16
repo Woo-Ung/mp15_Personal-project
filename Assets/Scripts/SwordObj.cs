@@ -4,6 +4,10 @@ using UnityEngine.UI;
 
 public class SwordObj : MonoBehaviour, IDamageable
 {
+    private const string WARNING_CANVAS = "EffectCanvas";
+    private const string LAYER_ENEMY = "Enemy";
+    private const string LAYER_WALL = "Wall";
+
     [field: SerializeField] public bool _canDestroy { get; private set; }
 
     [SerializeField] private LayerMask _groundLayer;
@@ -11,11 +15,10 @@ public class SwordObj : MonoBehaviour, IDamageable
   
     [SerializeField] private Image _warningSign;
 
+    private bool _isPoolSword;
     private GameObject _warningCanvas;
 
-    private const string WARNING_CANVAS = "EffectCanvas";
-    private const string LAYER_ENEMY = "Enemy";
-    private const string LAYER_WALL = "Wall";
+    
 
     private void Start()
     {
@@ -30,6 +33,17 @@ public class SwordObj : MonoBehaviour, IDamageable
     private void Init()
     {
         _warningCanvas = GameObject.Find(WARNING_CANVAS);
+        SetSwordType();
+    }
+
+    public void SetPoolSword()
+    {
+        _isPoolSword = true;
+    }
+
+    public void SetDestroy(bool can)
+    {
+        _canDestroy = can;
         SetSwordType();
     }
 
@@ -50,14 +64,14 @@ public class SwordObj : MonoBehaviour, IDamageable
 
             while (currentTime < 0.6f)
             {
-                if (array == null || array.BossControllerA == null)
+                if (!_isPoolSword && (array == null || array.BossControllerA == null ))
                 {
                     Destroy(warning.gameObject);
                     yield break;
                 }
 
                 if (StageManager.Instance.PlayerState == GameState.기본 ||
-                    !array.BossControllerA._isClearArray)
+                    (!_isPoolSword && !array.BossControllerA._isClearArray))
                 {
                     currentTime += Time.deltaTime;
                 }
@@ -85,6 +99,10 @@ public class SwordObj : MonoBehaviour, IDamageable
 
     public void Damaged()
     {
+        if(_isPoolSword)
+        {
+            ObjectPool.Instance.Return(this.gameObject);
+        }
         if (_canDestroy)
         {
             GetComponentInParent<SwordArray>()?.SwordDestroyed();

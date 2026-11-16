@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 
 public class PlayerAction : MonoBehaviour, IStateObserver
 {
+    [SerializeField] private GameObject _camera;
     [SerializeField] private Canvas _attackRouteCanvas;
     [SerializeField] private List<PlayerAttackPoint> _pointList = new();
     [SerializeField] private float _waitTime;    
@@ -52,7 +53,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     }
     public void FocusState()
     {        
-        Instantiate(_attackRouteCanvas, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);        
+        Instantiate(_attackRouteCanvas, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);  
     }
     
     public void PunishState()

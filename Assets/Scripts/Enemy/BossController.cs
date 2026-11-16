@@ -13,16 +13,19 @@ public class BossController : EnemyController
     [SerializeField] private LayerMask _playerLayer;
     [SerializeField] private float FocusCoolTime;
     [SerializeField] private bool _isInNoticeRange;
-
+    [SerializeField] private float _swordArrayTime;
+    [SerializeField] private Collider _circleCollider;
+    [SerializeField] private LineRendererPolygon _circleLine;
 
     private BossEquipmenet _equipment => GetComponent<BossEquipmenet>();
     private SwordArray _currentArray;        
     private bool _canSummonSwordArray;
     private bool _canSummonSword;
     private Coroutine _focusTimer;
+    private Coroutine _mainPattern;
 
 
-    public bool _isClearArray { get; private set; }
+    [field : SerializeField]public bool _isClearArray { get; private set; }
 
     private SwordObj _punishSword;
 
@@ -68,6 +71,12 @@ public class BossController : EnemyController
 
     public void PlayPunishAttack()
     {
+        if (_mainPattern != null)
+        {
+            StopCoroutine(_mainPattern);
+            _mainPattern = null;
+        }
+
         PunishAttack();
     }
 
@@ -77,11 +86,71 @@ public class BossController : EnemyController
     }
     public override void ShootAttackRay()
     {
-
+        StageManager.Instance.StateUpdate(GameState.사망);
     }
     public override void SetInRange(bool inR)
     {
         _isInNoticeRange = inR;
+    }
+
+    private IEnumerator PatternRoutine()
+    {
+        while (true)
+        {
+            yield return StartCoroutine(SpawnSword());
+            yield return StartCoroutine(SpawnSwordArray());
+
+            yield return new WaitForFixedUpdate();
+
+            if (_isClearArray)
+            {
+                if (_isInNoticeRange)
+                {
+                    yield return StartCoroutine(CircleAttack());
+                }
+                else
+                {
+                    int randInt = UnityEngine.Random.Range(0, 2);
+
+                    switch (randInt)
+                    {
+                        case 0:
+                            continue;                            
+                        case 1:
+                            yield return StartCoroutine(DropSwordCombo());
+                            break;
+                        default:
+                            continue;
+                    }
+                }
+            }
+            else
+            {
+                yield return StartCoroutine(GoUpArray(_currentArray));
+            }
+
+            if (_isInNoticeRange)
+            {
+                yield return StartCoroutine(CircleAttack());
+            }
+            else
+            {
+                int randInt1 = UnityEngine.Random.Range(0, 2);
+
+                switch (randInt1)
+                {
+                    case 0:
+                        continue;
+                    case 1:
+                        yield return StartCoroutine(DropSwordCombo());
+                        break;
+                    default:
+                        continue;
+                }
+            }
+
+            yield return null;
+        }
     }
 
     private IEnumerator SpawnSword()  // 통상패턴 1
@@ -111,8 +180,6 @@ public class BossController : EnemyController
     {
         if (_canSummonSwordArray)
         {
-            _canSummonSwordArray = false;
-
             float currentTime1 = 0f;
 
             while (currentTime1 < 0.5f)
@@ -129,20 +196,71 @@ public class BossController : EnemyController
             _currentArray = _equipment._patternArray[num];
             _currentArray.gameObject.SetActive(true);
             _currentArray.SetActiveAll();
+            _canSummonSwordArray = false;
             _currentArray.transform.position = new Vector3(transform.position.x, transform.position.y + _swordSpawnHeight, transform.position.z);
-            StartCoroutine(DropSword(_currentArray));
-            StartCoroutine(CastingAttack());
+            yield return StartCoroutine(DropSword(_currentArray));
+            yield return StartCoroutine(CastingAttack());
         }
+    }
+
+    private IEnumerator DropSwordCombo() // 통상패턴3
+    {       
+        for (int i = 0; i < 3; i++)
+        {
+            Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
+            Vector3 target = _player.transform.position + Vector3.up;
+            Vector3 direction = (target - origin).normalized;
+
+            GameObject sword = ObjectPool.Instance.Take();
+            sword.GetComponent<SwordObj>().SetDestroy(true);
+            sword.transform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+            sword.transform.position = target + (Vector3.up * _swordSpawnHeight);
+
+            yield return StartCoroutine(DropSword(sword.GetComponent<SwordObj>()));
+        }        
+    }
+
+    private IEnumerator CircleAttack() // 통상패턴4
+    {
+        _circleLine.gameObject.SetActive(true);
+        float currentTime = 0f;
+
+        while (currentTime < 0.4f)
+        {
+            if (StageManager.Instance.PlayerState == GameState.기본)
+            {
+                currentTime += Time.deltaTime;
+            }
+            yield return null;
+        }
+
+        _circleCollider.gameObject.SetActive(true);
+
+        float currentTime1 = 0f;
+
+        while (currentTime1 < 0.3f)
+        {
+            if (StageManager.Instance.PlayerState == GameState.기본)
+            {
+                currentTime1 += Time.deltaTime;
+            }
+            yield return null;
+        }
+
+        _circleLine.gameObject.SetActive(false);
+        _circleCollider.gameObject.SetActive(false);        
     }
 
     private IEnumerator CastingAttack() // 검진 생성 후 시전
     {
         float currentTime1 = 0f;
 
-        while (currentTime1 < 8f && !_canSummonSwordArray)
-        {            
-            currentTime1 += Time.deltaTime;
-           
+        while (currentTime1 < _swordArrayTime && !_canSummonSwordArray)
+        {
+            if (StageManager.Instance.PlayerState == GameState.기본)
+            {
+                currentTime1 += Time.deltaTime;               
+            }
             yield return null;
         }
 
@@ -164,11 +282,13 @@ public class BossController : EnemyController
         float currentTime = 0f;
 
         while (currentTime < _dropSwordTime)
-        {
-            
+        {      
+            if(StageManager.Instance.PlayerState != GameState.사망)
+            { 
             currentTime += Time.deltaTime;
             pos.y = Mathf.Lerp(pos.y, 200f, currentTime / _dropSwordTime);
             currentArray.transform.position = pos;
+            }
             
             yield return null;
         }
@@ -200,7 +320,7 @@ public class BossController : EnemyController
         pos1.y = 0f;
         currentArray1.transform.position = pos1;
                 
-        PunishAttack();
+        PlayPunishAttack();
     }
 
     private IEnumerator DashAttack(GameObject sword)
@@ -233,9 +353,7 @@ public class BossController : EnemyController
         {
             ObjectPool.Instance.Return(sword);
             transform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-            transform.position = sword.transform.position;
-
-            StartCoroutine(SpawnSwordArray());
+            transform.position = sword.transform.position;                        
         }
     }
 
@@ -373,29 +491,17 @@ public class BossController : EnemyController
         }
     }
 
-
-
     public override void IdleState()
     {
-        if (!_isInNoticeRange)
+        if(_mainPattern != null)
         {
-            if (_canSummonSwordArray)
-            {
-                StartCoroutine(SpawnSword());
-            }
+            return;
         }
-        else
-        {
-            StartCoroutine(SpawnSwordArray());
-        }
+
+        _mainPattern = StartCoroutine(PatternRoutine());
     }
 
-    public void AllBroken()
-    {
-        _canSummonSwordArray = true;        
-        _currentArray.gameObject.SetActive(false);
-        _currentArray = null;
-    }
+    
 
     public override void FocusState()
     {
@@ -408,13 +514,8 @@ public class BossController : EnemyController
         _focusTimer = StartCoroutine(FocusTimer());
     }
     public override void PunishState()
-    {
-        if (!_isClearArray)
-        {
-            StartCoroutine(GoUpArray(_currentArray));
-        }
-
-        if (!_canSummonSwordArray)
+    {       
+        if (!_canSummonSwordArray && _isClearArray)
         {
             for (int i = 0; i < _currentArray.Sword.Length; i++)
             {
@@ -434,6 +535,25 @@ public class BossController : EnemyController
                     }
                 }
             }
+            for (int i = 0; i < _equipment._swordPool.transform.childCount; i++)
+            {
+                if (_equipment._swordPool.transform.GetChild(i).gameObject.activeInHierarchy)
+                {
+                    ScanRoute(_equipment._swordPool.transform.GetChild(i).position, out Vector3 hitPosition, out bool isPlayerExist, false);
+
+                    if (isPlayerExist)
+                    {
+                        SetPunishSword(_currentArray.Sword[i]);
+                        PunishAttack();
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+            }
+
         }
     }
     
@@ -443,13 +563,19 @@ public class BossController : EnemyController
     }
     public override void DeadState()
     {
-
+        
     }
     public override void ClearState()
     {
 
     }
 
+    public void AllBroken()
+    {
+        _canSummonSwordArray = true;
+        _currentArray.gameObject.SetActive(false);
+        _currentArray = null;
+    }
     protected override void CacheComponents()
     {
         base.CacheComponents(); // 부모 클래스에서 옵저버 구독
@@ -457,6 +583,8 @@ public class BossController : EnemyController
         _canSummonSword = true;
         _isClearArray = true;
         _isInNoticeRange = false;
+        _circleCollider.gameObject.SetActive(false);
+        _circleLine.gameObject.SetActive(false);
     }
 
     //protected override void OnDestroy()

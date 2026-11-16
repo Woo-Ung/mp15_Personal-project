@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputActionReference _directionAction;
     [SerializeField] private InputActionReference _distanceAction;
     [SerializeField] private InputActionReference _undoAction;
+    [SerializeField] private InputActionReference _cameraFocusOnMe;
 
     private PlayerAction _playerAction;
     
@@ -39,6 +41,7 @@ public class PlayerController : MonoBehaviour
         _directionAction.action.Enable();
         _distanceAction.action.Enable();
         _undoAction.action.Enable();
+        _cameraFocusOnMe.action.Enable();
     }
 
     private void OffInputAction()
@@ -48,6 +51,7 @@ public class PlayerController : MonoBehaviour
         _directionAction.action.Disable();
         _distanceAction.action.Disable();
         _undoAction.action.Disable();
+        _cameraFocusOnMe.action.Disable();
     }
 
     private void BindInputEvent()
@@ -55,13 +59,15 @@ public class PlayerController : MonoBehaviour
         _focusAction.action.performed += FocusState;
         _attackAction.action.performed += AttackState;
         _undoAction.action.performed += Undo;
-    }
+        _cameraFocusOnMe.action.performed += CameraFocusOnme;
+    }    
 
     private void UnbindInputEvent()
     {
         _focusAction.action.performed -= FocusState;
         _attackAction.action.performed -= AttackState;
         _undoAction.action.performed -= Undo;
+        _cameraFocusOnMe.action.performed -= CameraFocusOnme;
     }
 
     private void FocusState(InputAction.CallbackContext context)
@@ -77,5 +83,10 @@ public class PlayerController : MonoBehaviour
     private void Undo(InputAction.CallbackContext context)
     {
         _playerAction.Undo();
+    }
+
+    private void CameraFocusOnme(InputAction.CallbackContext context)
+    {
+        Camera.main.GetComponentInParent<CameraController>().transform.position = transform.position;
     }
 }
