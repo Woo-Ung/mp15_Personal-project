@@ -12,7 +12,7 @@ public class RangedEnemyController : EnemyController
 
     [SerializeField] private LineRendererAtoB _attackLine;
 
-      private EnemyMovement _enemyMovement;
+    private EnemyMovement _enemyMovement;
     private Quaternion _prevRotation;
     private Coroutine _attackCoroutine;
 

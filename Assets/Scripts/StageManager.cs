@@ -1,14 +1,14 @@
-using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Playables;
 using UnityEngine.UI;
 
 public class StageManager : MonoBehaviour
-{    
+{
+    [field: SerializeField] public GameState PlayerState { get; private set; }   
+
     private List<IStateObserver> _subscriber = new();
     public static StageManager Instance { get; private set; }
-    [field: SerializeField] public GameState PlayerState { get; private set; }
 
     private void Awake()
     {
@@ -86,10 +86,7 @@ public class StageManager : MonoBehaviour
             case GameState.사망:
                 Debug.Log("사망상태");
                 PlayerState = GameState.사망;
-                for (int i = 0; i < _subscriber.Count; i++)
-                {                   
-                    _subscriber[i].DeadState();
-                }
+                StartCoroutine(Die());
                 break;
             case GameState.클리어:
                 Debug.Log("클리어");
@@ -99,6 +96,15 @@ public class StageManager : MonoBehaviour
                     _subscriber[i].ClearState();
                 }
                 break;
+        }
+    }  
+
+    private IEnumerator Die()
+    {
+        yield return new WaitForSeconds(0.3f);
+        for (int i = 0; i < _subscriber.Count; i++)
+        {
+            _subscriber[i].DeadState();
         }
     }
 

@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 
 public class PlayerAction : MonoBehaviour, IStateObserver
 {
+    [SerializeField] private GameObject _camera;
     [SerializeField] private Canvas _attackRouteCanvas;
     [SerializeField] private List<PlayerAttackPoint> _pointList = new();
     [SerializeField] private float _waitTime;    
@@ -52,7 +53,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     }
     public void FocusState()
     {        
-        Instantiate(_attackRouteCanvas, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);        
+        Instantiate(_attackRouteCanvas, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);  
     }
     
     public void PunishState()
@@ -74,12 +75,21 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     public void DeadState()
     {
         StopAllCoroutines();
+        ResetAttack();
         Debug.Log("죽음ㅠㅠ");
-        Time.timeScale = 0f;
+
+        StartCoroutine(TimeStop());       
     }
+
     public void ClearState()
     {
 
+    }
+
+    private IEnumerator TimeStop()
+    {
+        yield return new WaitForSeconds(1f);
+        Time.timeScale = 0f;
     }
 
     private IEnumerator Attack()
@@ -89,7 +99,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
             yield return _wait;
             for (int i = 1; i < _pointList.Count; i++)
             {
-                ScanRoute(_pointList[i]._transform.position, out Vector3 hitPosition, out bool isWallExit);
+                ScanRoute(_pointList[i]._transform.position, out Vector3 hitPosition, out bool isWallExist, out RaycastHit wall);
 
                 ScanEnemy(hitPosition, out RaycastHit[] hits);
                 transform.position = hitPosition;
@@ -99,7 +109,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
                 {
                     for (int j = 0; j < hits.Length; j++)
                     {
-                        hits[j].transform.GetComponent<IDamageable>().Damaged();
+                        hits[j].transform.GetComponentInParent<IDamageable>().Damaged();
                     }
                 }
                 else
@@ -109,7 +119,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
                     yield return new WaitForSeconds(0.05f);
                 }
 
-                if (!isWallExit)
+                if (!isWallExist)
                 {
                     if (!(i == _pointList.Count - 1))
                     {
@@ -122,6 +132,10 @@ public class PlayerAction : MonoBehaviour, IStateObserver
                 
                 else
                 {
+                    if(wall.transform.TryGetComponent<IDamageable>(out IDamageable damaged))
+                    {
+                        damaged.Damaged();
+                    }
                     break;
                 }
             }
@@ -166,7 +180,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
         _pointList.Clear();
     }
 
-    private void ScanRoute(Vector3 nextPoint, out Vector3 hitPosition, out bool isWallExit)
+    private void ScanRoute(Vector3 nextPoint, out Vector3 hitPosition, out bool isWallExist, out RaycastHit wall)
     {
         Ray ray = new Ray(transform.position + new Vector3(0, 1f, 0), (nextPoint - transform.position).normalized);
         Debug.DrawRay(transform.position + new Vector3(0, 1f, 0), (nextPoint - transform.position), Color.red, 5f);
@@ -176,12 +190,14 @@ public class PlayerAction : MonoBehaviour, IStateObserver
         {
             hitPosition = hit.point + hit.normal * 0.7f; //벽의 표면에서 0.7f만큼 떨어진 위치
             hitPosition = new Vector3(hitPosition.x, transform.position.y, hitPosition.z);
-            isWallExit = true;
+            wall = hit;
+            isWallExist = true;
             Debug.Log("장애물있음");
         }
         else
         {
-            isWallExit = false;
+            isWallExist = false;
+            wall = default;
             hitPosition = nextPoint;
         }        
     }
