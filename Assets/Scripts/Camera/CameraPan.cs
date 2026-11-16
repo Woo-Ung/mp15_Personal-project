@@ -7,6 +7,11 @@ public class CameraPan : MonoBehaviour
     [SerializeField] private CameraInput _cameraInput;
     [SerializeField] private float moveSpeed = 10f;
 
+    [SerializeField] private float minX;
+    [SerializeField] private float maxX;
+    [SerializeField] private float minZ;
+    [SerializeField] private float maxZ;
+
     private void Update()
     {
         Vector2 mousePos = _cameraInput.GetMousePosition();
@@ -32,5 +37,12 @@ public class CameraPan : MonoBehaviour
         }
 
         transform.Translate(Time.deltaTime * moveSpeed * move);
+
+        Vector3 disiredPosition = transform.position;
+
+        disiredPosition.x = Mathf.Clamp(disiredPosition.x, minX, maxX);
+        disiredPosition.z = Mathf.Clamp(disiredPosition.z, minZ, maxZ);
+
+        transform.position = disiredPosition;
     }
 }
