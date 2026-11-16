@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class StageManager : MonoBehaviour
-{    
+{
+    [field: SerializeField] public GameState PlayerState { get; private set; }   
+
     private List<IStateObserver> _subscriber = new();
     public static StageManager Instance { get; private set; }
-    [field: SerializeField] public GameState PlayerState { get; private set; }
 
     private void Awake()
     {
@@ -96,7 +97,7 @@ public class StageManager : MonoBehaviour
                 }
                 break;
         }
-    }
+    }  
 
     private IEnumerator Die()
     {

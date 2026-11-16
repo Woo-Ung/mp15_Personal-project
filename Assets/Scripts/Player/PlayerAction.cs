@@ -74,12 +74,21 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     public void DeadState()
     {
         StopAllCoroutines();
+        ResetAttack();
         Debug.Log("죽음ㅠㅠ");
-        Time.timeScale = 0f;
+
+        StartCoroutine(TimeStop());       
     }
+
     public void ClearState()
     {
 
+    }
+
+    private IEnumerator TimeStop()
+    {
+        yield return new WaitForSeconds(1f);
+        Time.timeScale = 0f;
     }
 
     private IEnumerator Attack()

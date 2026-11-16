@@ -11,16 +11,22 @@ public class BossController : EnemyController
     [SerializeField] private PlayerAction _player;
     [SerializeField] private float _swordSpawnHeight;
     [SerializeField] private LayerMask _playerLayer;
+    [SerializeField] private float FocusCoolTime;
+    [SerializeField] private bool _isInNoticeRange;
+
 
     private BossEquipmenet _equipment => GetComponent<BossEquipmenet>();
     private SwordArray _currentArray;        
     private bool _canSummonSwordArray;
     private bool _canSummonSword;
+    private Coroutine _focusTimer;
+
+
     public bool _isClearArray { get; private set; }
 
     private SwordObj _punishSword;
 
-    [SerializeField] private bool _isInNoticeRange;
+  
 
 
     protected override void Start()
@@ -43,15 +49,21 @@ public class BossController : EnemyController
     }
 
     protected override void PunishAttack()
-    {   
-         Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
-         Vector3 target = _player.transform.position + Vector3.up;
-         Vector3 direction = (target - origin).normalized;
+    {
+        StageManager.Instance.StateUpdate(GameState.사망);
+        StartCoroutine(PunishTerm());        
+    }
 
-         transform.position = _player.transform.position + (direction * 2f);
-         transform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-         _punishSword?.gameObject.SetActive(false);
-         StageManager.Instance.StateUpdate(GameState.사망);        
+    private IEnumerator PunishTerm()
+    {
+        Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
+        Vector3 target = _player.transform.position + Vector3.up;
+        Vector3 direction = (target - origin).normalized;
+        yield return new WaitForSeconds(0.5f);
+
+        transform.position = _player.transform.position + (direction * 2f);
+        transform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        _punishSword?.gameObject.SetActive(false);
     }
 
     public void PlayPunishAttack()
@@ -99,6 +111,8 @@ public class BossController : EnemyController
     {
         if (_canSummonSwordArray)
         {
+            _canSummonSwordArray = false;
+
             float currentTime1 = 0f;
 
             while (currentTime1 < 0.5f)
@@ -110,7 +124,7 @@ public class BossController : EnemyController
                 yield return null;
             }
 
-            _canSummonSwordArray = false;
+            
             int num = UnityEngine.Random.Range(0, 3);
             _currentArray = _equipment._patternArray[num];
             _currentArray.gameObject.SetActive(true);
@@ -338,7 +352,28 @@ public class BossController : EnemyController
         currentArray.transform.position = pos;
     }
 
-  
+    private IEnumerator FocusTimer() // 집중상태 x초 이상 유지 시 즉사 패턴
+    {
+        float currentTime = 0;
+        while (currentTime < FocusCoolTime)
+        {            
+            if(StageManager.Instance.PlayerState != GameState.집중)
+            {               
+                _focusTimer = null;
+                yield break;
+            }
+            currentTime += Time.deltaTime;
+            yield return null;
+        }
+
+        _focusTimer = null;
+        if (StageManager.Instance.PlayerState == GameState.집중)
+        {
+            PlayPunishAttack();
+        }
+    }
+
+
 
     public override void IdleState()
     {
@@ -364,7 +399,13 @@ public class BossController : EnemyController
 
     public override void FocusState()
     {
+        if(_focusTimer != null)
+        {
+            StopCoroutine( _focusTimer );
+            _focusTimer = null;
+        }
 
+        _focusTimer = StartCoroutine(FocusTimer());
     }
     public override void PunishState()
     {
