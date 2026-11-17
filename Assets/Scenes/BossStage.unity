@@ -1870,6 +1870,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4653162786864725678, guid: 7e11a9ef056b0ac4b9213f457d4b9841, type: 3}
+      propertyPath: near clip plane
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4653162786864725678, guid: 7e11a9ef056b0ac4b9213f457d4b9841, type: 3}
       propertyPath: orthographic size
       value: 15
       objectReference: {fileID: 0}
