@@ -192,13 +192,14 @@ public class PlayerAction : MonoBehaviour, IStateObserver
             hitPosition = new Vector3(hitPosition.x, transform.position.y, hitPosition.z);
             wall = hit;
             isWallExist = true;
-            Debug.Log("장애물있음");
+            //Debug.Log("장애물있음");
         }
         else
         {
             isWallExist = false;
             wall = default;
             hitPosition = nextPoint;
+            //Debug.Log("장애물감지못함");
         }        
     }
 
@@ -208,7 +209,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
         hits = Physics.SphereCastAll(transform.position, 0.5f, ((nextPoint - transform.position).normalized), distance, _enemyLayer);
         if (hits.Length > 0)
         {
-            Debug.Log($"적 수:{hits.Length}");
+            //Debug.Log($"적 수:{hits.Length}");
             for (int i = 0; i < hits.Length; i++)
             {
                 Debug.Log(hits[i].transform.name);

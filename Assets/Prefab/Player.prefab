@@ -52,6 +52,7 @@ MonoBehaviour:
   _directionAction: {fileID: 2459678351085388295, guid: cdd01ce6a0f5a3e40aad58a9c49d8cff, type: 3}
   _distanceAction: {fileID: -4884029557276584604, guid: cdd01ce6a0f5a3e40aad58a9c49d8cff, type: 3}
   _undoAction: {fileID: 8913434135651166316, guid: cdd01ce6a0f5a3e40aad58a9c49d8cff, type: 3}
+  _cameraFocusOnMe: {fileID: -8122266691446608641, guid: cdd01ce6a0f5a3e40aad58a9c49d8cff, type: 3}
 --- !u!114 &5292179914667198422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d53550c9b57844489b17c2336b00ef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAction
+  _camera: {fileID: 0}
   _attackRouteCanvas: {fileID: 1901421250281526570, guid: aea3efc4f19e5e1499515ea8f13e3b5f, type: 3}
   _waitTime: 0.6
   _wallLayer:

@@ -113,7 +113,7 @@ public class RangedEnemyController : EnemyController
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                Debug.Log("AttackRay: 타겟확인");
+                //Debug.Log("AttackRay: 타겟확인");
                 if (_attackCoroutine != null)
                 {
                     StopCoroutine(_attackCoroutine);
@@ -124,7 +124,7 @@ public class RangedEnemyController : EnemyController
             }
             else
             {
-                Debug.Log($"AttackRay: 타겟놓침:{hit.transform.name}");
+                //Debug.Log($"AttackRay: 타겟놓침:{hit.transform.name}");
             }
         }
     }
@@ -143,7 +143,7 @@ public class RangedEnemyController : EnemyController
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                Debug.Log($"{transform.name}_NoticeRay: 타겟감지aaaaaaaaaaaaaaaaaaa");                
+                //Debug.Log($"{transform.name}_NoticeRay: 타겟감지aaaaaaaaaaaaaaaaaaa");                
                 SetInRange(true);
 
                 if(_attackCoroutine != null)
@@ -159,7 +159,7 @@ public class RangedEnemyController : EnemyController
 
             else
             {
-                Debug.Log($"{transform.name}_NoticeRay: 타겟안보임");
+                //Debug.Log($"{transform.name}_NoticeRay: 타겟안보임");
                 SetInRange(false);
             }
         }

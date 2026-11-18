@@ -52,8 +52,8 @@ public class SwordObj : MonoBehaviour, IDamageable
         Physics.SyncTransforms();
         yield return null;
         Ray ray = new Ray(transform.position, -transform.up);
-        //Debug.DrawRay(transform.position, -transform.up * 30f, Color.red, 5f); //확인용
-        if(Physics.Raycast(ray, out RaycastHit hit, 30f, _groundLayer))
+        Debug.DrawRay(transform.position, -transform.up * 30f, Color.red, 5f); //확인용
+        if (Physics.Raycast(ray, out RaycastHit hit, 30f, _groundLayer))
         {
             yield return null;            
             Image warning = Instantiate(_warningSign, hit.point + new Vector3(0, 0.01f, 0), _warningSign.transform.rotation);

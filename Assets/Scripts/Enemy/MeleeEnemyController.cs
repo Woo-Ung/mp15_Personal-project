@@ -82,13 +82,13 @@ public class MeleeEnemyController : EnemyController
 
     protected override void PunishAttack()
     {
+        StageManager.Instance.StateUpdate(GameState.»ç¸Á);
+                
         Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
         Vector3 target = _player.transform.position + Vector3.up;
         Vector3 direction = (target - origin).normalized;
 
-        transform.position = target + (direction * 1.2f);
-
-        StageManager.Instance.StateUpdate(GameState.»ç¸Á);
+        transform.position = target + (direction * 1.2f);        
     }
 
     public override void Damaged()
@@ -110,12 +110,12 @@ public class MeleeEnemyController : EnemyController
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                Debug.Log("AttackRay: Å¸°ÙÈ®ÀÎ");
+                //Debug.Log("AttackRay: Å¸°ÙÈ®ÀÎ");
                 PunishAttack();
             }
             else
             {
-                Debug.Log($"AttackRay: Å¸°Ù³õÄ§:{hit.transform.name}");
+                //Debug.Log($"AttackRay: Å¸°Ù³õÄ§:{hit.transform.name}");
             }
         }
     }
@@ -134,13 +134,13 @@ public class MeleeEnemyController : EnemyController
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                Debug.Log("NoticeRay: Å¸°Ù°¨Áö");
+                //Debug.Log("NoticeRay: Å¸°Ù°¨Áö");
                 SetInRange(true);
                 StartCoroutine(SetAttackRange());
             }
             else
             {
-                Debug.Log("NoticeRay: Å¸°Ù¾Èº¸ÀÓ");
+                //Debug.Log("NoticeRay: Å¸°Ù¾Èº¸ÀÓ");
                 SetInRange(false);
             }
         }
