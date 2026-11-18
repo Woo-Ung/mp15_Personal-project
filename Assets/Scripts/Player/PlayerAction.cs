@@ -25,11 +25,21 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     private void Start()
     {
         CacheComponents();
+        if (_camera != null)
+        {
+            _camera.transform.position = transform.position;
+        }
     }
 
     private void Update()
     {
         
+    }
+
+    private void OnEnable()
+    {
+
+        StageManager.Instance.StateUpdate(GameState.기본);
     }
 
     private void Init()

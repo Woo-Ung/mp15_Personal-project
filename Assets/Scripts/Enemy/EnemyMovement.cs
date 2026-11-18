@@ -3,10 +3,11 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
-    [SerializeField] private float waitTime = 0.3f;
-    [SerializeField] private float turnSpeed = 90f;
+    [SerializeField] private float speed;
+    [SerializeField] private float waitTime;
+    [SerializeField] private float turnSpeed;
     [SerializeField] private Transform _pathHolder;
+    [SerializeField] private int _startNum = 0;
 
     private bool _canMove;
     private float _remainingWaitTime;
@@ -35,13 +36,13 @@ public class EnemyMovement : MonoBehaviour
             waypoints[i] = _pathHolder.GetChild(i).position;
             waypoints[i] = new Vector3(waypoints[i].x, transform.position.y, waypoints[i].z);
         }
-        StartCoroutine(FollowPath(waypoints));
+        StartCoroutine(FollowPath(waypoints, _startNum));
     }
 
-    private IEnumerator FollowPath(Vector3[] waypoints)
+    private IEnumerator FollowPath(Vector3[] waypoints, int startNum)
     {
-        transform.position = waypoints[0];
-        int targetWaypointIndex = 1;
+        transform.position = waypoints[startNum];
+        int targetWaypointIndex = (startNum + 1) % waypoints.Length;
         Vector3 targetWaypoint = waypoints[targetWaypointIndex];
         transform.LookAt(targetWaypoint);
 

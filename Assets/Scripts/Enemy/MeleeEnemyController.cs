@@ -98,6 +98,11 @@ public class MeleeEnemyController : EnemyController
 
     public override void ShootAttackRay()
     {
+        if(StageManager.Instance.PlayerState == GameState.공격)
+        {
+            return;
+        }
+
         Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z); // Ray 나가는 높이 조절
         Vector3 target = _player.transform.position + Vector3.up;
 

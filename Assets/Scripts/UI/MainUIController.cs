@@ -17,6 +17,8 @@ public class MainUIController : MonoBehaviour, IStateObserver
     {
         StageManager.Instance.Subscribe(this);
         _gameOverButton.onClick.AddListener(GameManager.Instance.RetrySceneLoad);
+        _gameOverImage.gameObject.SetActive(false);
+        _gameOverButton.gameObject.SetActive(false);
     }
 
     public void IdleState()

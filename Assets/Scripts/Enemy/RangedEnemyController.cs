@@ -90,6 +90,7 @@ public class RangedEnemyController : EnemyController
 
     protected override void PunishAttack()
     {
+        Debug.Log("궁병의 공격aaaaaaaa");
         LookPlayer();
         StageManager.Instance.StateUpdate(GameState.사망);
     }
@@ -143,7 +144,7 @@ public class RangedEnemyController : EnemyController
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                //Debug.Log($"{transform.name}_NoticeRay: 타겟감지aaaaaaaaaaaaaaaaaaa");                
+                Debug.Log($"궁병 타겟감지aaaaaaaaaaaaaaaaaaa");                
                 SetInRange(true);
 
                 if(_attackCoroutine != null)
