@@ -152,11 +152,7 @@ public class TitleUIController : MonoBehaviour
     {
         RectTransform rect2 = _leftCanvas2.GetComponent<RectTransform>();
 
-        Slice();
-        yield return new WaitForSeconds(0.03f);
-        _sliceImgae.rectTransform.DOAnchorPos(new Vector2(0, -1500f), 0.3f).SetEase(Ease.OutQuart);
-        yield return new WaitForSeconds(0.2f);
-        _sliceImgae.DOFade(0f, 0.1f);
+        StartCoroutine(Slice());        
         yield return new WaitForSeconds(0.3f);
         rect2.DOLocalRotate(new Vector3(0, 0, 5), 0.1f).SetEase(Ease.InOutCubic);
         yield return new WaitForSeconds(0.4f);
@@ -173,7 +169,7 @@ public class TitleUIController : MonoBehaviour
     {
         _sliceImgae2.DOFillAmount(1f, 0.1f).SetEase(Ease.OutQuart);
         yield return new WaitForSeconds(0.03f);
-        _sliceImgae2.rectTransform.DOAnchorPos(new Vector2(1500f, 0f), 0.3f).SetEase(Ease.OutQuart);
+        _sliceImgae2.rectTransform.DOAnchorPos(new Vector2(1500f, _sliceImgae2.rectTransform.anchoredPosition.y), 0.3f).SetEase(Ease.OutQuart);
         yield return new WaitForSeconds(0.2f);
         _sliceImgae2.DOFade(0f, 0.1f);
     }
@@ -183,7 +179,7 @@ public class TitleUIController : MonoBehaviour
         RectTransform rect = _RightCanvas1.GetComponent<RectTransform>();
 
         StartCoroutine(Slice2());
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
         //rect.DOLocalRotate(new Vector3(0, 0, 5), 0.1f).SetEase(Ease.InOutCubic);
         //yield return new WaitForSeconds(0.4f);
         //rect.DOLocalRotate(new Vector3(0, 0, 15), 0.3f).SetEase(Ease.OutQuart);
@@ -200,7 +196,7 @@ public class TitleUIController : MonoBehaviour
         RectTransform rect = _RightCanvas2.GetComponent<RectTransform>();
 
         StartCoroutine(Slice2());
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
         //rect.DOLocalRotate(new Vector3(0, 0, 5), 0.1f).SetEase(Ease.InOutCubic);
         //yield return new WaitForSeconds(0.4f);
         //rect.DOLocalRotate(new Vector3(0, 0, 15), 0.3f).SetEase(Ease.OutQuart);

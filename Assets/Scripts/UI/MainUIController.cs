@@ -16,7 +16,7 @@ public class MainUIController : MonoBehaviour, IStateObserver
     private void CacheComponents()
     {
         StageManager.Instance.Subscribe(this);
-        _gameOverButton.onClick.AddListener(GameManager.Instance.BossSceneLoad);
+        _gameOverButton.onClick.AddListener(GameManager.Instance.RetrySceneLoad);
     }
 
     public void IdleState()

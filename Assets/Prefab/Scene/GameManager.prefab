@@ -44,3 +44,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ebd82e6ee71bf4cb559927f9454827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  _titleScene:
+    _sceneAsset: {fileID: 102900000, guid: 8d3f73f993afd85469cd2715d03c774d, type: 3}
+    _scenePath: Assets/Scenes/TitleScene.unity
+    _sceneName: TitleScene
+  _tutorialScene:
+    _sceneAsset: {fileID: 102900000, guid: cd947aa4bea4f94449f09694fe0d18a5, type: 3}
+    _scenePath: Assets/Scenes/TutorialScene.unity
+    _sceneName: TutorialScene
+  _stageScene:
+    _sceneAsset: {fileID: 102900000, guid: 99c9720ab356a0642a771bea13969a05, type: 3}
+    _scenePath: Assets/Scenes/StageScene.unity
+    _sceneName: StageScene
+  _bossScene:
+    _sceneAsset: {fileID: 102900000, guid: bbcad0fc2a9aa0b4594a70f961c15c92, type: 3}
+    _scenePath: Assets/Scenes/BossStage.unity
+    _sceneName: BossStage

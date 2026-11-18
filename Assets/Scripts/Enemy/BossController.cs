@@ -166,6 +166,12 @@ public class BossController : EnemyController
         Vector3 direction = (target - origin).normalized;
                 
         GameObject sword = ObjectPool.Instance.Take();
+
+        if(sword == null)
+        {
+            yield break;
+        }
+
         sword.transform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         sword.transform.position = target + (direction * 2f) + (Vector3.up * _swordSpawnHeight);
         
@@ -211,6 +217,12 @@ public class BossController : EnemyController
             Vector3 direction = (target - origin).normalized;
 
             GameObject sword = ObjectPool.Instance.Take();
+
+            if (sword == null)
+            {
+                yield break;
+            }
+
             sword.GetComponent<SwordObj>().SetDestroy(true);
             sword.transform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             sword.transform.position = target + (Vector3.up * _swordSpawnHeight);

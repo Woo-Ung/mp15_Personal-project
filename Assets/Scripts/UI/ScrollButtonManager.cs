@@ -3,25 +3,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ScrollButtonManager : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class ScrollButtonManager : MonoBehaviour
 {
-    //   public void OnBeginDrag(PointerEventData eventData)
-    //{
-
-    //}
-
-    //public void OnDrag(PointerEventData eventData)
-    //{
-
-    //}
-
-    //public void OnEndDrag(PointerEventData eventData)
-    //{
-
-    //}
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
     [SerializeField] private Scrollbar _scroll;
     [SerializeField] private GameObject _content;
     [SerializeField] private Button _easyButton;
