@@ -7,13 +7,12 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
     [SerializeField] private Image _directionImage;
     [SerializeField] private Image _distanceImage;
     [SerializeField] private Image _testPointImage;
-
+    [SerializeField] private AttackRouteUI attackPoint;
     [SerializeField] private float _maxDistance;
+    [SerializeField] private float _timeValue;
 
     private PlayerAction _playerAction;
-    private GameObject _ground;    
-    
-    [SerializeField] private AttackRouteUI attackPoint;
+    private GameObject _ground;  
 
     public bool _isRotate { get; private set; }
     public bool _isSelectNow { get; private set; }
@@ -100,6 +99,7 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
 
     private void ConfirmAttackRout()
     {
+        StageManager.Instance.FocusTimeUpdate(_timeValue);
         AttackRouteUI a = Instantiate(attackPoint, new Vector3(_testPointImage.transform.position.x, 0, _testPointImage.transform.position.z), attackPoint.transform.rotation);
         _testPointImage.gameObject.SetActive(false);
         _isRotate = false;

@@ -249,6 +249,7 @@ MonoBehaviour:
     m_Bits: 2880
   _attackCoolTime: 2
   _attackLine: {fileID: 0}
+  _returnTime: 1
 --- !u!1 &8310117682244922037
 GameObject:
   m_ObjectHideFlags: 0

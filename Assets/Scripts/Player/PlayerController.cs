@@ -71,7 +71,11 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FocusState(InputAction.CallbackContext context)
-    {        
+    {
+        if (_playerAction.GetComponent<PlayerFocusModeManager>()._focusTime < 1f)
+        {
+            return;
+        }
         StageManager.Instance.StateUpdate(GameState.집중);
     }
     

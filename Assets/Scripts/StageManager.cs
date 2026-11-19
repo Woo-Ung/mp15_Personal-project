@@ -8,6 +8,7 @@ public class StageManager : MonoBehaviour
     [field: SerializeField] public GameState PlayerState { get; private set; }   
 
     private List<IStateObserver> _subscriber = new();
+    private PlayerFocusModeManager _player;
     public static StageManager Instance { get; private set; }
 
     private void Awake()
@@ -29,6 +30,16 @@ public class StageManager : MonoBehaviour
     private void CasheComponent()
     {
         StateUpdate(GameState.기본);
+    }
+
+    public void PlayerSub(PlayerFocusModeManager player)
+    {
+        _player = player;
+    }
+
+    public void FocusTimeUpdate(float value)
+    {
+        _player.ChangeFocusTime(value);
     }
 
     public void Subscribe(IStateObserver observer)

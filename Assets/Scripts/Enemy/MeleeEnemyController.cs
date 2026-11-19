@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class MeleeEnemyController : EnemyController
 {
@@ -12,6 +13,7 @@ public class MeleeEnemyController : EnemyController
     [SerializeField] private float _setAttackRange;
     [SerializeField] private float _addAttackRange;
     [SerializeField] private AttackCollider _attackCollider;
+    [SerializeField] private float _returnTime;
 
     private EnemyMovement _enemyMovement;
     private Quaternion _prevRotation;
@@ -93,6 +95,7 @@ public class MeleeEnemyController : EnemyController
 
     public override void Damaged()
     {
+        StageManager.Instance.FocusTimeUpdate(_returnTime);
         Destroy(gameObject);
     }     
 

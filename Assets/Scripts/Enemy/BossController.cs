@@ -20,6 +20,7 @@ public class BossController : EnemyController
     private SwordArray _currentArray;        
     private bool _canSummonSwordArray;
     private bool _canSummonSword;
+    private bool _firstAttack;
     private Coroutine _focusTimer;
     private Coroutine _mainPattern;
 
@@ -96,8 +97,30 @@ public class BossController : EnemyController
     {
         while (true)
         {
+           
             yield return StartCoroutine(SpawnSword());
-            yield return StartCoroutine(SpawnSwordArray());
+
+            if (_firstAttack)
+            {
+                yield return StartCoroutine(SpawnSwordArray());
+                _firstAttack = false;
+            }
+            else
+            {
+                int randInt0 = UnityEngine.Random.Range(0, 2);
+
+                switch (randInt0)
+                {
+                    case 0:
+                        yield return StartCoroutine(SpawnSwordArray());
+                        break;
+                    case 1:
+                        yield return StartCoroutine(CircleAttack());
+                        break;
+                    default:
+                        break;
+                }
+            }
 
             yield return new WaitForFixedUpdate();
 
@@ -165,17 +188,25 @@ public class BossController : EnemyController
         Vector3 target = _player.transform.position + Vector3.up;
         Vector3 direction = (target - origin).normalized;
                 
-        GameObject sword = ObjectPool.Instance.Take();
-
-        if(sword == null)
-        {
-            yield break;
-        }
+        GameObject sword = ObjectPool.Instance.Take();        
 
         sword.transform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         sword.transform.position = target + (direction * 2f) + (Vector3.up * _swordSpawnHeight);
-        
+
+        if (!sword.gameObject.activeInHierarchy)
+        {
+            _canSummonSword = true;
+            yield break;
+        }
+
         yield return StartCoroutine(DropSword(sword.GetComponent<SwordObj>()));
+
+        if (!sword.gameObject.activeInHierarchy)
+        {
+            _canSummonSword = true;
+            yield break;
+        }
+
         yield return StartCoroutine(DashAttack(sword));
 
         _canSummonSword = true;
@@ -236,7 +267,7 @@ public class BossController : EnemyController
         _circleLine.gameObject.SetActive(true);
         float currentTime = 0f;
 
-        while (currentTime < 0.4f)
+        while (currentTime < 0.6f)
         {
             if (StageManager.Instance.PlayerState == GameState.기본)
             {
@@ -277,6 +308,7 @@ public class BossController : EnemyController
 
         if(_canSummonSwordArray)// 검진 파훼
         {
+            yield return new WaitUntil(() => StageManager.Instance.PlayerState != GameState.공격);
             StageManager.Instance.StateUpdate(GameState.기본);
         }
         else // 검진 파훼 실패
@@ -596,6 +628,7 @@ public class BossController : EnemyController
         _isInNoticeRange = false;
         _circleCollider.gameObject.SetActive(false);
         _circleLine.gameObject.SetActive(false);
+        _firstAttack = true;
     }
 
     //protected override void OnDestroy()

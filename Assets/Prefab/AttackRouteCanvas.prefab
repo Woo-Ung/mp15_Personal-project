@@ -120,8 +120,9 @@ MonoBehaviour:
   _directionImage: {fileID: 8453764234697257346}
   _distanceImage: {fileID: 2699715667602701378}
   _testPointImage: {fileID: 4971306339924402329}
-  _maxDistance: 15
   attackPoint: {fileID: 5905114767320508067}
+  _maxDistance: 15
+  _timeValue: -1
 --- !u!1 &2967733925895031012
 GameObject:
   m_ObjectHideFlags: 0

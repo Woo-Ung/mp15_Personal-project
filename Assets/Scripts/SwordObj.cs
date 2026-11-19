@@ -14,6 +14,7 @@ public class SwordObj : MonoBehaviour, IDamageable
     [SerializeField] private TextureChanger _textureChanger;
   
     [SerializeField] private Image _warningSign;
+    [SerializeField] private float _returnTime;
 
     private bool _isPoolSword;
     private GameObject _warningCanvas;
@@ -98,19 +99,20 @@ public class SwordObj : MonoBehaviour, IDamageable
     }
 
     public void Damaged()
-    {
-        if(_isPoolSword)
-        {
-            ObjectPool.Instance.Return(this.gameObject);
-        }
+    {       
         if (_canDestroy)
         {
+            if (_isPoolSword)
+            {
+                ObjectPool.Instance.Return(this.gameObject);
+            }
+            StageManager.Instance.FocusTimeUpdate(_returnTime);
             GetComponentInParent<SwordArray>()?.SwordDestroyed();
             gameObject.SetActive(false);
         }
         else
         {
             GetComponentInParent<SwordArray>()?.WrongSwordSAttacked(this);
-        }
+        }        
     }
 }

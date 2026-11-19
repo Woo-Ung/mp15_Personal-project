@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 public class RangedEnemyController : EnemyController
 {
@@ -8,8 +9,8 @@ public class RangedEnemyController : EnemyController
     [SerializeField] private PlayerAction _player;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private float _attackCoolTime;
-
     [SerializeField] private LineRendererAtoB _attackLine;
+    [SerializeField] private float _returnTime;
 
     private EnemyMovement _enemyMovement;
     private Quaternion _prevRotation;
@@ -97,6 +98,7 @@ public class RangedEnemyController : EnemyController
 
     public override void Damaged()
     {
+        StageManager.Instance.FocusTimeUpdate(_returnTime);
         Destroy(gameObject);
     }
 

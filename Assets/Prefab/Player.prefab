@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7580489129123002415}
   - component: {fileID: 6913271872075603626}
   - component: {fileID: 5292179914667198422}
+  - component: {fileID: 4785093445854810937}
   - component: {fileID: 403940416286653180}
   m_Layer: 6
   m_Name: Player
@@ -74,6 +75,24 @@ MonoBehaviour:
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 2560
+  _timeValue: 1
+--- !u!114 &4785093445854810937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549351669682908355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec7fb58aa53cad469e93e6649c6fa37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerFocusModeManager
+  _timeImage: {fileID: 0}
+  _maxFocusTime: 6
+  <_focusTime>k__BackingField: 3
+  _chargingSpeed: 1.5
+  _usingSpeed: 0.5
 --- !u!54 &403940416286653180
 Rigidbody:
   m_ObjectHideFlags: 0

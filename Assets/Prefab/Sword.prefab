@@ -73,8 +73,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _textureChanger: {fileID: 3752035304167649978}
-  _warningCanvas: {fileID: 0}
   _warningSign: {fileID: 263303441522034211, guid: dc48ec0364df33b4ebd35a5b48f59f1b, type: 3}
+  _returnTime: 1
 --- !u!1 &5076852704726308934
 GameObject:
   m_ObjectHideFlags: 0

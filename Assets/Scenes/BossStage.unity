@@ -1432,6 +1432,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6319604432396745280, guid: 626f856a607984a42b54634cbaa9c08d, type: 3}
   m_PrefabInstance: {fileID: 1374115687}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &501726362 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1859282266612537129, guid: b1b7c9991241f204fa017ad4eb65f128, type: 3}
+  m_PrefabInstance: {fileID: 1392366100}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1001 &509076707
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1716,6 +1727,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4785093445854810937, guid: dc0c2c62e264de441a2f4674ba3ff8e5, type: 3}
+      propertyPath: _timeImage
+      value: 
+      objectReference: {fileID: 501726362}
     - target: {fileID: 5292179914667198422, guid: dc0c2c62e264de441a2f4674ba3ff8e5, type: 3}
       propertyPath: _camera
       value: 

@@ -206,6 +206,7 @@ MonoBehaviour:
   _setAttackRange: 2
   _addAttackRange: 0.35
   _attackCollider: {fileID: 8669646962315047181}
+  _returnTime: 1
 --- !u!1 &6282208904625078385
 GameObject:
   m_ObjectHideFlags: 0

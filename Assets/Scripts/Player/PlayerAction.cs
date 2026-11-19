@@ -14,6 +14,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     [SerializeField] private float _waitTime;    
     [SerializeField] private LayerMask _wallLayer;
     [SerializeField] private LayerMask _enemyLayer;
+    [SerializeField] private float _timeValue;
     private WaitForSeconds _wait;
 
 
@@ -63,7 +64,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     }
     public void FocusState()
     {        
-        Instantiate(_attackRouteCanvas, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);  
+        Instantiate(_attackRouteCanvas, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);        
     }
     
     public void PunishState()
@@ -167,7 +168,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
         {
             return;
         }
-
+        StageManager.Instance.FocusTimeUpdate(_timeValue);
         Destroy(_pointList[(_pointList.Count - 1)]._transform.gameObject);
         _pointList.RemoveAt(_pointList.Count - 1);
         _pointList[(_pointList.Count - 1)]._attackPoint.GetComponent<AttackRouteUI>().CanSelect();
