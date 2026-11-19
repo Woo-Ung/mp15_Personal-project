@@ -63,6 +63,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c675f4c9ace1a1e45932988b2b0a953d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7156656064148353210}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c675f4c9ace1a1e45932988b2b0a953d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8891411895177377574}
   m_SourcePrefab: {fileID: 100100000, guid: c675f4c9ace1a1e45932988b2b0a953d, type: 3}
 --- !u!1 &1806616268402374471 stripped
 GameObject:
@@ -92,3 +95,17 @@ CapsuleCollider:
   m_Height: 19.73
   m_Direction: 2
   m_Center: {x: -0.0000007152558, y: 0.0000020265581, z: 3.35}
+--- !u!114 &-8891411895177377574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806616268402374471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68be7a518d7c78469025b7d82876503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StateTextureChanger
+  _baseMaterial: {fileID: 0}
+  _changeMaterial: {fileID: 2100000, guid: f9b7db3cfeef8824db07df56f08d64d8, type: 2}

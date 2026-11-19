@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class TextureChanger : MonoBehaviour
@@ -22,6 +23,8 @@ public class TextureChanger : MonoBehaviour
         if (_meshRenderer != null && _changeMaterial)
         {
             _meshRenderer.material = _changeMaterial;
+            _meshRenderer.material.DOFade(0f, "_BaseColor", 0.1f);
+            _meshRenderer.material.DOFade(1f,"_BaseColor", 2f);
         }
     }
 

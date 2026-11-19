@@ -90,6 +90,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6208081271082750372, guid: 16ab1a99227f9684fb72e44d842da143, type: 3}
+      propertyPath: _changeMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: f9b7db3cfeef8824db07df56f08d64d8, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -108,6 +112,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 219683051188934010}
     m_Modifications:
+    - target: {fileID: -6018351240863489911, guid: df20fd40a1432d840957b1022c7a65e3, type: 3}
+      propertyPath: _changeMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: f9b7db3cfeef8824db07df56f08d64d8, type: 2}
     - target: {fileID: 5092770522371350138, guid: df20fd40a1432d840957b1022c7a65e3, type: 3}
       propertyPath: m_LocalScale.x
       value: -1
@@ -178,6 +186,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 219683051188934010}
     m_Modifications:
+    - target: {fileID: 4862953208286105293, guid: bddfe89a2eceaa2489676193645cf447, type: 3}
+      propertyPath: _changeMaterial
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7224079991307260464, guid: bddfe89a2eceaa2489676193645cf447, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -229,8 +241,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8001426313427552394, guid: bddfe89a2eceaa2489676193645cf447, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3743249905200985937}
   m_SourcePrefab: {fileID: 100100000, guid: bddfe89a2eceaa2489676193645cf447, type: 3}
+--- !u!1 &6028926844261503979 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8001426313427552394, guid: bddfe89a2eceaa2489676193645cf447, type: 3}
+  m_PrefabInstance: {fileID: 4368997220714158945}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3743249905200985937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6028926844261503979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68be7a518d7c78469025b7d82876503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StateTextureChanger
+  _baseMaterial: {fileID: 0}
+  _changeMaterial: {fileID: 2100000, guid: f9b7db3cfeef8824db07df56f08d64d8, type: 2}
 --- !u!4 &6404362388773423441 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7224079991307260464, guid: bddfe89a2eceaa2489676193645cf447, type: 3}

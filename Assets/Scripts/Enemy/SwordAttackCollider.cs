@@ -11,7 +11,7 @@ public class SwordAttackCollider : MonoBehaviour
         {
             StageManager.Instance.StateUpdate(GameState.사망);
             //StartCoroutine(DropAttack());
-        }
+        }        
     }
 
     //private IEnumerator DropAttack()

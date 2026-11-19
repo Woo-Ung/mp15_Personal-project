@@ -91,6 +91,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1a709e26aef8fd64bb543a5fd58f73a8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4542861956566819417}
+    - targetCorrespondingSourceObject: {fileID: -6177509979527109023, guid: 1a709e26aef8fd64bb543a5fd58f73a8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1745204461143477172}
+    - targetCorrespondingSourceObject: {fileID: -2254504247542753893, guid: 1a709e26aef8fd64bb543a5fd58f73a8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8615183025273852452}
   m_SourcePrefab: {fileID: 100100000, guid: 1a709e26aef8fd64bb543a5fd58f73a8, type: 3}
 --- !u!1 &778638604492610709 stripped
 GameObject:
@@ -120,3 +126,41 @@ CapsuleCollider:
   m_Height: 28.68
   m_Direction: 1
   m_Center: {x: 0, y: 3.73, z: 0}
+--- !u!1 &3191430467167848357 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6177509979527109023, guid: 1a709e26aef8fd64bb543a5fd58f73a8, type: 3}
+  m_PrefabInstance: {fileID: 436618810015687108}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1745204461143477172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3191430467167848357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68be7a518d7c78469025b7d82876503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StateTextureChanger
+  _baseMaterial: {fileID: 0}
+  _changeMaterial: {fileID: 2100000, guid: f9b7db3cfeef8824db07df56f08d64d8, type: 2}
+--- !u!1 &7402029008917361759 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -2254504247542753893, guid: 1a709e26aef8fd64bb543a5fd58f73a8, type: 3}
+  m_PrefabInstance: {fileID: 436618810015687108}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8615183025273852452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7402029008917361759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68be7a518d7c78469025b7d82876503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StateTextureChanger
+  _baseMaterial: {fileID: 0}
+  _changeMaterial: {fileID: 2100000, guid: f9b7db3cfeef8824db07df56f08d64d8, type: 2}
