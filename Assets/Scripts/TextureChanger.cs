@@ -24,7 +24,7 @@ public class TextureChanger : MonoBehaviour
         {
             _meshRenderer.material = _changeMaterial;
             _meshRenderer.material.DOFade(0f, "_BaseColor", 0.1f);
-            _meshRenderer.material.DOFade(1f,"_BaseColor", 2f);
+            _meshRenderer.material.DOFade(1f,"_BaseColor", 1f);
         }
     }
 

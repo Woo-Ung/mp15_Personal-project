@@ -1288,6 +1288,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 862816936}
     m_Modifications:
+    - target: {fileID: 93368175310735086, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 279780183707330737, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 312374659900033500, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2991685665563475205, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -31.1
@@ -1328,9 +1340,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3472012090793313648, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640421279882832687, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006845877777179677, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4757959156284484141, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_Name
       value: WoodFence_longlong (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061346318518772629, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499253094302060116, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1694,6 +1726,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 862816936}
     m_Modifications:
+    - target: {fileID: 93368175310735086, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 279780183707330737, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 312374659900033500, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2991685665563475205, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.7
@@ -1734,9 +1778,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3472012090793313648, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640421279882832687, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006845877777179677, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4757959156284484141, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_Name
       value: WoodFence_longlong
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061346318518772629, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499253094302060116, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1896,6 +1960,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 862816936}
     m_Modifications:
+    - target: {fileID: 93368175310735086, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 279780183707330737, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 312374659900033500, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2991685665563475205, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -24.7
@@ -1936,9 +2012,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3472012090793313648, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640421279882832687, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006845877777179677, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4757959156284484141, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_Name
       value: WoodFence_longlong (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061346318518772629, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499253094302060116, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2207,6 +2303,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 862816936}
     m_Modifications:
+    - target: {fileID: 93368175310735086, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 279780183707330737, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 312374659900033500, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2991685665563475205, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -39.5
@@ -2247,9 +2355,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3472012090793313648, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640421279882832687, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006845877777179677, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4757959156284484141, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_Name
       value: WoodFence_longlong (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061346318518772629, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499253094302060116, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2444,6 +2572,18 @@ PrefabInstance:
       propertyPath: _cameraInput
       value: 
       objectReference: {fileID: 1221525723}
+    - target: {fileID: 5833431992389554936, guid: 7e11a9ef056b0ac4b9213f457d4b9841, type: 3}
+      propertyPath: near clip plane
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5833431992389554936, guid: 7e11a9ef056b0ac4b9213f457d4b9841, type: 3}
+      propertyPath: orthographic size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5833431992389554936, guid: 7e11a9ef056b0ac4b9213f457d4b9841, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 320
+      objectReference: {fileID: 0}
     - target: {fileID: 8478793487264397621, guid: 7e11a9ef056b0ac4b9213f457d4b9841, type: 3}
       propertyPath: m_Name
       value: Camera
@@ -2526,6 +2666,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 862816936}
     m_Modifications:
+    - target: {fileID: 93368175310735086, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 279780183707330737, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 312374659900033500, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2991685665563475205, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.6
@@ -2566,9 +2718,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3472012090793313648, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640421279882832687, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006845877777179677, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4757959156284484141, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_Name
       value: WoodFence_longlong
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061346318518772629, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499253094302060116, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3338,6 +3510,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 862816936}
     m_Modifications:
+    - target: {fileID: 93368175310735086, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 279780183707330737, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 312374659900033500, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2991685665563475205, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -19.6
@@ -3378,9 +3562,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3472012090793313648, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640421279882832687, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006845877777179677, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4757959156284484141, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_Name
       value: WoodFence_longlong
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061346318518772629, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499253094302060116, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4216,6 +4420,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6319604432396745280, guid: 626f856a607984a42b54634cbaa9c08d, type: 3}
   m_PrefabInstance: {fileID: 421527853}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1047580364 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8573105160776606438, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
+  m_PrefabInstance: {fileID: 1765611367}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1047580370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047580364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a70a92ba1b82e47a6eef20313c542d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RippleFollowPlayer
+  rippleImage: {fileID: 1423937013}
+  player: {fileID: 2033078636}
+  gameCamera: {fileID: 115632096}
+  rippleDuration: 0.6
+  fadeDuration: 0.5
 --- !u!1001 &1048505525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4575,6 +4801,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 862816936}
     m_Modifications:
+    - target: {fileID: 93368175310735086, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 279780183707330737, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 312374659900033500, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2991685665563475205, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.6
@@ -4615,9 +4853,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3472012090793313648, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640421279882832687, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006845877777179677, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4757959156284484141, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_Name
       value: WoodFence_longlong (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061346318518772629, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499253094302060116, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4941,6 +5199,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 862816936}
     m_Modifications:
+    - target: {fileID: 93368175310735086, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 279780183707330737, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 312374659900033500, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2991685665563475205, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 39.6
@@ -4981,9 +5251,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3472012090793313648, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640421279882832687, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006845877777179677, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4757959156284484141, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_Name
       value: WoodFence_longlong (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061346318518772629, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499253094302060116, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5701,6 +5991,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 862816936}
     m_Modifications:
+    - target: {fileID: 93368175310735086, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 279780183707330737, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 312374659900033500, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2991685665563475205, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 36.3
@@ -5741,9 +6043,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3472012090793313648, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640421279882832687, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006845877777179677, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4757959156284484141, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_Name
       value: WoodFence_longlong
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061346318518772629, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499253094302060116, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6159,6 +6481,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1b7c9991241f204fa017ad4eb65f128, type: 3}
+--- !u!114 &1423937013 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5954558733936377389, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
+  m_PrefabInstance: {fileID: 1765611367}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1001 &1425452619
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6513,6 +6846,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tent_big
       objectReference: {fileID: 0}
+    - target: {fileID: 3191430467167848357, guid: 1a0a49488a37c5748ad7fa82816199da, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7402029008917361759, guid: 1a0a49488a37c5748ad7fa82816199da, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6541,6 +6882,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 862816936}
     m_Modifications:
+    - target: {fileID: 93368175310735086, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 279780183707330737, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 312374659900033500, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2991685665563475205, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 24.8
@@ -6581,9 +6934,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3472012090793313648, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640421279882832687, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006845877777179677, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4757959156284484141, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_Name
       value: WoodFence_longlong (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061346318518772629, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499253094302060116, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6603,6 +6976,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 862816936}
     m_Modifications:
+    - target: {fileID: 93368175310735086, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 279780183707330737, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 312374659900033500, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2991685665563475205, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -36.3
@@ -6643,9 +7028,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3472012090793313648, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640421279882832687, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006845877777179677, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4757959156284484141, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_Name
       value: WoodFence_longlong
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061346318518772629, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499253094302060116, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6854,6 +7259,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 862816936}
     m_Modifications:
+    - target: {fileID: 93368175310735086, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 279780183707330737, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 312374659900033500, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2991685665563475205, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -39.5
@@ -6894,9 +7311,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3472012090793313648, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640421279882832687, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006845877777179677, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4757959156284484141, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_Name
       value: WoodFence_longlong
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061346318518772629, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499253094302060116, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7271,7 +7708,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1700887019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7344,6 +7781,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 862816936}
     m_Modifications:
+    - target: {fileID: 93368175310735086, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 279780183707330737, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 312374659900033500, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2991685665563475205, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.8
@@ -7384,9 +7833,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3472012090793313648, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640421279882832687, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006845877777179677, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4757959156284484141, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_Name
       value: WoodFence_longlong
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061346318518772629, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499253094302060116, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7537,6 +8006,30 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5954558733936377389, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5954558733936377389, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2076178282, guid: fa24c0a78c57429498c5e9792006c60b, type: 3}
+    - target: {fileID: 5954558733936377389, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5954558733936377389, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5954558733936377389, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5954558733936377389, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 4db3df57034636f41bc93d95bb1ec1a8, type: 2}
     - target: {fileID: 6813919188014637289, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -7621,18 +8114,61 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 115632096}
+    - target: {fileID: 7050409827081021421, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382730770805101287, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
+      propertyPath: rippleEffect
+      value: 
+      objectReference: {fileID: 1047580370}
     - target: {fileID: 8573105160776606438, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
       propertyPath: m_Name
       value: FocusCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 8573105160776606438, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894527952975637420, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894527952975637420, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894527952975637420, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894527952975637420, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894527952975637420, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894527952975637420, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894527952975637420, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894527952975637420, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8573105160776606438, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1047580370}
   m_SourcePrefab: {fileID: 100100000, guid: 45632f68058795e47a96e1dfdb4103b4, type: 3}
 --- !u!1001 &1765825293
 PrefabInstance:
@@ -8584,6 +9120,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 862816936}
     m_Modifications:
+    - target: {fileID: 93368175310735086, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 279780183707330737, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 312374659900033500, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2991685665563475205, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 31.2
@@ -8624,9 +9172,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3472012090793313648, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640421279882832687, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006845877777179677, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4757959156284484141, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_Name
       value: WoodFence_longlong (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061346318518772629, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499253094302060116, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8726,6 +9294,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 862816936}
     m_Modifications:
+    - target: {fileID: 93368175310735086, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 279780183707330737, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 312374659900033500, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2991685665563475205, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.5
@@ -8766,9 +9346,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3472012090793313648, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640421279882832687, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006845877777179677, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4757959156284484141, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_Name
       value: WoodFence_longlong (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061346318518772629, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499253094302060116, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8927,6 +9527,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d53550c9b57844489b17c2336b00ef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAction
+--- !u!4 &2033078636 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7580489129123002415, guid: dc0c2c62e264de441a2f4674ba3ff8e5, type: 3}
+  m_PrefabInstance: {fileID: 612222194}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2040890419 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6319604432396745280, guid: 626f856a607984a42b54634cbaa9c08d, type: 3}
@@ -9274,6 +9879,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 862816936}
     m_Modifications:
+    - target: {fileID: 93368175310735086, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 279780183707330737, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 312374659900033500, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2991685665563475205, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 39.6
@@ -9314,9 +9931,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3472012090793313648, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640421279882832687, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006845877777179677, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4757959156284484141, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
       propertyPath: m_Name
       value: WoodFence_longlong
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061346318518772629, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499253094302060116, guid: 6d891dfd15fa3004e8a46617c440942d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

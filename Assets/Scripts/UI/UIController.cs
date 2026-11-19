@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour, IStateObserver
 {
     [SerializeField] private Image _focusImage;
+    [SerializeField] private RippleOnce rippleEffect;
 
     private void Start()
     {
@@ -19,18 +20,22 @@ public class UIController : MonoBehaviour, IStateObserver
     public void IdleState()
     {
         _focusImage.gameObject.SetActive(false);
+        rippleEffect?.HideRipple();
     }
     public void FocusState()
     {
         _focusImage.gameObject.SetActive(true);
+        rippleEffect?.PlayRipple();
     }
     public void PunishState()
     {
         _focusImage.gameObject.SetActive(false);
+        rippleEffect?.HideRipple();
     }
     public void AttackState()
     {
         _focusImage.gameObject.SetActive(false);
+        rippleEffect?.HideRipple();
     }
     public void DeadState()
     {
