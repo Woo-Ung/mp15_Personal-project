@@ -73,7 +73,7 @@ MonoBehaviour:
     m_Bits: 256
   _enemyLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 2560
 --- !u!54 &403940416286653180
 Rigidbody:
   m_ObjectHideFlags: 0

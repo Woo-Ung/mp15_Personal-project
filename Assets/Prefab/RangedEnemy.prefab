@@ -246,7 +246,7 @@ MonoBehaviour:
   _player: {fileID: 0}
   _layerMask:
     serializedVersion: 2
-    m_Bits: 832
+    m_Bits: 2880
   _attackCoolTime: 2
   _attackLine: {fileID: 0}
 --- !u!1 &8310117682244922037

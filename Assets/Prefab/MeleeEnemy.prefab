@@ -202,7 +202,7 @@ MonoBehaviour:
   _player: {fileID: 0}
   _layerMask:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 2368
   _setAttackRange: 2
   _addAttackRange: 0.35
   _attackCollider: {fileID: 8669646962315047181}
