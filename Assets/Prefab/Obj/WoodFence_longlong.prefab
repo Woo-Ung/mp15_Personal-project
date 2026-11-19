@@ -87,7 +87,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7312603077555171608, guid: ab272940709f501468cc21752899e602, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8733699009764316630, guid: ab272940709f501468cc21752899e602, type: 3}
       propertyPath: _changeMaterial
@@ -157,7 +157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7312603077555171608, guid: ab272940709f501468cc21752899e602, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -99,7 +99,8 @@ public class TitleUIController : MonoBehaviour
     {
         _sliceImgae.DOFillAmount(1f,0.1f).SetEase(Ease.OutQuart);
         yield return new WaitForSeconds(0.03f);
-        _sliceImgae.rectTransform.DOAnchorPos(new Vector2(0, -1500f), 0.3f).SetEase(Ease.OutQuart);
+        Vector2 direction = _sliceImgae.rectTransform.localRotation * Vector3.down;
+        _sliceImgae.rectTransform.DOAnchorPos(_sliceImgae.rectTransform.anchoredPosition + direction * 1500f, 0.3f).SetEase(Ease.OutQuart);
         yield return new WaitForSeconds(0.2f);
         _sliceImgae.DOFade(0f, 0.1f);
     }

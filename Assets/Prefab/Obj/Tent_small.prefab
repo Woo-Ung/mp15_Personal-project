@@ -60,6 +60,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6676117596650526484, guid: e122ebd60626de24f9b7f0da347b1158, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -5795845215311118915, guid: e122ebd60626de24f9b7f0da347b1158, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e122ebd60626de24f9b7f0da347b1158, type: 3}
       propertyPath: m_Name
       value: Tent_small
