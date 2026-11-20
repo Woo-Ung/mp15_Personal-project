@@ -47,6 +47,18 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(currentScene.name);
     }
 
+    public void Pause()
+    {
+        Time.timeScale = 0f;
+        StageManager.Instance.SetPause(true);
+    }
+
+    public void Continue()
+    {
+        Time.timeScale = 1f;
+        StageManager.Instance.SetPause(false);
+    }
+
     private void SetSingletion()
     {
         if(Instance != null && Instance != this)
