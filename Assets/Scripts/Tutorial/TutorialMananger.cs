@@ -1,4 +1,4 @@
-using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,10 +8,16 @@ public class TutorialMananger : MonoBehaviour
 
     private int _stepNum;
 
-    private void PlayTutorial()
+    private void Start()
     {
+        _stepNum = 0;
+        StartCoroutine(PlayTutorial());
+    }
 
-
+    private IEnumerator PlayTutorial()
+    {
+        yield return new WaitUntil(() => _stepNum < 1);
 
     }
+
 }
