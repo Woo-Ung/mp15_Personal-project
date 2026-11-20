@@ -128,8 +128,8 @@ public class AttackRouteUI : MonoBehaviour, IStateObserver
             _testPointImage.gameObject.SetActive(false);           
         }
         _isRotate = false;
-        _directionImage.color = new Color(1f, 0.5f, 0.5f, 1f);
-        _distanceImage.color = new Color(1f, 0.5f, 0.5f, 1f);
+        //_directionImage.color = new Color(1f, 0.5f, 0.5f, 1f);
+        //_distanceImage.color = new Color(1f, 0.5f, 0.5f, 1f);
     }
     public void DeadState()
     {

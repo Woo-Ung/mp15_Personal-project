@@ -175,7 +175,7 @@ public class MeleeEnemyController : EnemyController
         _focusMark.gameObject.SetActive(true);
         _focusMark.rectTransform.LookAt(Camera.main.transform);
         _focusMark.DOFade(1f, 0.01f);
-        _focusMark.DOFade(0f, 0.5f).SetEase(Ease.InQuint);        
+        _focusMark.DOFade(0f, 1f).SetEase(Ease.InQuint);        
     }
     public override void PunishState()
     {        

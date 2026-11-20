@@ -87,7 +87,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &6782734627655729758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 8165941979362237066}
   - component: {fileID: 5566139123040917793}
   - component: {fileID: 4971306339924402329}
+  - component: {fileID: 6304550926439887287}
   m_Layer: 6
   m_Name: TestPoint
   m_TagString: Untagged
@@ -158,7 +159,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0.006}
-  m_SizeDelta: {x: 3, y: 3}
+  m_SizeDelta: {x: 3, y: 3.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5566139123040917793
 CanvasRenderer:
@@ -180,15 +181,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.21888566, g: 1, b: 0, a: 1}
+  m_Material: {fileID: 2100000, guid: 8e575603b2b6e5f4aa2e1b4770bde106, type: 2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1014051207, guid: 2802005f449abd24bb512b03b3dfa53d, type: 3}
+  m_Sprite: {fileID: -1768410251, guid: 173bd209f560ad34a9bb99901a5dd235, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -198,6 +199,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6304550926439887287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2967733925895031012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AllIn1SpriteShaderAssembly::AllIn1SpriteShader.AllIn1Shader
+  currentShaderType: 0
+  normalStrength: 5
+  normalSmoothing: 1
+  computingNormal: 0
 --- !u!1 &4331763584372740736
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,6 +226,7 @@ GameObject:
   - component: {fileID: 8846812349711223310}
   - component: {fileID: 8898583824359589290}
   - component: {fileID: 2699715667602701378}
+  - component: {fileID: 3719349023878638351}
   m_Layer: 6
   m_Name: Distance
   m_TagString: Untagged
@@ -233,7 +251,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0.005}
-  m_SizeDelta: {x: 1, y: 15}
+  m_SizeDelta: {x: 2, y: 15}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &8898583824359589290
 CanvasRenderer:
@@ -255,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 44ecdf98d9691424187364a64fd2d1a5, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -263,7 +281,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -329233173, guid: 538a14847b57b434a88106ef9ba20c64, type: 3}
+  m_Sprite: {fileID: -2091865779, guid: 9876b2c3fbfbcf14ab9133967f3744b2, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -273,6 +291,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3719349023878638351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4331763584372740736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AllIn1SpriteShaderAssembly::AllIn1SpriteShader.AllIn1Shader
+  currentShaderType: 0
+  normalStrength: 5
+  normalSmoothing: 1
+  computingNormal: 0
 --- !u!1 &8508178354798954508
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +318,7 @@ GameObject:
   - component: {fileID: 7186324524991360702}
   - component: {fileID: 5065809105906539431}
   - component: {fileID: 8453764234697257346}
+  - component: {fileID: 4260346758010190956}
   m_Layer: 6
   m_Name: Direction
   m_TagString: Untagged
@@ -308,7 +343,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0.006}
-  m_SizeDelta: {x: 3, y: 3}
+  m_SizeDelta: {x: 3, y: 3.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5065809105906539431
 CanvasRenderer:
@@ -330,7 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 6eb4436e6ea43ed4fb2fec7bdb2f3320, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -338,7 +373,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1014051207, guid: 2802005f449abd24bb512b03b3dfa53d, type: 3}
+  m_Sprite: {fileID: -1768410251, guid: 173bd209f560ad34a9bb99901a5dd235, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -348,3 +383,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4260346758010190956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508178354798954508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AllIn1SpriteShaderAssembly::AllIn1SpriteShader.AllIn1Shader
+  currentShaderType: 0
+  normalStrength: 5
+  normalSmoothing: 1
+  computingNormal: 0
