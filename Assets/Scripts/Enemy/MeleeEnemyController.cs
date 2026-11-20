@@ -1,7 +1,7 @@
-using System;
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class MeleeEnemyController : EnemyController
 {
@@ -14,6 +14,7 @@ public class MeleeEnemyController : EnemyController
     [SerializeField] private float _addAttackRange;
     [SerializeField] private AttackCollider _attackCollider;
     [SerializeField] private float _returnTime;
+    [SerializeField] private Image _focusMark;
 
     private EnemyMovement _enemyMovement;
     private Quaternion _prevRotation;
@@ -36,6 +37,7 @@ public class MeleeEnemyController : EnemyController
         _isInRange = false;
         _attackRange = _setAttackRange;
         _enemyMovement = transform?.GetComponent<EnemyMovement>();
+        _focusMark.gameObject.SetActive(false);
     }
     protected override void CacheComponents()
     {
@@ -165,13 +167,18 @@ public class MeleeEnemyController : EnemyController
     public override void IdleState()
     {
         _enemyMovement?.SetCanMove(!_isInRange);
+        _focusMark.gameObject.SetActive(false);
     }
     public override void FocusState()
     {
         _enemyMovement?.SetCanMove(false);
+        _focusMark.gameObject.SetActive(true);
+        _focusMark.rectTransform.LookAt(Camera.main.transform);
+        _focusMark.DOFade(1f, 0.01f);
+        _focusMark.DOFade(0f, 0.5f).SetEase(Ease.InQuint);        
     }
     public override void PunishState()
-    {
+    {        
         ShootAttackRay();               
     }
     //public override void AttackState()
