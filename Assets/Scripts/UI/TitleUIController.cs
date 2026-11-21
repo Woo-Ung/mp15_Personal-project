@@ -24,6 +24,10 @@ public class TitleUIController : MonoBehaviour
     [SerializeField] private Quaternion _startRot2;
 
     [SerializeField] private List<UIObjList> _sliceuiList = new();
+   
+    [SerializeField] private CanvasGroup _scrollCanvasGroup;
+
+    private bool _isTransitioning;
 
     //private RectTransform _imageRect;
     //private Vector2 _starImagePos;
@@ -73,25 +77,66 @@ public class TitleUIController : MonoBehaviour
         
         _starPos2 = _rect2.anchoredPosition;
         _startRot2 = _rect2.localRotation;
+
+        SetCanvasInput(_leftCanvas1, true);
+        SetCanvasInput(_leftCanvas2, false);
+        SetCanvasInput(_RightCanvas1, false);
+        SetCanvasInput(_RightCanvas2, false);
+
+        _scrollCanvasGroup.blocksRaycasts = false;
     }
 
     public void StartSliceCanvas1()
     {
+        if (_isTransitioning)
+        {
+            return;
+        }
+
+        _isTransitioning = true;
+        SetCanvasInput(_leftCanvas1, false);
+
         StartCoroutine(SliceCanvas1());
     }
 
     public void StartSliceCanvas2()
     {
+        if (_isTransitioning)
+        {
+            return;
+        }
+
+        _isTransitioning = true;
+        SetCanvasInput(_leftCanvas2, false);
+
         StartCoroutine(SliceCanvas2());
     }
 
     public void StartSliceCanvasHorizontal1()
     {
-        StartCoroutine(SliceCanvasHorizontal1());
+        if (_isTransitioning)
+        {
+            return;
+        }
+
+        _isTransitioning = true;
+        SetCanvasInput(_RightCanvas1, false);
+        SetCanvasInput(_leftCanvas2, false);
+
+        StartCoroutine(SliceCanvasHorizontal1());        
     }
 
     public void StartSliceCanvasHorizontal2()
     {
+        if (_isTransitioning)
+        {
+            return;
+        }
+
+        _isTransitioning = true;        
+        SetCanvasInput(_RightCanvas2, false);
+        _scrollCanvasGroup.blocksRaycasts = false;
+
         StartCoroutine(SliceCanvasHorizontal2());
     }
 
@@ -105,9 +150,15 @@ public class TitleUIController : MonoBehaviour
         _sliceImgae.DOFade(0f, 0.1f);
     }
 
+    private void SetCanvasInput(CanvasGroup canvas, bool canInput)
+    {
+        canvas.interactable = canInput;
+        canvas.blocksRaycasts = canInput;
+    }
+
     private void ResetCanvas(RectTransform canvas)
     {
-        canvas.transform.parent.GetComponentInParent<Canvas>().sortingOrder = -2;
+        canvas.transform.parent.GetComponentInParent<Canvas>().sortingOrder = 0;
         canvas.GetComponent<CanvasGroup>().alpha = 1f;
         canvas.anchoredPosition = _starPos;
         canvas.localRotation = _startRot;
@@ -144,9 +195,14 @@ public class TitleUIController : MonoBehaviour
         rect.DOAnchorPos(new Vector2(-250f, -200), 0.6f).SetEase(Ease.OutQuart);
         yield return _leftCanvas1.DOFade(0f, 0.6f).WaitForCompletion();
          
-        _leftCanvas2.transform.parent.GetComponentInParent<Canvas>().sortingOrder = -1;
+        _leftCanvas2.transform.parent.GetComponentInParent<Canvas>().sortingOrder = 1;
         ResetCanvas(rect);
         ResetSlice(_sliceImgae.GetComponent<RectTransform>(), 0);
+
+        SetCanvasInput(_leftCanvas1, false);
+        SetCanvasInput(_leftCanvas2, true);
+
+        _isTransitioning = false;
     }
 
     private IEnumerator SliceCanvas2()
@@ -164,6 +220,11 @@ public class TitleUIController : MonoBehaviour
         _leftCanvas1.transform.parent.GetComponentInParent<Canvas>().sortingOrder = -1;
         ResetCanvas(rect2);
         ResetSlice(_sliceImgae.GetComponent<RectTransform>(), 0);
+
+        SetCanvasInput(_leftCanvas2, false);
+        SetCanvasInput(_leftCanvas1, true);
+
+        _isTransitioning = false;
     }
 
     private IEnumerator Slice2()
@@ -190,6 +251,13 @@ public class TitleUIController : MonoBehaviour
         _RightCanvas2.transform.parent.GetComponentInParent<Canvas>().sortingOrder = -1;
         ResetCanvas2(rect);
         ResetSlice(_sliceImgae2.GetComponent<RectTransform>(), 1);
+
+        SetCanvasInput(_leftCanvas2, false);
+        SetCanvasInput(_RightCanvas1, false);
+        SetCanvasInput(_RightCanvas2, true);
+
+        _isTransitioning = false;
+        _scrollCanvasGroup.blocksRaycasts = true;
     }
 
     private IEnumerator SliceCanvasHorizontal2()
@@ -207,6 +275,12 @@ public class TitleUIController : MonoBehaviour
         _RightCanvas1.transform.parent.GetComponentInParent<Canvas>().sortingOrder = -1;
         ResetCanvas2(rect);
         ResetSlice(_sliceImgae2.GetComponent<RectTransform>(), 1);
+
+        SetCanvasInput(_RightCanvas2, false);
+        SetCanvasInput(_RightCanvas1, true);
+        SetCanvasInput(_leftCanvas2, true);
+
+        _isTransitioning = false;
     }
 
 }
