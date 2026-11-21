@@ -14,7 +14,10 @@ public class MeleeEnemyController : EnemyController
     [SerializeField] private float _addAttackRange;
     [SerializeField] private AttackCollider _attackCollider;
     [SerializeField] private float _returnTime;
-    [SerializeField] private Image _focusMark;
+    [SerializeField] private Image _focusMark;    
+    [SerializeField] private GameObject _idle;
+    [SerializeField] private GameObject _attackReady;
+    [SerializeField] private GameObject _attack;
 
     private EnemyMovement _enemyMovement;
     private Quaternion _prevRotation;
@@ -38,6 +41,8 @@ public class MeleeEnemyController : EnemyController
         _attackRange = _setAttackRange;
         _enemyMovement = transform?.GetComponent<EnemyMovement>();
         _focusMark.gameObject.SetActive(false);
+        _attack.SetActive(false);
+        _attackReady.SetActive(false);
     }
     protected override void CacheComponents()
     {
@@ -71,12 +76,20 @@ public class MeleeEnemyController : EnemyController
             _prevRotation = transform.rotation;
             _isInRange = true;
             LookPlayer();
+
+            _idle.SetActive(false);
+            _attackReady.SetActive(true);
+            _attack.SetActive(false);
         }
 
         else
         {
             _isInRange = false;
             transform.rotation = _prevRotation;
+
+            _idle.SetActive(true);
+            _attackReady.SetActive(false);
+            _attack.SetActive(false);
         }
 
         bool canMove = (StageManager.Instance.PlayerState == GameState.±âº» && !_isInRange);
@@ -86,6 +99,10 @@ public class MeleeEnemyController : EnemyController
 
     protected override void PunishAttack()
     {
+        _attack.SetActive(true);
+        _attackReady.SetActive(false);
+        _idle.SetActive(false);
+
         StageManager.Instance.StateUpdate(GameState.»ç¸Á);
                 
         Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
@@ -165,9 +182,11 @@ public class MeleeEnemyController : EnemyController
     }
 
     public override void IdleState()
-    {
+    {        
         _enemyMovement?.SetCanMove(!_isInRange);
         _focusMark.gameObject.SetActive(false);
+
+        ShootAttackRay();
     }
     public override void FocusState()
     {
@@ -179,7 +198,7 @@ public class MeleeEnemyController : EnemyController
     }
     public override void PunishState()
     {        
-        ShootAttackRay();               
+        ShootAttackRay();
     }
     //public override void AttackState()
     //{

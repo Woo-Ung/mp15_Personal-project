@@ -8,6 +8,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float turnSpeed;
     [SerializeField] private Transform _pathHolder;
     [SerializeField] private int _startNum = 0;
+    [SerializeField] private Animator _animator;
 
     private bool _canMove;
     private float _remainingWaitTime;
@@ -20,12 +21,18 @@ public class EnemyMovement : MonoBehaviour
 
     private void Init()
     {
-        _canMove = false;
+        _canMove = true;
+        _animator = GetComponentInChildren<Animator>();
     }
 
     public void SetCanMove(bool can)
     {
         _canMove = can;
+
+        if(!can)
+        {
+            _animator.SetBool("IsWalking",false);
+        }
     }
 
     public void Start()
@@ -45,14 +52,16 @@ public class EnemyMovement : MonoBehaviour
         int targetWaypointIndex = (startNum + 1) % waypoints.Length;
         Vector3 targetWaypoint = waypoints[targetWaypointIndex];
         transform.LookAt(targetWaypoint);
-
-        while(true)
+      
+        while (true)
         {
             if(!_canMove)
             {
                 yield return null;
                 continue;
             }
+
+            _animator.SetBool("IsWalking", true);
 
             transform.position = Vector3.MoveTowards(transform.position, targetWaypoint, speed * Time.deltaTime);
             if(transform.position == targetWaypoint)

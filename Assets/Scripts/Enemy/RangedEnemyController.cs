@@ -1,6 +1,7 @@
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class RangedEnemyController : EnemyController
 {
@@ -11,6 +12,9 @@ public class RangedEnemyController : EnemyController
     [SerializeField] private float _attackCoolTime;
     [SerializeField] private LineRendererAtoB _attackLine;
     [SerializeField] private float _returnTime;
+    [SerializeField] private GameObject _idle;
+    [SerializeField] private GameObject _attack;
+    [SerializeField] private Image _focusMark;
 
     private EnemyMovement _enemyMovement;
     private Quaternion _prevRotation;
@@ -33,6 +37,9 @@ public class RangedEnemyController : EnemyController
         _isInRange = false;
         _attackRange = _noticeRange;
         _enemyMovement = transform?.GetComponent<EnemyMovement>();
+        _focusMark.gameObject.SetActive(false);
+        _idle.SetActive(true);
+        _attack.SetActive(false);
     }
 
     protected override void CacheComponents()
@@ -75,12 +82,18 @@ public class RangedEnemyController : EnemyController
         {
             _prevRotation = transform.rotation;
             _isInRange = true;
-            LookPlayer();
+
+            _idle.SetActive(false);
+            _attack.SetActive(true);            
         }
 
         else
         {
             _isInRange = false;
+
+            _idle.SetActive(true);
+            _attack.SetActive(false);
+
             transform.rotation = _prevRotation;
         }
 
@@ -155,7 +168,7 @@ public class RangedEnemyController : EnemyController
                     _attackLine.Stop();
                     _attackCoroutine = null;
                 }
-
+                LookPlayer();
                 _attackLine.Play(origin, target);
                 _attackCoroutine = StartCoroutine(StartAttackCoolTime());
             }
@@ -184,6 +197,10 @@ public class RangedEnemyController : EnemyController
     public override void FocusState()
     {
         _enemyMovement?.SetCanMove(false);
+        _focusMark.gameObject.SetActive(true);
+        _focusMark.rectTransform.LookAt(Camera.main.transform);
+        _focusMark.DOFade(1f, 0.01f);
+        _focusMark.DOFade(0f, 1f).SetEase(Ease.InQuint);
     }
     public override void PunishState()
     {

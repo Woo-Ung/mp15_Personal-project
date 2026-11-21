@@ -15,6 +15,10 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     [SerializeField] private LayerMask _wallLayer;
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private float _timeValue;
+
+    [SerializeField] private GameObject _Idle;
+    [SerializeField] private GameObject[] _Attack;
+
     private WaitForSeconds _wait;
 
 
@@ -46,6 +50,11 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     private void Init()
     {        
         _wait = new WaitForSeconds(_waitTime);
+        for (int i = 0; i < _Attack.Length; i++)
+        {
+            _Attack[i].SetActive(false);
+        }
+
     }
 
     private void CacheComponents()
@@ -58,9 +67,31 @@ public class PlayerAction : MonoBehaviour, IStateObserver
         _pointList.Add(point);
     }
 
+    private void IdlePose()
+    {
+        for (int i = 0; i < _Attack.Length; i++)
+        {
+            _Attack[i].SetActive(false);
+        }
+        _Idle.SetActive(true);
+    }
+
+    private void AttackPose()
+    {
+        _Idle.SetActive(false);
+        for (int i = 0; i < _Attack.Length; i++)
+        {
+            _Attack[i].SetActive(false);
+        }
+        int num = Random.Range(0, _Attack.Length);
+
+        _Attack[num].SetActive(true);
+
+    }
+
     public void IdleState()
     {
-        
+        IdlePose();
     }
     public void FocusState()
     {        
@@ -118,6 +149,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 
                 if (hits.Length > 0)
                 {
+                    AttackPose();
                     for (int j = 0; j < hits.Length; j++)
                     {
                         hits[j].transform.GetComponentInParent<IDamageable>().Damaged();
@@ -125,6 +157,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
                 }
                 else
                 {
+                    IdleState();
                     yield return new WaitForSeconds(0.05f);
                     StageManager.Instance.StateUpdate(GameState.응징);
                     yield return new WaitForSeconds(0.05f);
@@ -147,9 +180,11 @@ public class PlayerAction : MonoBehaviour, IStateObserver
                     {
                         damaged.Damaged();
                     }
+                    IdleState();
                     break;
                 }
             }
+            yield return new WaitForSeconds(0.3f);
 
             ResetAttack();
         }
