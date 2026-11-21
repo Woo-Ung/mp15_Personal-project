@@ -75,11 +75,15 @@ public class MeleeEnemyController : EnemyController
         {
             _prevRotation = transform.rotation;
             _isInRange = true;
-            LookPlayer();
 
-            _idle.SetActive(false);
-            _attackReady.SetActive(true);
-            _attack.SetActive(false);
+            if ((StageManager.Instance.PlayerState != GameState.АјАн))
+            {
+                LookPlayer();
+
+                _idle.SetActive(false);
+                _attackReady.SetActive(true);
+                _attack.SetActive(false);
+            }
         }
 
         else
@@ -185,6 +189,14 @@ public class MeleeEnemyController : EnemyController
     {        
         _enemyMovement?.SetCanMove(!_isInRange);
         _focusMark.gameObject.SetActive(false);
+
+        _idle.SetActive(!_isInRange);
+        _attackReady.SetActive(_isInRange);
+        _attack.SetActive(false);
+        if (_isInRange)
+        {
+            LookPlayer();
+        }
 
         ShootAttackRay();
     }

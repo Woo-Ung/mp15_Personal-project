@@ -1,10 +1,9 @@
-using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class PlayerAction : MonoBehaviour, IStateObserver
 {
@@ -15,6 +14,8 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     [SerializeField] private LayerMask _wallLayer;
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private float _timeValue;
+    [SerializeField] private GameObject _eye;
+    [SerializeField] private Image _eyeFire;
 
     [SerializeField] private GameObject _Idle;
     [SerializeField] private GameObject[] _Attack;
@@ -43,7 +44,6 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 
     private void OnEnable()
     {
-
         StageManager.Instance.StateUpdate(GameState.기본);
     }
 
@@ -54,7 +54,8 @@ public class PlayerAction : MonoBehaviour, IStateObserver
         {
             _Attack[i].SetActive(false);
         }
-
+        _eyeFire.gameObject.SetActive(false);
+        _eye.SetActive(false);
     }
 
     private void CacheComponents()
@@ -92,10 +93,21 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     public void IdleState()
     {
         IdlePose();
+
+        _eye.SetActive(false);
+        _eyeFire.gameObject.SetActive(false);
     }
     public void FocusState()
     {        
-        Instantiate(_attackRouteCanvas, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);        
+        Instantiate(_attackRouteCanvas, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);
+        _eye.SetActive(true);
+        _eyeFire.gameObject.SetActive(true);
+
+        _eyeFire.DOKill();
+        _eyeFire.fillAmount = 0f;
+
+        _eyeFire.DOFillAmount(1f, 0.5f)
+                .SetEase(Ease.OutQuad);
     }
     
     public void PunishState()
@@ -105,6 +117,9 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 
     public void AttackState()
     {
+        _eye.SetActive(false);
+        _eyeFire.gameObject.SetActive(false);
+
         if (_pointList.Count <= 1)
         {
             ResetAttack();
@@ -116,6 +131,9 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     }
     public void DeadState()
     {
+        _eye.SetActive(false);
+        _eyeFire.gameObject.SetActive(false);
+
         StopAllCoroutines();
         ResetAttack();
         Debug.Log("죽음ㅠㅠ");
