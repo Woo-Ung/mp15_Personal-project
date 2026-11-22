@@ -77,6 +77,11 @@ public class PlayerController : MonoBehaviour
 
     private void FocusState(InputAction.CallbackContext context)
     {
+        if (TutorialManager.Instance != null && TutorialManager.Instance.IsDialogueOpen)
+        {
+            return;
+        }
+
         if (_playerAction.GetComponent<PlayerFocusModeManager>()._focusTime < 1f)
         {
             return;

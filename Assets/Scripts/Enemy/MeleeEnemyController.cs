@@ -118,6 +118,7 @@ public class MeleeEnemyController : EnemyController
 
     public override void Damaged()
     {
+        GetComponent<TutorialEnemyTarget>()?.ReportDefeated(); // Æ©Åä¸®¾ó¿ë
         StageManager.Instance.FocusTimeUpdate(_returnTime);
         Destroy(gameObject);
     }     

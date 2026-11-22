@@ -103,14 +103,14 @@ public class RangedEnemyController : EnemyController
     }
 
     protected override void PunishAttack()
-    {
-        Debug.Log("궁병의 공격aaaaaaaa");
+    {        
         LookPlayer();
         StageManager.Instance.StateUpdate(GameState.사망);
     }
 
     public override void Damaged()
     {
+        GetComponent<TutorialEnemyTarget>()?.ReportDefeated(); // 튜토리얼용
         StageManager.Instance.FocusTimeUpdate(_returnTime);
         Destroy(gameObject);
     }
@@ -185,6 +185,8 @@ public class RangedEnemyController : EnemyController
     {
         if (_player.transform != null)
         {
+            _idle.SetActive(false);
+            _attack.SetActive(true);
             transform.LookAt(new Vector3(_player.transform.position.x, transform.position.y, _player.transform.position.z));
         }
     }

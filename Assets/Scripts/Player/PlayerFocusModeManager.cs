@@ -29,6 +29,8 @@ public class PlayerFocusModeManager : MonoBehaviour
     private void Start()
     {
         StageManager.Instance.PlayerSub(this);
+
+        UpdateFocusTime();
     }
 
     private void ChargeFocusTime()
@@ -53,5 +55,7 @@ public class PlayerFocusModeManager : MonoBehaviour
     {
         _focusTime = Mathf.Clamp(_focusTime, 0f, _maxFocusTime);
         _timeImage.fillAmount = _focusTime / _maxFocusTime;
+
+        _timeImage.color = _focusTime < 1f ? Color.red : Color.white;
     }       
 }

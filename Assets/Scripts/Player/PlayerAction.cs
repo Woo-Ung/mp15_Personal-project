@@ -98,7 +98,8 @@ public class PlayerAction : MonoBehaviour, IStateObserver
         _eyeFire.gameObject.SetActive(false);
     }
     public void FocusState()
-    {        
+    {
+        TutorialManager.Instance?.OnFocusEntered(); // 튜토리얼용
         Instantiate(_attackRouteCanvas, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);
         _eye.SetActive(true);
         _eyeFire.gameObject.SetActive(true);
@@ -127,6 +128,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
             return;
         }
 
+        TutorialManager.Instance?.OnAttackStarted(); // 튜토리얼용
         StartCoroutine(Attack());
     }
     public void DeadState()
@@ -154,6 +156,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 
     private IEnumerator Attack()
     {
+
         if (_pointList.Count > 0)
         {
             yield return _wait;
@@ -205,6 +208,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
             yield return new WaitForSeconds(0.3f);
 
             ResetAttack();
+            TutorialManager.Instance?.OnAttackFinished(); // 튜토리얼용
         }
 
         Physics.SyncTransforms(); // 물리좌표 동기화

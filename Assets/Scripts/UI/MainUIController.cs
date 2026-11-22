@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class MainUIController : MonoBehaviour, IStateObserver
 {
+    [SerializeField] private GameObject _gameOver;
     [SerializeField] private Button _gameOverButton;
-    [SerializeField] private TextMeshProUGUI _gameOverImage;
+    [SerializeField] private GameObject _gameClear;
+    [SerializeField] private Button _exitButton;
 
     private void Start()
     {
@@ -17,14 +19,14 @@ public class MainUIController : MonoBehaviour, IStateObserver
     {
         StageManager.Instance.Subscribe(this);
         _gameOverButton.onClick.AddListener(GameManager.Instance.RetrySceneLoad);
-        _gameOverImage.gameObject.SetActive(false);
         _gameOverButton.gameObject.SetActive(false);
+        _gameOver.gameObject.SetActive(false);
     }
 
     public void IdleState()
     {
-        _gameOverImage.gameObject.SetActive(false);
         _gameOverButton.gameObject.SetActive(false);
+        _gameOver.gameObject.SetActive(false);       
     }
     public void FocusState()
     {
@@ -50,7 +52,8 @@ public class MainUIController : MonoBehaviour, IStateObserver
     private IEnumerator GameOver()
     {
         yield return new WaitForSeconds(1f);
+        _gameOver.gameObject.SetActive(true);
         _gameOverButton.gameObject.SetActive(true);
-        _gameOverImage.gameObject.SetActive(true);
+        
     }
 }
