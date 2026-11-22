@@ -465,9 +465,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3832751957706949365, guid: 6ca8ab4b2eef2544ea21bf5996b87be7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fa4967dae3835db4897ef0720c4c5637, type: 2}
+    - target: {fileID: -1592289475483123607, guid: 6ca8ab4b2eef2544ea21bf5996b87be7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1f596ef880b1d9b46a07121bd2b95976, type: 2}
+    - target: {fileID: -1340404474936722609, guid: 6ca8ab4b2eef2544ea21bf5996b87be7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fa4967dae3835db4897ef0720c4c5637, type: 2}
+    - target: {fileID: 75241364967847454, guid: 6ca8ab4b2eef2544ea21bf5996b87be7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fa4967dae3835db4897ef0720c4c5637, type: 2}
+    - target: {fileID: 794535015940297157, guid: 6ca8ab4b2eef2544ea21bf5996b87be7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fa4967dae3835db4897ef0720c4c5637, type: 2}
     - target: {fileID: 919132149155446097, guid: 6ca8ab4b2eef2544ea21bf5996b87be7, type: 3}
       propertyPath: m_Name
       value: Enemy_sword_Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6ca8ab4b2eef2544ea21bf5996b87be7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -548,6 +572,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: -5796501329377715267, guid: f2279316bd3ee204391f776d46155d2d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fa4967dae3835db4897ef0720c4c5637, type: 2}
     - target: {fileID: -5546027622031815498, guid: f2279316bd3ee204391f776d46155d2d, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -628,10 +656,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f2279316bd3ee204391f776d46155d2d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1101335783960345640, guid: f2279316bd3ee204391f776d46155d2d, type: 3}
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 2295383164578159696, guid: f2279316bd3ee204391f776d46155d2d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1f596ef880b1d9b46a07121bd2b95976, type: 2}
     - target: {fileID: 2349317276075137832, guid: f2279316bd3ee204391f776d46155d2d, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -640,6 +676,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 3381291077895778269, guid: f2279316bd3ee204391f776d46155d2d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fa4967dae3835db4897ef0720c4c5637, type: 2}
     - target: {fileID: 3483898069505667242, guid: f2279316bd3ee204391f776d46155d2d, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -656,6 +696,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 4946195220787098772, guid: f2279316bd3ee204391f776d46155d2d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fa4967dae3835db4897ef0720c4c5637, type: 2}
     - target: {fileID: 5115850148741621008, guid: f2279316bd3ee204391f776d46155d2d, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -821,10 +865,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6325694467927830221, guid: 2fa319266df59bd44aafaf20d77bdaaf, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fa4967dae3835db4897ef0720c4c5637, type: 2}
+    - target: {fileID: -5265558064501858721, guid: 2fa319266df59bd44aafaf20d77bdaaf, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fa4967dae3835db4897ef0720c4c5637, type: 2}
     - target: {fileID: 919132149155446097, guid: 2fa319266df59bd44aafaf20d77bdaaf, type: 3}
       propertyPath: m_Name
       value: Enemy_Sword_AttackReady
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2fa319266df59bd44aafaf20d77bdaaf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1603246306389932429, guid: 2fa319266df59bd44aafaf20d77bdaaf, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1f596ef880b1d9b46a07121bd2b95976, type: 2}
+    - target: {fileID: 2505312298389004836, guid: 2fa319266df59bd44aafaf20d77bdaaf, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fa4967dae3835db4897ef0720c4c5637, type: 2}
+    - target: {fileID: 5706263594933505890, guid: 2fa319266df59bd44aafaf20d77bdaaf, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fa4967dae3835db4897ef0720c4c5637, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
