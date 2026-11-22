@@ -9,6 +9,7 @@ public class MainUIController : MonoBehaviour, IStateObserver
     [SerializeField] private Button _gameOverButton;
     [SerializeField] private GameObject _gameClear;
     [SerializeField] private Button _exitButton;
+    [SerializeField] private Button _nextButton;
 
     private void Start()
     {
@@ -19,14 +20,17 @@ public class MainUIController : MonoBehaviour, IStateObserver
     {
         StageManager.Instance.Subscribe(this);
         _gameOverButton.onClick.AddListener(GameManager.Instance.RetrySceneLoad);
-        _gameOverButton.gameObject.SetActive(false);
         _gameOver.gameObject.SetActive(false);
+
+        _nextButton.onClick.AddListener(GameManager.Instance.NextSceneSceneLoad); 
+        _exitButton.onClick.AddListener(GameManager.Instance.TitleSceneSceneLoad);
+        _gameClear.gameObject.SetActive(false);
     }
 
     public void IdleState()
-    {
-        _gameOverButton.gameObject.SetActive(false);
-        _gameOver.gameObject.SetActive(false);       
+    {        
+        _gameOver.gameObject.SetActive(false);
+        _gameClear.gameObject.SetActive(false);
     }
     public void FocusState()
     {
@@ -46,7 +50,7 @@ public class MainUIController : MonoBehaviour, IStateObserver
     }
     public void ClearState()
     {
-        
+        StartCoroutine(GameClear());
     }
 
     private IEnumerator GameOver()
@@ -55,5 +59,11 @@ public class MainUIController : MonoBehaviour, IStateObserver
         _gameOver.gameObject.SetActive(true);
         _gameOverButton.gameObject.SetActive(true);
         
+    }
+
+    private IEnumerator GameClear()
+    {
+        yield return new WaitForSeconds(1f);
+        _gameClear.gameObject.SetActive(true);
     }
 }

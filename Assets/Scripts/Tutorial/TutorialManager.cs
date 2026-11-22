@@ -140,6 +140,11 @@ public class TutorialManager : MonoBehaviour
 
         _waitingForNext = false;
 
+        if (StageManager.Instance.PlayerState != GameState.기본)
+        {
+            StageManager.Instance.StateUpdate(GameState.기본);
+        }
+
         // 대사 종료 후 이미 충족된 조건도 확인
         CheckCompletion();
     }

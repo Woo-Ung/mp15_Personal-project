@@ -49,13 +49,13 @@ MonoBehaviour:
     _scenePath: Assets/Scenes/TitleScene.unity
     _sceneName: TitleScene
   _tutorialScene:
-    _sceneAsset: {fileID: 102900000, guid: cd947aa4bea4f94449f09694fe0d18a5, type: 3}
-    _scenePath: Assets/Scenes/TutorialScene.unity
-    _sceneName: TutorialScene
+    _sceneAsset: {fileID: 102900000, guid: 53a937eb047f71a49ae5bb993b95b9c5, type: 3}
+    _scenePath: Assets/Scenes/TestTutorialScene.unity
+    _sceneName: TestTutorialScene
   _stageScene:
-    _sceneAsset: {fileID: 102900000, guid: 99c9720ab356a0642a771bea13969a05, type: 3}
-    _scenePath: Assets/Scenes/StageScene.unity
-    _sceneName: StageScene
+    _sceneAsset: {fileID: 102900000, guid: 76b998e9554b8f543915623ff0599762, type: 3}
+    _scenePath: Assets/Scenes/TestStageScene.unity
+    _sceneName: TestStageScene
   _bossScene:
     _sceneAsset: {fileID: 102900000, guid: bbcad0fc2a9aa0b4594a70f961c15c92, type: 3}
     _scenePath: Assets/Scenes/BossStage.unity

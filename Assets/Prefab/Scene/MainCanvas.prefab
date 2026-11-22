@@ -313,7 +313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4489902208153357127
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1528,8 +1528,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c39dc36a3d049914ca13f8ad4f62ba59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainUIController
+  _gameOver: {fileID: 993587212638099585}
   _gameOverButton: {fileID: 7085236237110866978}
-  _gameOverImage: {fileID: 4636890347405934817}
+  _gameClear: {fileID: 570270253156003498}
+  _exitButton: {fileID: 2774220541730198658}
+  _nextButton: {fileID: 8237991663232433850}
 --- !u!1 &7842863105722586224
 GameObject:
   m_ObjectHideFlags: 0

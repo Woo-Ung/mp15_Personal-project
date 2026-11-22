@@ -55,17 +55,29 @@ public class ScrollButtonManager : MonoBehaviour
 
     public IEnumerator ButtonDestroy()
     {
-        _easyButton.gameObject.SetActive(false);
-        Destroy(_easyButton.gameObject);
+        if (_easyButton == null)
+            yield break;
+
+        GameObject target = _easyButton.gameObject;
+        target.SetActive(false);
+        Destroy(target);
+
         _easyButton = null;
 
         yield return null;
 
         SetSize();
-        SetAddValue();
+
+        if (_size > 1)
+        {
+            SetAddValue();
+        }
+        else
+        {
+            _addValue = 0f;
+        }
 
         LayoutRebuilder.ForceRebuildLayoutImmediate(_content.GetComponent<RectTransform>());
-
         Canvas.ForceUpdateCanvases();
 
         LeftButton();

@@ -40,6 +40,30 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(_bossScene.SceneName);
     }
 
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+    Application.Quit();
+#endif
+    }
+
+    public void NextSceneSceneLoad()
+    {
+        Time.timeScale = 1f;
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        if (currentScene.name == _tutorialScene.SceneName)
+        {
+            StageSceneLoad();
+        }
+        else if (currentScene.name == _stageScene.SceneName)
+        {
+            BossSceneLoad();
+        }
+    }
+
     public void RetrySceneLoad()
     {
         Time.timeScale = 1f;

@@ -217,7 +217,7 @@ public class TitleUIController : MonoBehaviour
         rect2.DOAnchorPos(new Vector2(-250f, -200), 0.6f).SetEase(Ease.OutQuart);
         yield return _leftCanvas2.DOFade(0f, 0.6f).WaitForCompletion();
 
-        _leftCanvas1.transform.parent.GetComponentInParent<Canvas>().sortingOrder = -1;
+        _leftCanvas1.transform.parent.GetComponentInParent<Canvas>().sortingOrder = 1;
         ResetCanvas(rect2);
         ResetSlice(_sliceImgae.GetComponent<RectTransform>(), 0);
 
@@ -282,5 +282,23 @@ public class TitleUIController : MonoBehaviour
 
         _isTransitioning = false;
     }
+    public void LoadTutorial()
+    {
+        GameManager.Instance.TutorialSceneLoad();
+    }
 
+    public void LoadStage()
+    {
+        GameManager.Instance.StageSceneLoad();
+    }
+
+    public void LoadBoss()
+    {
+        GameManager.Instance.BossSceneLoad();
+    }
+
+    public void ExitButton()
+    {
+        GameManager.Instance.QuitGame();
+    }
 }

@@ -44,6 +44,16 @@ public class MeleeEnemyController : EnemyController
         _attack.SetActive(false);
         _attackReady.SetActive(false);
     }
+
+    private void OnEnable()
+    {
+        if (StageManager.Instance == null)
+            return;
+
+        bool canMove = StageManager.Instance.PlayerState == GameState.기본 && !_isInRange;
+
+        GetComponent<EnemyMovement>()?.SetCanMove(canMove);
+    }
     protected override void CacheComponents()
     {
         base.CacheComponents(); // 부모 클래스에서 옵저버 구독함
@@ -66,7 +76,11 @@ public class MeleeEnemyController : EnemyController
 
     public override void SetInRange(bool inR)
     {
-        if(_isInRange == inR)
+        Debug.Log(
+       $"{name} SetInRange 호출: {inR}, " +
+       $"현재 감지 상태: {_isInRange}"
+   );
+        if (_isInRange == inR)
         {
             return;
         }

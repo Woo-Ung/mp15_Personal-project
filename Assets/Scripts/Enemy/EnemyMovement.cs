@@ -10,7 +10,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private int _startNum = 0;
     [SerializeField] private Animator _animator;
 
-    private bool _canMove;
+    [SerializeField]private bool _canMove = true;
     private float _remainingWaitTime;
    
 
@@ -25,18 +25,10 @@ public class EnemyMovement : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
     }
 
-    public void SetCanMove(bool can)
+    private void OnEnable()
     {
-        _canMove = can;
+        _canMove = true;
 
-        if(!can)
-        {
-            _animator.SetBool("IsWalking",false);
-        }
-    }
-
-    public void Start()
-    {
         Vector3[] waypoints = new Vector3[_pathHolder.childCount];
         for (int i = 0; i < waypoints.Length; i++)
         {
@@ -46,6 +38,16 @@ public class EnemyMovement : MonoBehaviour
         StartCoroutine(FollowPath(waypoints, _startNum));
     }
 
+    public void SetCanMove(bool can)
+    {
+        _canMove = can;
+
+        if(!can)
+        {
+            _animator.SetBool("IsWalking",false);
+        }
+    }
+        
     private IEnumerator FollowPath(Vector3[] waypoints, int startNum)
     {
         transform.position = waypoints[startNum];
@@ -55,14 +57,17 @@ public class EnemyMovement : MonoBehaviour
       
         while (true)
         {
-            if(!_canMove)
+            if (!_canMove)
             {
                 yield return null;
                 continue;
             }
 
             _animator.SetBool("IsWalking", true);
-
+            Debug.Log(
+    $"{name} 현재 위치: {transform.position} / " +
+    $"목표 위치: {targetWaypoint} / " +
+    $"거리: {Vector3.Distance(transform.position, targetWaypoint)}");
             transform.position = Vector3.MoveTowards(transform.position, targetWaypoint, speed * Time.deltaTime);
             if(transform.position == targetWaypoint)
             {
