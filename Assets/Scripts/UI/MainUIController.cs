@@ -11,6 +11,10 @@ public class MainUIController : MonoBehaviour, IStateObserver
     [SerializeField] private Button _exitButton;
     [SerializeField] private Button _nextButton;
 
+    [SerializeField] private GameObject _pausePanel;
+    [SerializeField] private Button _continueButton;
+    [SerializeField] private Button _titleButton;
+
     private void Start()
     {
         CacheComponents();
@@ -22,9 +26,14 @@ public class MainUIController : MonoBehaviour, IStateObserver
         _gameOverButton.onClick.AddListener(GameManager.Instance.RetrySceneLoad);
         _gameOver.gameObject.SetActive(false);
 
-        _nextButton.onClick.AddListener(GameManager.Instance.NextSceneSceneLoad); 
+        _nextButton.onClick.AddListener(GameManager.Instance.NextSceneSceneLoad);
         _exitButton.onClick.AddListener(GameManager.Instance.TitleSceneSceneLoad);
         _gameClear.gameObject.SetActive(false);
+
+        _pausePanel.SetActive(false);
+
+        _continueButton.onClick.AddListener(ContinueButton);
+        _titleButton.onClick.AddListener(TitleButton);
     }
 
     public void IdleState()
@@ -65,5 +74,20 @@ public class MainUIController : MonoBehaviour, IStateObserver
     {
         yield return new WaitForSeconds(1f);
         _gameClear.gameObject.SetActive(true);
+    }
+    public void SetPauseUI(bool isPaused)
+    {
+        _pausePanel.SetActive(isPaused);
+    }
+
+    public void ContinueButton()
+    {
+        GameManager.Instance.Continue();
+    }
+
+    public void TitleButton()
+    {
+        GameManager.Instance.Continue();
+        GameManager.Instance.TitleSceneSceneLoad();
     }
 }

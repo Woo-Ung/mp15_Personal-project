@@ -49,9 +49,9 @@ MonoBehaviour:
     _scenePath: Assets/Scenes/TitleScene.unity
     _sceneName: TitleScene
   _tutorialScene:
-    _sceneAsset: {fileID: 102900000, guid: 53a937eb047f71a49ae5bb993b95b9c5, type: 3}
-    _scenePath: Assets/Scenes/TestTutorialScene.unity
-    _sceneName: TestTutorialScene
+    _sceneAsset: {fileID: 102900000, guid: c75bf1b88d642a44fb12cf971d0177d3, type: 3}
+    _scenePath: Assets/Scenes/TestStageScene 1.unity
+    _sceneName: TestStageScene 1
   _stageScene:
     _sceneAsset: {fileID: 102900000, guid: 76b998e9554b8f543915623ff0599762, type: 3}
     _scenePath: Assets/Scenes/TestStageScene.unity

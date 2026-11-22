@@ -1,7 +1,6 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,6 +25,9 @@ public class TitleUIController : MonoBehaviour
     [SerializeField] private List<UIObjList> _sliceuiList = new();
    
     [SerializeField] private CanvasGroup _scrollCanvasGroup;
+    [SerializeField] private Image _eyeFire;
+
+    private Sequence _eyeFireSequence;
 
     private bool _isTransitioning;
 
@@ -37,10 +39,13 @@ public class TitleUIController : MonoBehaviour
     //private Vector2 _starImagePos2;
     //private Quaternion _startImageRot2;
 
+    
+
     private void Awake()
     {
         _rect = _leftCanvas1.GetComponent<RectTransform>();
         _rect2 = _RightCanvas1.GetComponent<RectTransform>();
+        _eyeFire.gameObject.SetActive(false);
         //_imageRect = _sliceImgae.GetComponent<RectTransform>();
     }
 
@@ -86,12 +91,54 @@ public class TitleUIController : MonoBehaviour
         _scrollCanvasGroup.blocksRaycasts = false;
     }
 
+
+
+    private void EyeFireOn()
+    {
+        _eyeFireSequence?.Kill();
+        _eyeFire.DOKill();
+
+        _eyeFire.gameObject.SetActive(true);
+
+        _eyeFire.type = Image.Type.Filled;
+        _eyeFire.fillMethod = Image.FillMethod.Horizontal;
+
+        _eyeFire.fillOrigin = (int)Image.OriginHorizontal.Left;
+        _eyeFire.fillAmount = 0f;
+
+        Color color = _eyeFire.color;
+        color.a = 1f;
+        _eyeFire.color = color;
+
+        _eyeFireSequence = DOTween.Sequence()
+            // 왼쪽 → 오른쪽으로 등장
+            .Append(_eyeFire.DOFillAmount(1f, 0.2f)
+                .SetEase(Ease.OutQuad))
+
+            // 사라질 때는 오른쪽 기준으로 채워진 양 감소
+            // 결과적으로 왼쪽 → 오른쪽으로 지워짐
+            .AppendCallback(() =>
+            {
+                _eyeFire.fillOrigin = (int)Image.OriginHorizontal.Right;
+            })
+
+            .Append(_eyeFire.DOFillAmount(0f, 0.2f)
+                .SetEase(Ease.InQuad))
+
+            .OnComplete(() =>
+            {
+                _eyeFire.gameObject.SetActive(false);
+            });
+    }
+
     public void StartSliceCanvas1()
     {
         if (_isTransitioning)
         {
             return;
         }
+
+        EyeFireOn();
 
         _isTransitioning = true;
         SetCanvasInput(_leftCanvas1, false);
@@ -105,6 +152,7 @@ public class TitleUIController : MonoBehaviour
         {
             return;
         }
+        EyeFireOn();
 
         _isTransitioning = true;
         SetCanvasInput(_leftCanvas2, false);
@@ -118,6 +166,8 @@ public class TitleUIController : MonoBehaviour
         {
             return;
         }
+
+        EyeFireOn();
 
         _isTransitioning = true;
         SetCanvasInput(_RightCanvas1, false);

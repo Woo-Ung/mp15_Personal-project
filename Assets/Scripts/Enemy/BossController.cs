@@ -16,6 +16,11 @@ public class BossController : EnemyController
     [SerializeField] private Collider _circleCollider;
     [SerializeField] private LineRendererPolygon _circleLine;
 
+    [SerializeField] private GameObject _default;
+    [SerializeField] private GameObject _attack1;
+    [SerializeField] private GameObject _attack2;
+    [SerializeField] private GameObject _attack3;
+
     private BossEquipmenet _equipment => GetComponent<BossEquipmenet>();
     private SwordArray _currentArray;        
     private bool _canSummonSwordArray;
@@ -35,6 +40,12 @@ public class BossController : EnemyController
     protected override void Start()
     {
         base.Start(); // 부모 클래스에 CacheComponents 등록됨
+        _default.SetActive(true);
+        _attack1.SetActive(false);
+        _attack2.SetActive(false);
+        _attack3.SetActive(false);
+
+        StageManager.Instance.StateUpdate(GameState.기본);
     }
 
     public override void Damaged()
@@ -42,6 +53,7 @@ public class BossController : EnemyController
         _life -= 1;
         if(_life <= 0)
         {
+            StageManager.Instance.StateUpdate(GameState.클리어);
             Destroy(gameObject);
         }
     }
@@ -53,6 +65,7 @@ public class BossController : EnemyController
 
     protected override void PunishAttack()
     {
+        ChangeBossModel(2);
         StageManager.Instance.StateUpdate(GameState.사망);
         StartCoroutine(PunishTerm());        
     }
@@ -96,8 +109,7 @@ public class BossController : EnemyController
     private IEnumerator PatternRoutine()
     {
         while (true)
-        {
-           
+        {           
             yield return StartCoroutine(SpawnSword());
 
             if (_firstAttack)
@@ -181,6 +193,7 @@ public class BossController : EnemyController
         {
             yield break;
         }
+        ChangeBossModel(0);
 
         _canSummonSword = false;
 
@@ -215,7 +228,7 @@ public class BossController : EnemyController
     private IEnumerator SpawnSwordArray() // 통상패턴 2
     {
         if (_canSummonSwordArray)
-        {
+        {            
             float currentTime1 = 0f;
 
             while (currentTime1 < 0.5f)
@@ -234,6 +247,7 @@ public class BossController : EnemyController
             _currentArray.SetActiveAll();
             _canSummonSwordArray = false;
             _currentArray.transform.position = new Vector3(transform.position.x, transform.position.y + _swordSpawnHeight, transform.position.z);
+            ChangeBossModel(0);
             yield return StartCoroutine(DropSword(_currentArray));
             yield return StartCoroutine(CastingAttack());
         }
@@ -243,6 +257,7 @@ public class BossController : EnemyController
     {       
         for (int i = 0; i < 3; i++)
         {
+            ChangeBossModel(0);
             Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
             Vector3 target = _player.transform.position + Vector3.up;
             Vector3 direction = (target - origin).normalized;
@@ -264,6 +279,7 @@ public class BossController : EnemyController
 
     private IEnumerator CircleAttack() // 통상패턴4
     {
+        ChangeBossModel(0);
         _circleLine.gameObject.SetActive(true);
         float currentTime = 0f;
 
@@ -277,7 +293,7 @@ public class BossController : EnemyController
         }
 
         _circleCollider.gameObject.SetActive(true);
-
+        ChangeBossModel(3);
         float currentTime1 = 0f;
 
         while (currentTime1 < 0.3f)
@@ -290,7 +306,8 @@ public class BossController : EnemyController
         }
 
         _circleLine.gameObject.SetActive(false);
-        _circleCollider.gameObject.SetActive(false);        
+        _circleCollider.gameObject.SetActive(false);
+        ChangeBossModel(0);
     }
 
     private IEnumerator CastingAttack() // 검진 생성 후 시전
@@ -384,7 +401,7 @@ public class BossController : EnemyController
         }
 
         ScanRoute(target, out Vector3 hitPosition, out bool isPlayerExist);
-
+        ChangeBossModel(1);
         if (isPlayerExist)
         {
             ObjectPool.Instance.Return(sword);
@@ -397,7 +414,7 @@ public class BossController : EnemyController
             ObjectPool.Instance.Return(sword);
             transform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             transform.position = sword.transform.position;                        
-        }
+        }        
     }
 
     private void ScanRoute(Vector3 nextPoint, out Vector3 hitPosition, out bool isPlayerExist, bool CheckRay = true) // 기본적으로 Ray, CheckRay = false 면 SphereCast발사
@@ -630,6 +647,14 @@ public class BossController : EnemyController
         _circleLine.gameObject.SetActive(false);
         _firstAttack = true;
     }
+    private void ChangeBossModel(int pattern)
+    {
+        _default.SetActive(pattern == 0);
+        _attack1.SetActive(pattern == 1);
+        _attack2.SetActive(pattern == 2);
+        _attack3.SetActive(pattern == 3);
+    }
+
 
     //protected override void OnDestroy()
     //{

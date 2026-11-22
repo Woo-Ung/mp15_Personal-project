@@ -75,12 +75,16 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         StageManager.Instance.SetPause(true);
+
+        FindFirstObjectByType<MainUIController>()?.SetPauseUI(true);
     }
 
     public void Continue()
     {
         Time.timeScale = 1f;
         StageManager.Instance.SetPause(false);
+
+        FindFirstObjectByType<MainUIController>()?.SetPauseUI(false);
     }
 
     private void SetSingletion()

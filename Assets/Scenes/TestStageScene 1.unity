@@ -12771,18 +12771,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1145326891077400373, guid: 981c276b91240fa43ad9392531f3346a, type: 3}
-      propertyPath: _tutorialScene._sceneName
-      value: TestStageScene 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1145326891077400373, guid: 981c276b91240fa43ad9392531f3346a, type: 3}
-      propertyPath: _tutorialScene._scenePath
-      value: Assets/Scenes/TestStageScene 1.unity
-      objectReference: {fileID: 0}
-    - target: {fileID: 1145326891077400373, guid: 981c276b91240fa43ad9392531f3346a, type: 3}
-      propertyPath: _tutorialScene._sceneAsset
-      value: 
-      objectReference: {fileID: 102900000, guid: c75bf1b88d642a44fb12cf971d0177d3, type: 3}
     - target: {fileID: 7079098680843526774, guid: 981c276b91240fa43ad9392531f3346a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.73852

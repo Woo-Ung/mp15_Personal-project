@@ -37,6 +37,14 @@ public class SwordObj : MonoBehaviour, IDamageable
         SetSwordType();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public void SetPoolSword()
     {
         _isPoolSword = true;
