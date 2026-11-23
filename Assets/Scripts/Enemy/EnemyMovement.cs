@@ -22,7 +22,7 @@ public class EnemyMovement : MonoBehaviour
     private void Init()
     {
         _canMove = true;
-        _animator = GetComponentInChildren<Animator>();
+        _animator = GetComponentInChildren<Animator>(true);
     }
 
     private void OnEnable()
@@ -42,10 +42,10 @@ public class EnemyMovement : MonoBehaviour
     {
         _canMove = can;
 
-        if(!can)
+        if (_animator != null)
         {
-            _animator.SetBool("IsWalking",false);
-        }
+            _animator.speed = can ? 1f : 0f;
+        }       
     }
         
     private IEnumerator FollowPath(Vector3[] waypoints, int startNum)

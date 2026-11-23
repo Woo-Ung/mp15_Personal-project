@@ -11,9 +11,10 @@ public class ButtonDestory : MonoBehaviour
     [SerializeField] private Image _burnImage;
     [SerializeField] private Material _effectMaterial;
     [SerializeField] private ScrollButtonManager _scrollButtonManager;
-
+    [SerializeField] private GameObject _text;
     private Button _button;
     private Material _runtimeMaterial;
+
     private Tween _effectTween;
 
     private void Awake()
@@ -24,6 +25,8 @@ public class ButtonDestory : MonoBehaviour
         _burnImage.material = _runtimeMaterial;
 
         _runtimeMaterial.SetFloat("_FadeAmount", 0f);
+
+        _text.SetActive(true);
 
         SetAlpha(_normalImage, 1f);
         SetAlpha(_burnImage, 0f);
@@ -37,7 +40,9 @@ public class ButtonDestory : MonoBehaviour
         _effectTween?.Kill();
 
         // 일반 이미지는 숨기고 불타는 이미지 표시
+      
         SetAlpha(_normalImage, 0f);
+        _text.SetActive(false);
         SetAlpha(_burnImage, 1f);
 
         _runtimeMaterial.SetFloat("_FadeAmount", 0f);

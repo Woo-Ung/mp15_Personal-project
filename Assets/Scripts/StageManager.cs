@@ -60,6 +60,12 @@ public class StageManager : MonoBehaviour
 
     public void StateUpdate(GameState state)
     {
+        if (PlayerState == GameState.클리어 &&
+        state != GameState.클리어)
+        {
+            return;
+        }
+
         if (!_isPaused)
         {
             switch (state)

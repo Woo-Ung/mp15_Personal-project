@@ -287,5 +287,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7b4ef7be68c276409e165c4726ec5cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextureChanger
-  _baseMaterial: {fileID: 0}
+  _baseMaterial: {fileID: 2100000, guid: fa4967dae3835db4897ef0720c4c5637, type: 2}
   _changeMaterial: {fileID: 2100000, guid: fbbb4a4d81038fa488b2c2c40b77780e, type: 2}
