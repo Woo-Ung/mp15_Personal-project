@@ -17,6 +17,7 @@ public class BossController : EnemyController
     [SerializeField] private LineRendererPolygon _circleLine;
 
     [SerializeField] private GameObject _default;
+    [SerializeField] private GameObject _arrayReady;
     [SerializeField] private GameObject _attack1;
     [SerializeField] private GameObject _attack2;
     [SerializeField] private GameObject _attack3;
@@ -64,8 +65,7 @@ public class BossController : EnemyController
     }
 
     protected override void PunishAttack()
-    {
-        ChangeBossModel(2);
+    {        
         StageManager.Instance.StateUpdate(GameState.사망);
         StartCoroutine(PunishTerm());        
     }
@@ -77,6 +77,7 @@ public class BossController : EnemyController
         Vector3 direction = (target - origin).normalized;
         yield return new WaitForSeconds(0.5f);
 
+        ChangeBossModel(1);
         transform.position = _player.transform.position + (direction * 2f);
         transform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         _punishSword?.gameObject.SetActive(false);
@@ -247,8 +248,9 @@ public class BossController : EnemyController
             _currentArray.SetActiveAll();
             _canSummonSwordArray = false;
             _currentArray.transform.position = new Vector3(transform.position.x, transform.position.y + _swordSpawnHeight, transform.position.z);
-            ChangeBossModel(0);
-            yield return StartCoroutine(DropSword(_currentArray));
+            
+            yield return StartCoroutine(DropSword(_currentArray));            
+            ChangeBossModel(4);
             yield return StartCoroutine(CastingAttack());
         }
     }
@@ -272,7 +274,7 @@ public class BossController : EnemyController
             sword.GetComponent<SwordObj>().SetDestroy(true);
             sword.transform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             sword.transform.position = target + (Vector3.up * _swordSpawnHeight);
-
+            ChangeBossModel(3);
             yield return StartCoroutine(DropSword(sword.GetComponent<SwordObj>()));
         }        
     }
@@ -293,7 +295,7 @@ public class BossController : EnemyController
         }
 
         _circleCollider.gameObject.SetActive(true);
-        ChangeBossModel(3);
+        ChangeBossModel(2);
         float currentTime1 = 0f;
 
         while (currentTime1 < 0.3f)
@@ -357,6 +359,8 @@ public class BossController : EnemyController
 
         _currentArray.gameObject.SetActive(false);
         _currentArray = null;
+
+        ChangeBossModel(3);
 
         SwordArray currentArray1 = _equipment._patternArray[4];
         currentArray1.gameObject.SetActive(true);
@@ -474,6 +478,7 @@ public class BossController : EnemyController
 
         float currentTime = 0f;
 
+        ChangeBossModel(4);
         while (currentTime < _dropSwordTime)
         {
             if (StageManager.Instance.PlayerState == GameState.기본)
@@ -515,6 +520,7 @@ public class BossController : EnemyController
 
         float currentTime = 0f;
 
+        ChangeBossModel(3);
         while (currentTime < _dropSwordTime)
         {
             if (StageManager.Instance.PlayerState == GameState.기본)
@@ -630,6 +636,13 @@ public class BossController : EnemyController
 
     }
 
+    private void LookPlayer()
+    {
+        if (_player.transform != null)
+        {
+            transform.LookAt(new Vector3(_player.transform.position.x, transform.position.y, _player.transform.position.z));
+        }
+    }
     public void AllBroken()
     {
         _canSummonSwordArray = true;
@@ -649,10 +662,13 @@ public class BossController : EnemyController
     }
     private void ChangeBossModel(int pattern)
     {
+        LookPlayer();
+
         _default.SetActive(pattern == 0);
         _attack1.SetActive(pattern == 1);
         _attack2.SetActive(pattern == 2);
         _attack3.SetActive(pattern == 3);
+        _arrayReady.SetActive(pattern == 4);
     }
 
 
