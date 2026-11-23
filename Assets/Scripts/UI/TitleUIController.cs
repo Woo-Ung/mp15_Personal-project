@@ -110,21 +110,12 @@ public class TitleUIController : MonoBehaviour
         color.a = 1f;
         _eyeFire.color = color;
 
-        _eyeFireSequence = DOTween.Sequence()
-            // 왼쪽 → 오른쪽으로 등장
-            .Append(_eyeFire.DOFillAmount(1f, 0.2f)
-                .SetEase(Ease.OutQuad))
-
-            // 사라질 때는 오른쪽 기준으로 채워진 양 감소
-            // 결과적으로 왼쪽 → 오른쪽으로 지워짐
+        _eyeFireSequence = DOTween.Sequence().Append(_eyeFire.DOFillAmount(1f, 0.2f).SetEase(Ease.OutExpo))
             .AppendCallback(() =>
             {
                 _eyeFire.fillOrigin = (int)Image.OriginHorizontal.Right;
             })
-
-            .Append(_eyeFire.DOFillAmount(0f, 0.2f)
-                .SetEase(Ease.InQuad))
-
+            .Append(_eyeFire.DOFillAmount(0f, 0.25f).SetEase(Ease.InQuad))
             .OnComplete(() =>
             {
                 _eyeFire.gameObject.SetActive(false);

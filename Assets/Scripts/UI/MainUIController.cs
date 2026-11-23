@@ -77,7 +77,7 @@ public class MainUIController : MonoBehaviour, IStateObserver
     }
     public void SetPauseUI(bool isPaused)
     {
-        _pausePanel.SetActive(isPaused);
+        _pausePanel.SetActive(isPaused);        
     }
 
     public void ContinueButton()
