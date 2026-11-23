@@ -274,7 +274,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     private void ScanEnemy(Vector3 nextPoint, out RaycastHit[] hits)
     {
         float distance = Vector3.Distance(transform.position, nextPoint);
-        hits = Physics.SphereCastAll(transform.position, 0.5f, ((nextPoint - transform.position).normalized), distance, _enemyLayer);
+        hits = Physics.SphereCastAll(transform.position, 0.6f, ((nextPoint - transform.position).normalized), distance, _enemyLayer);
         if (hits.Length > 0)
         {
             //Debug.Log($"적 수:{hits.Length}");
