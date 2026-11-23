@@ -43068,6 +43068,18 @@ PrefabInstance:
       propertyPath: _cameraInput
       value: 
       objectReference: {fileID: 923923894}
+    - target: {fileID: 5753200435943535118, guid: 7e11a9ef056b0ac4b9213f457d4b9841, type: 3}
+      propertyPath: _hardMask.m_Bits
+      value: 1088
+      objectReference: {fileID: 0}
+    - target: {fileID: 5753200435943535118, guid: 7e11a9ef056b0ac4b9213f457d4b9841, type: 3}
+      propertyPath: _layerMask.m_Bits
+      value: 1088
+      objectReference: {fileID: 0}
+    - target: {fileID: 5753200435943535118, guid: 7e11a9ef056b0ac4b9213f457d4b9841, type: 3}
+      propertyPath: _normalMask.m_Bits
+      value: 1344
+      objectReference: {fileID: 0}
     - target: {fileID: 5833431992389554936, guid: 7e11a9ef056b0ac4b9213f457d4b9841, type: 3}
       propertyPath: far clip plane
       value: 100

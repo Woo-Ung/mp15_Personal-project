@@ -91,7 +91,15 @@ public class TitleUIController : MonoBehaviour
         _scrollCanvasGroup.blocksRaycasts = false;
     }
 
+    public void SetNormalLevel()
+    {
+        GameManager.Instance.SetNormalLevel();
+    }
 
+    public void SetHardLevel()
+    {
+        GameManager.Instance.SetHardLevel();
+    }
 
     private void EyeFireOn()
     {

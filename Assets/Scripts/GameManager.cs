@@ -2,6 +2,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements.Experimental;
 
+public enum Level
+{ 
+    보통,
+    어려움
+}
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
@@ -9,11 +15,23 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SceneReference _titleScene;
     [SerializeField] private SceneReference _tutorialScene;
     [SerializeField] private SceneReference _stageScene;
-    [SerializeField] private SceneReference _bossScene;       
+    [SerializeField] private SceneReference _bossScene;
+
+    [field: SerializeField] public Level _level { get; private set; }
 
     private void Awake()
     {
         SetSingletion();
+    }
+
+    public void SetNormalLevel()
+    {
+        _level = Level.보통;
+    }
+
+    public void SetHardLevel()
+    {
+        _level = Level.어려움;
     }
 
     public void TitleSceneSceneLoad()
