@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputActionReference _distanceAction;
     [SerializeField] private InputActionReference _undoAction;
     [SerializeField] private InputActionReference _cameraFocusOnMe;
+    [SerializeField] private InputActionReference _pause;
 
     private PlayerAction _playerAction;
     
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
         _distanceAction.action.Enable();
         _undoAction.action.Enable();
         _cameraFocusOnMe.action.Enable();
+        _pause.action.Enable();
     }
 
     private void OffInputAction()
@@ -52,6 +54,7 @@ public class PlayerController : MonoBehaviour
         _distanceAction.action.Disable();
         _undoAction.action.Disable();
         _cameraFocusOnMe.action.Disable();
+        _pause.action.Disable();
     }
 
     private void BindInputEvent()
@@ -60,6 +63,7 @@ public class PlayerController : MonoBehaviour
         _attackAction.action.performed += AttackState;
         _undoAction.action.performed += Undo;
         _cameraFocusOnMe.action.performed += CameraFocusOnme;
+        _pause.action.performed += Pause;
     }    
 
     private void UnbindInputEvent()
@@ -68,10 +72,20 @@ public class PlayerController : MonoBehaviour
         _attackAction.action.performed -= AttackState;
         _undoAction.action.performed -= Undo;
         _cameraFocusOnMe.action.performed -= CameraFocusOnme;
+        _pause.action.performed -= Pause;
     }
 
     private void FocusState(InputAction.CallbackContext context)
-    {        
+    {
+        if (TutorialManager.Instance != null && TutorialManager.Instance.IsDialogueOpen)
+        {
+            return;
+        }
+
+        if (_playerAction.GetComponent<PlayerFocusModeManager>()._focusTime < 1f)
+        {
+            return;
+        }
         StageManager.Instance.StateUpdate(GameState.집중);
     }
     
@@ -89,4 +103,16 @@ public class PlayerController : MonoBehaviour
     {
         Camera.main.GetComponentInParent<CameraController>().transform.position = transform.position;
     }
+
+    private void Pause(InputAction.CallbackContext context)
+    {
+        if (!StageManager.Instance._isPaused)
+        {
+            GameManager.Instance.Pause();
+        }
+        else
+        {
+            GameManager.Instance.Continue();
+        }
+    } 
 }

@@ -57,16 +57,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Material: {fileID: 2100000, guid: 4db3df57034636f41bc93d95bb1ec1a8, type: 2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 3
+  m_Sprite: {fileID: -2076178282, guid: fa24c0a78c57429498c5e9792006c60b, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 3531673534880033663}
   - component: {fileID: 7811018284671460560}
   - component: {fileID: 7382730770805101287}
+  - component: {fileID: 830117936977946625}
   m_Layer: 10
   m_Name: FocusCanvas
   m_TagString: Untagged
@@ -191,3 +192,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIController
   _focusImage: {fileID: 5954558733936377389}
+  rippleEffect: {fileID: 830117936977946625}
+--- !u!114 &830117936977946625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8573105160776606438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a70a92ba1b82e47a6eef20313c542d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RippleFollowPlayer
+  rippleImage: {fileID: 5954558733936377389}
+  player: {fileID: 0}
+  gameCamera: {fileID: 0}
+  rippleDuration: 0.6
+  fadeDuration: 0.5

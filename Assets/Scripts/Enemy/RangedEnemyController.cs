@@ -1,6 +1,7 @@
-using UnityEngine;
 using System.Collections;
-using UnityEditor.Rendering;
+using DG.Tweening;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class RangedEnemyController : EnemyController
 {
@@ -9,8 +10,11 @@ public class RangedEnemyController : EnemyController
     [SerializeField] private PlayerAction _player;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private float _attackCoolTime;
-
     [SerializeField] private LineRendererAtoB _attackLine;
+    [SerializeField] private float _returnTime;
+    [SerializeField] private GameObject _idle;
+    [SerializeField] private GameObject _attack;
+    [SerializeField] private Image _focusMark;
 
     private EnemyMovement _enemyMovement;
     private Quaternion _prevRotation;
@@ -33,6 +37,9 @@ public class RangedEnemyController : EnemyController
         _isInRange = false;
         _attackRange = _noticeRange;
         _enemyMovement = transform?.GetComponent<EnemyMovement>();
+        _focusMark.gameObject.SetActive(false);
+        _idle.SetActive(true);
+        _attack.SetActive(false);
     }
 
     protected override void CacheComponents()
@@ -75,12 +82,18 @@ public class RangedEnemyController : EnemyController
         {
             _prevRotation = transform.rotation;
             _isInRange = true;
-            LookPlayer();
+
+            _idle.SetActive(false);
+            _attack.SetActive(true);            
         }
 
         else
         {
             _isInRange = false;
+
+            _idle.SetActive(true);
+            _attack.SetActive(false);
+
             transform.rotation = _prevRotation;
         }
 
@@ -90,13 +103,15 @@ public class RangedEnemyController : EnemyController
     }
 
     protected override void PunishAttack()
-    {
+    {        
         LookPlayer();
         StageManager.Instance.StateUpdate(GameState.사망);
     }
 
     public override void Damaged()
     {
+        GetComponent<TutorialEnemyTarget>()?.ReportDefeated(); // 튜토리얼용
+        StageManager.Instance.FocusTimeUpdate(_returnTime);
         Destroy(gameObject);
     }
 
@@ -114,7 +129,7 @@ public class RangedEnemyController : EnemyController
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                Debug.Log("AttackRay: 타겟확인");
+                //Debug.Log("AttackRay: 타겟확인");
                 if (_attackCoroutine != null)
                 {
                     StopCoroutine(_attackCoroutine);
@@ -125,7 +140,7 @@ public class RangedEnemyController : EnemyController
             }
             else
             {
-                Debug.Log($"AttackRay: 타겟놓침:{hit.transform.name}");
+                //Debug.Log($"AttackRay: 타겟놓침:{hit.transform.name}");
             }
         }
     }
@@ -144,7 +159,7 @@ public class RangedEnemyController : EnemyController
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                Debug.Log($"{transform.name}_NoticeRay: 타겟감지aaaaaaaaaaaaaaaaaaa");                
+                Debug.Log($"궁병 타겟감지aaaaaaaaaaaaaaaaaaa");                
                 SetInRange(true);
 
                 if(_attackCoroutine != null)
@@ -153,14 +168,14 @@ public class RangedEnemyController : EnemyController
                     _attackLine.Stop();
                     _attackCoroutine = null;
                 }
-
+                LookPlayer();
                 _attackLine.Play(origin, target);
                 _attackCoroutine = StartCoroutine(StartAttackCoolTime());
             }
 
             else
             {
-                Debug.Log($"{transform.name}_NoticeRay: 타겟안보임");
+                //Debug.Log($"{transform.name}_NoticeRay: 타겟안보임");
                 SetInRange(false);
             }
         }
@@ -170,6 +185,8 @@ public class RangedEnemyController : EnemyController
     {
         if (_player.transform != null)
         {
+            _idle.SetActive(false);
+            _attack.SetActive(true);
             transform.LookAt(new Vector3(_player.transform.position.x, transform.position.y, _player.transform.position.z));
         }
     }
@@ -182,6 +199,10 @@ public class RangedEnemyController : EnemyController
     public override void FocusState()
     {
         _enemyMovement?.SetCanMove(false);
+        _focusMark.gameObject.SetActive(true);
+        _focusMark.rectTransform.LookAt(Camera.main.transform);
+        _focusMark.DOFade(1f, 0.01f);
+        _focusMark.DOFade(0f, 1f).SetEase(Ease.InQuint);
     }
     public override void PunishState()
     {

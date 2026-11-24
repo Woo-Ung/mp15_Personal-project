@@ -4,9 +4,25 @@ using UnityEngine;
 public class CameraController : MonoBehaviour, IStateObserver
 {
     [SerializeField] private Camera _charaCamera;
+    [SerializeField] private LayerMask _hardMask;
+    [SerializeField] private LayerMask _normalMask;
+
     private void Start()
     {
         CacheComponents();
+        SetLevel();
+    }
+
+    private void SetLevel()
+    {
+        if (GameManager.Instance._level == Level.어려움)
+        {
+            _charaCamera.cullingMask = _hardMask;
+        }
+        else
+        {
+            _charaCamera.cullingMask = _normalMask;
+        }
     }
 
     private void CacheComponents()

@@ -1,6 +1,7 @@
-using System;
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MeleeEnemyController : EnemyController
 {
@@ -12,6 +13,11 @@ public class MeleeEnemyController : EnemyController
     [SerializeField] private float _setAttackRange;
     [SerializeField] private float _addAttackRange;
     [SerializeField] private AttackCollider _attackCollider;
+    [SerializeField] private float _returnTime;
+    [SerializeField] private Image _focusMark;    
+    [SerializeField] private GameObject _idle;
+    [SerializeField] private GameObject _attackReady;
+    [SerializeField] private GameObject _attack;
 
     private EnemyMovement _enemyMovement;
     private Quaternion _prevRotation;
@@ -34,6 +40,19 @@ public class MeleeEnemyController : EnemyController
         _isInRange = false;
         _attackRange = _setAttackRange;
         _enemyMovement = transform?.GetComponent<EnemyMovement>();
+        _focusMark.gameObject.SetActive(false);
+        _attack.SetActive(false);
+        _attackReady.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        if (StageManager.Instance == null)
+            return;
+
+        bool canMove = StageManager.Instance.PlayerState == GameState.기본 && !_isInRange;
+
+        GetComponent<EnemyMovement>()?.SetCanMove(canMove);
     }
     protected override void CacheComponents()
     {
@@ -57,7 +76,11 @@ public class MeleeEnemyController : EnemyController
 
     public override void SetInRange(bool inR)
     {
-        if(_isInRange == inR)
+        Debug.Log(
+       $"{name} SetInRange 호출: {inR}, " +
+       $"현재 감지 상태: {_isInRange}"
+   );
+        if (_isInRange == inR)
         {
             return;
         }
@@ -66,13 +89,25 @@ public class MeleeEnemyController : EnemyController
         {
             _prevRotation = transform.rotation;
             _isInRange = true;
-            LookPlayer();
+
+            if ((StageManager.Instance.PlayerState != GameState.공격))
+            {
+                LookPlayer();
+
+                _idle.SetActive(false);
+                _attackReady.SetActive(true);
+                _attack.SetActive(false);
+            }
         }
 
         else
         {
             _isInRange = false;
             transform.rotation = _prevRotation;
+
+            _idle.SetActive(true);
+            _attackReady.SetActive(false);
+            _attack.SetActive(false);
         }
 
         bool canMove = (StageManager.Instance.PlayerState == GameState.기본 && !_isInRange);
@@ -82,22 +117,33 @@ public class MeleeEnemyController : EnemyController
 
     protected override void PunishAttack()
     {
+        _attack.SetActive(true);
+        _attackReady.SetActive(false);
+        _idle.SetActive(false);
+
+        StageManager.Instance.StateUpdate(GameState.사망);
+                
         Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
         Vector3 target = _player.transform.position + Vector3.up;
         Vector3 direction = (target - origin).normalized;
 
-        transform.position = target + (direction * 1.2f);
-
-        StageManager.Instance.StateUpdate(GameState.사망);
+        transform.position = target + (direction * 1.2f);        
     }
 
     public override void Damaged()
     {
+        GetComponent<TutorialEnemyTarget>()?.ReportDefeated(); // 튜토리얼용
+        StageManager.Instance.FocusTimeUpdate(_returnTime);
         Destroy(gameObject);
     }     
 
     public override void ShootAttackRay()
     {
+        if(StageManager.Instance.PlayerState == GameState.공격)
+        {
+            return;
+        }
+
         Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z); // Ray 나가는 높이 조절
         Vector3 target = _player.transform.position + Vector3.up;
 
@@ -110,12 +156,12 @@ public class MeleeEnemyController : EnemyController
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                Debug.Log("AttackRay: 타겟확인");
+                //Debug.Log("AttackRay: 타겟확인");
                 PunishAttack();
             }
             else
             {
-                Debug.Log($"AttackRay: 타겟놓침:{hit.transform.name}");
+                //Debug.Log($"AttackRay: 타겟놓침:{hit.transform.name}");
             }
         }
     }
@@ -134,13 +180,13 @@ public class MeleeEnemyController : EnemyController
         {
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                Debug.Log("NoticeRay: 타겟감지");
+                //Debug.Log("NoticeRay: 타겟감지");
                 SetInRange(true);
                 StartCoroutine(SetAttackRange());
             }
             else
             {
-                Debug.Log("NoticeRay: 타겟안보임");
+                //Debug.Log("NoticeRay: 타겟안보임");
                 SetInRange(false);
             }
         }
@@ -155,16 +201,31 @@ public class MeleeEnemyController : EnemyController
     }
 
     public override void IdleState()
-    {
+    {        
         _enemyMovement?.SetCanMove(!_isInRange);
+        _focusMark.gameObject.SetActive(false);
+
+        _idle.SetActive(!_isInRange);
+        _attackReady.SetActive(_isInRange);
+        _attack.SetActive(false);
+        if (_isInRange)
+        {
+            LookPlayer();
+        }
+
+        ShootAttackRay();
     }
     public override void FocusState()
     {
         _enemyMovement?.SetCanMove(false);
+        _focusMark.gameObject.SetActive(true);
+        _focusMark.rectTransform.LookAt(Camera.main.transform);
+        _focusMark.DOFade(1f, 0.01f);
+        _focusMark.DOFade(0f, 1f).SetEase(Ease.InQuint);        
     }
     public override void PunishState()
-    {
-        ShootAttackRay();               
+    {        
+        ShootAttackRay();
     }
     //public override void AttackState()
     //{

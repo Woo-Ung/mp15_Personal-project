@@ -59,7 +59,7 @@ public class ObjectPool : MonoBehaviour
     public void Return(GameObject sword)
     {
         sword.GetComponent<SwordObj>().SetDestroy(false);
-        sword.SetActive(false);        
+        sword.SetActive(false);
         _swords[_count] = sword;
         _count++;
     }

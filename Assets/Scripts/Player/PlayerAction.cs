@@ -1,10 +1,9 @@
-using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class PlayerAction : MonoBehaviour, IStateObserver
 {
@@ -14,6 +13,13 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     [SerializeField] private float _waitTime;    
     [SerializeField] private LayerMask _wallLayer;
     [SerializeField] private LayerMask _enemyLayer;
+    [SerializeField] private float _timeValue;
+    [SerializeField] private GameObject _eye;
+    [SerializeField] private Image _eyeFire;
+
+    [SerializeField] private GameObject _Idle;
+    [SerializeField] private GameObject[] _Attack;
+
     private WaitForSeconds _wait;
 
 
@@ -25,6 +31,10 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     private void Start()
     {
         CacheComponents();
+        if (_camera != null)
+        {
+            _camera.transform.position = transform.position;
+        }
     }
 
     private void Update()
@@ -32,9 +42,20 @@ public class PlayerAction : MonoBehaviour, IStateObserver
         
     }
 
+    private void OnEnable()
+    {
+        StageManager.Instance.StateUpdate(GameState.기본);
+    }
+
     private void Init()
     {        
         _wait = new WaitForSeconds(_waitTime);
+        for (int i = 0; i < _Attack.Length; i++)
+        {
+            _Attack[i].SetActive(false);
+        }
+        _eyeFire.gameObject.SetActive(false);
+        _eye.SetActive(false);
     }
 
     private void CacheComponents()
@@ -47,13 +68,47 @@ public class PlayerAction : MonoBehaviour, IStateObserver
         _pointList.Add(point);
     }
 
+    private void IdlePose()
+    {
+        for (int i = 0; i < _Attack.Length; i++)
+        {
+            _Attack[i].SetActive(false);
+        }
+        _Idle.SetActive(true);
+    }
+
+    private void AttackPose()
+    {
+        _Idle.SetActive(false);
+        for (int i = 0; i < _Attack.Length; i++)
+        {
+            _Attack[i].SetActive(false);
+        }
+        int num = Random.Range(0, _Attack.Length);
+
+        _Attack[num].SetActive(true);
+
+    }
+
     public void IdleState()
     {
-        
+        IdlePose();
+
+        _eye.SetActive(false);
+        _eyeFire.gameObject.SetActive(false);
     }
     public void FocusState()
-    {        
-        Instantiate(_attackRouteCanvas, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);  
+    {
+        TutorialManager.Instance?.OnFocusEntered(); // 튜토리얼용
+        Instantiate(_attackRouteCanvas, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);
+        _eye.SetActive(true);
+        _eyeFire.gameObject.SetActive(true);
+
+        _eyeFire.DOKill();
+        _eyeFire.fillAmount = 0f;
+
+        _eyeFire.DOFillAmount(1f, 0.5f)
+                .SetEase(Ease.OutQuad);
     }
     
     public void PunishState()
@@ -63,6 +118,9 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 
     public void AttackState()
     {
+        _eye.SetActive(false);
+        _eyeFire.gameObject.SetActive(false);
+
         if (_pointList.Count <= 1)
         {
             ResetAttack();
@@ -70,10 +128,14 @@ public class PlayerAction : MonoBehaviour, IStateObserver
             return;
         }
 
+        TutorialManager.Instance?.OnAttackStarted(); // 튜토리얼용
         StartCoroutine(Attack());
     }
     public void DeadState()
     {
+        _eye.SetActive(false);
+        _eyeFire.gameObject.SetActive(false);
+
         StopAllCoroutines();
         ResetAttack();
         Debug.Log("죽음ㅠㅠ");
@@ -94,6 +156,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 
     private IEnumerator Attack()
     {
+
         if (_pointList.Count > 0)
         {
             yield return _wait;
@@ -107,6 +170,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
 
                 if (hits.Length > 0)
                 {
+                    AttackPose();
                     for (int j = 0; j < hits.Length; j++)
                     {
                         hits[j].transform.GetComponentInParent<IDamageable>().Damaged();
@@ -114,6 +178,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
                 }
                 else
                 {
+                    IdleState();
                     yield return new WaitForSeconds(0.05f);
                     StageManager.Instance.StateUpdate(GameState.응징);
                     yield return new WaitForSeconds(0.05f);
@@ -136,11 +201,14 @@ public class PlayerAction : MonoBehaviour, IStateObserver
                     {
                         damaged.Damaged();
                     }
+                    IdleState();
                     break;
                 }
             }
+            yield return new WaitForSeconds(0.3f);
 
             ResetAttack();
+            TutorialManager.Instance?.OnAttackFinished(); // 튜토리얼용
         }
 
         Physics.SyncTransforms(); // 물리좌표 동기화
@@ -157,7 +225,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
         {
             return;
         }
-
+        StageManager.Instance.FocusTimeUpdate(_timeValue);
         Destroy(_pointList[(_pointList.Count - 1)]._transform.gameObject);
         _pointList.RemoveAt(_pointList.Count - 1);
         _pointList[(_pointList.Count - 1)]._attackPoint.GetComponent<AttackRouteUI>().CanSelect();
@@ -192,23 +260,24 @@ public class PlayerAction : MonoBehaviour, IStateObserver
             hitPosition = new Vector3(hitPosition.x, transform.position.y, hitPosition.z);
             wall = hit;
             isWallExist = true;
-            Debug.Log("장애물있음");
+            //Debug.Log("장애물있음");
         }
         else
         {
             isWallExist = false;
             wall = default;
             hitPosition = nextPoint;
+            //Debug.Log("장애물감지못함");
         }        
     }
 
     private void ScanEnemy(Vector3 nextPoint, out RaycastHit[] hits)
     {
         float distance = Vector3.Distance(transform.position, nextPoint);
-        hits = Physics.SphereCastAll(transform.position, 0.5f, ((nextPoint - transform.position).normalized), distance, _enemyLayer);
+        hits = Physics.SphereCastAll(transform.position, 0.6f, ((nextPoint - transform.position).normalized), distance, _enemyLayer);
         if (hits.Length > 0)
         {
-            Debug.Log($"적 수:{hits.Length}");
+            //Debug.Log($"적 수:{hits.Length}");
             for (int i = 0; i < hits.Length; i++)
             {
                 Debug.Log(hits[i].transform.name);

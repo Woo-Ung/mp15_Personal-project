@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
-    [SerializeField] private float waitTime = 0.3f;
-    [SerializeField] private float turnSpeed = 90f;
+    [SerializeField] private float speed;
+    [SerializeField] private float waitTime;
+    [SerializeField] private float turnSpeed;
     [SerializeField] private Transform _pathHolder;
+    [SerializeField] private int _startNum = 0;
+    [SerializeField] private Animator _animator;
 
-    private bool _canMove;
+    [SerializeField]private bool _canMove = true;
     private float _remainingWaitTime;
    
 
@@ -19,40 +21,53 @@ public class EnemyMovement : MonoBehaviour
 
     private void Init()
     {
-        _canMove = false;
+        _canMove = true;
+        _animator = GetComponentInChildren<Animator>(true);
     }
 
-    public void SetCanMove(bool can)
+    private void OnEnable()
     {
-        _canMove = can;
-    }
+        _canMove = true;
 
-    public void Start()
-    {
         Vector3[] waypoints = new Vector3[_pathHolder.childCount];
         for (int i = 0; i < waypoints.Length; i++)
         {
             waypoints[i] = _pathHolder.GetChild(i).position;
             waypoints[i] = new Vector3(waypoints[i].x, transform.position.y, waypoints[i].z);
         }
-        StartCoroutine(FollowPath(waypoints));
+        StartCoroutine(FollowPath(waypoints, _startNum));
     }
 
-    private IEnumerator FollowPath(Vector3[] waypoints)
+    public void SetCanMove(bool can)
     {
-        transform.position = waypoints[0];
-        int targetWaypointIndex = 1;
+        _canMove = can;
+
+        if (_animator != null)
+        {
+            _animator.speed = can ? 1f : 0f;
+        }       
+    }
+        
+    private IEnumerator FollowPath(Vector3[] waypoints, int startNum)
+    {
+        transform.position = waypoints[startNum];
+        int targetWaypointIndex = (startNum + 1) % waypoints.Length;
         Vector3 targetWaypoint = waypoints[targetWaypointIndex];
         transform.LookAt(targetWaypoint);
-
-        while(true)
+      
+        while (true)
         {
-            if(!_canMove)
+            if (!_canMove)
             {
                 yield return null;
                 continue;
             }
 
+            _animator.SetBool("IsWalking", true);
+            Debug.Log(
+    $"{name} 현재 위치: {transform.position} / " +
+    $"목표 위치: {targetWaypoint} / " +
+    $"거리: {Vector3.Distance(transform.position, targetWaypoint)}");
             transform.position = Vector3.MoveTowards(transform.position, targetWaypoint, speed * Time.deltaTime);
             if(transform.position == targetWaypoint)
             {

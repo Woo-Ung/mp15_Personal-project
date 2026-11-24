@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class StateTextureChanger : TextureChanger, IStateObserver
@@ -25,6 +26,10 @@ public class StateTextureChanger : TextureChanger, IStateObserver
     private void CacheComponents()
     {
         StageManager.Instance.Subscribe(this);
+        if (_baseMaterial == null)
+        {
+            _baseMaterial = _meshRenderer.material;            
+        }
     }
 
     public void IdleState()

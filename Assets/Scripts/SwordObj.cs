@@ -14,6 +14,7 @@ public class SwordObj : MonoBehaviour, IDamageable
     [SerializeField] private TextureChanger _textureChanger;
   
     [SerializeField] private Image _warningSign;
+    [SerializeField] private float _returnTime;
 
     private bool _isPoolSword;
     private GameObject _warningCanvas;
@@ -36,6 +37,14 @@ public class SwordObj : MonoBehaviour, IDamageable
         SetSwordType();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public void SetPoolSword()
     {
         _isPoolSword = true;
@@ -52,9 +61,9 @@ public class SwordObj : MonoBehaviour, IDamageable
         Physics.SyncTransforms();
         yield return null;
         Ray ray = new Ray(transform.position, -transform.up);
-        //Debug.DrawRay(transform.position, -transform.up * 30f, Color.red, 5f); //확인용
-        if(Physics.Raycast(ray, out RaycastHit hit, 30f, _groundLayer))
-        {
+        Debug.DrawRay(transform.position, -transform.up * 30f, Color.red, 5f); //확인용
+        if (Physics.Raycast(ray, out RaycastHit hit, 30f, _groundLayer))
+        {            
             yield return null;            
             Image warning = Instantiate(_warningSign, hit.point + new Vector3(0, 0.01f, 0), _warningSign.transform.rotation);
             warning.transform.SetParent(_warningCanvas.transform);
@@ -98,19 +107,20 @@ public class SwordObj : MonoBehaviour, IDamageable
     }
 
     public void Damaged()
-    {
-        if(_isPoolSword)
-        {
-            ObjectPool.Instance.Return(this.gameObject);
-        }
+    {       
         if (_canDestroy)
         {
+            if (_isPoolSword)
+            {
+                ObjectPool.Instance.Return(this.gameObject);
+            }
+            StageManager.Instance.FocusTimeUpdate(_returnTime);
             GetComponentInParent<SwordArray>()?.SwordDestroyed();
             gameObject.SetActive(false);
         }
         else
         {
             GetComponentInParent<SwordArray>()?.WrongSwordSAttacked(this);
-        }
+        }        
     }
 }

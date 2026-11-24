@@ -8,6 +8,8 @@ public class StageManager : MonoBehaviour
     [field: SerializeField] public GameState PlayerState { get; private set; }   
 
     private List<IStateObserver> _subscriber = new();
+    private PlayerFocusModeManager _player;
+    public bool _isPaused { get; private set; }
     public static StageManager Instance { get; private set; }
 
     private void Awake()
@@ -31,6 +33,21 @@ public class StageManager : MonoBehaviour
         StateUpdate(GameState.기본);
     }
 
+    public void SetPause(bool value)
+    {
+        _isPaused = value;
+    }
+
+    public void PlayerSub(PlayerFocusModeManager player)
+    {
+        _player = player;
+    }
+
+    public void FocusTimeUpdate(float value)
+    {
+        _player.ChangeFocusTime(value);
+    }
+
     public void Subscribe(IStateObserver observer)
     {
         _subscriber.Add(observer);
@@ -43,59 +60,68 @@ public class StageManager : MonoBehaviour
 
     public void StateUpdate(GameState state)
     {
-        switch (state)
+        if (PlayerState == GameState.클리어 &&
+        state != GameState.클리어)
         {
-            case GameState.기본:
-                Debug.Log("기본상태");
-                PlayerState = GameState.기본;
-                for (int i = 0; i < _subscriber.Count; i++)
-                {                                       
-                    _subscriber[i].IdleState();
-                }
-                break;
-            case GameState.집중:
-                if (PlayerState == GameState.기본)
-                {
-                    Debug.Log("집중상태");
-                    PlayerState = GameState.집중;
+            return;
+        }
+
+        if (!_isPaused)
+        {
+            switch (state)
+            {
+                case GameState.기본:
+                    Debug.Log("기본상태");
+                    PlayerState = GameState.기본;
                     for (int i = 0; i < _subscriber.Count; i++)
-                    {                        
-                        _subscriber[i].FocusState();
+                    {
+                        _subscriber[i].IdleState();
                     }
-                }
-                break;
-            case GameState.공격:
-                if (PlayerState == GameState.집중)
-                {                  
-                    Debug.Log("공격상태");
-                    PlayerState = GameState.공격;
+                    break;
+                case GameState.집중:
+                    if (PlayerState == GameState.기본)
+                    {
+                        Debug.Log("집중상태");
+                        PlayerState = GameState.집중;
+                        for (int i = 0; i < _subscriber.Count; i++)
+                        {
+                            _subscriber[i].FocusState();
+                        }
+                    }
+                    break;
+                case GameState.공격:
+                    if (PlayerState == GameState.집중)
+                    {
+                        Debug.Log("공격상태");
+                        PlayerState = GameState.공격;
+                        for (int i = 0; i < _subscriber.Count; i++)
+                        {
+                            _subscriber[i].AttackState();
+                        }
+                    }
+                    break;
+                case GameState.응징:
+                    Debug.Log("응징상태");
+                    PlayerState = GameState.응징;
                     for (int i = 0; i < _subscriber.Count; i++)
-                    {                        
-                        _subscriber[i].AttackState();
+                    {
+                        _subscriber[i].PunishState();
                     }
-                }
-                break;
-            case GameState.응징:
-                Debug.Log("응징상태");
-                PlayerState = GameState.응징;
-                for (int i = 0; i < _subscriber.Count; i++)
-                {                   
-                    _subscriber[i].PunishState();
-                }
-                break;
-            case GameState.사망:
-                Debug.Log("사망상태");
-                PlayerState = GameState.사망;
-                StartCoroutine(Die());
-                break;
-            case GameState.클리어:
-                Debug.Log("클리어");
-                PlayerState = GameState.클리어;
-                for (int i = 0; i < _subscriber.Count; i++)
-                {                    
-                    _subscriber[i].ClearState();
-                }
-                break;
+                    break;
+                case GameState.사망:
+                    Debug.Log("사망상태");
+                    PlayerState = GameState.사망;
+                    StartCoroutine(Die());
+                    break;
+                case GameState.클리어:
+                    Debug.Log("클리어");
+                    PlayerState = GameState.클리어;
+                    for (int i = 0; i < _subscriber.Count; i++)
+                    {
+                        _subscriber[i].ClearState();
+                    }
+                    break;
+            }
         }
     }  
 
