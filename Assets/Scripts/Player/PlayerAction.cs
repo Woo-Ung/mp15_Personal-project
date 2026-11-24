@@ -21,6 +21,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
     [SerializeField] private GameObject[] _Attack;
 
     private WaitForSeconds _wait;
+    private Coroutine _attackCoroutine;
 
 
     private void Awake()
@@ -129,7 +130,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
         }
 
         TutorialManager.Instance?.OnAttackStarted(); // 튜토리얼용
-        StartCoroutine(Attack());
+        _attackCoroutine = StartCoroutine(Attack());
     }
     public void DeadState()
     {
@@ -269,6 +270,17 @@ public class PlayerAction : MonoBehaviour, IStateObserver
             hitPosition = nextPoint;
             //Debug.Log("장애물감지못함");
         }        
+    }
+
+    public void StopAttack()
+    {
+        if (_attackCoroutine != null)
+        {
+            StopCoroutine(_attackCoroutine);
+            _attackCoroutine = null;
+        }
+
+        ResetAttack();
     }
 
     private void ScanEnemy(Vector3 nextPoint, out RaycastHit[] hits)

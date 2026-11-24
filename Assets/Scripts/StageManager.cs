@@ -111,7 +111,8 @@ public class StageManager : MonoBehaviour
                 case GameState.사망:
                     Debug.Log("사망상태");
                     PlayerState = GameState.사망;
-                    StartCoroutine(Die());
+                    //StartCoroutine(Die());
+                    Die();
                     break;
                 case GameState.클리어:
                     Debug.Log("클리어");
@@ -123,17 +124,16 @@ public class StageManager : MonoBehaviour
                     break;
             }
         }
-    }  
+    }
 
-    private IEnumerator Die()
-    {
-        yield return new WaitForSeconds(0.3f);
+    private void Die()
+    {  
         for (int i = 0; i < _subscriber.Count; i++)
         {
             _subscriber[i].DeadState();
         }
     }
-
+  
     private void SetSingleton()
     {
         if (Instance != null && Instance != this)
