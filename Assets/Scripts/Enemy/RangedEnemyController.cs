@@ -15,6 +15,7 @@ public class RangedEnemyController : EnemyController
     [SerializeField] private GameObject _idle;
     [SerializeField] private GameObject _attack;
     [SerializeField] private Image _focusMark;
+    [SerializeField] private Image _punishMark;
 
     private EnemyMovement _enemyMovement;
     private Quaternion _prevRotation;
@@ -38,6 +39,7 @@ public class RangedEnemyController : EnemyController
         _attackRange = _noticeRange;
         _enemyMovement = transform?.GetComponent<EnemyMovement>();
         _focusMark.gameObject.SetActive(false);
+        _punishMark.gameObject.SetActive(false);
         _idle.SetActive(true);
         _attack.SetActive(false);
     }
@@ -105,7 +107,12 @@ public class RangedEnemyController : EnemyController
     protected override void PunishAttack()
     {        
         LookPlayer();
+        _idle.SetActive(false);
+        _attack.SetActive(true);
         StageManager.Instance.StateUpdate(GameState.사망);
+        CameraController _mainCam = Camera.main.GetComponentInParent<CameraController>();
+        _punishMark.gameObject.SetActive(true);
+        _mainCam.transform.position = transform.position;
     }
 
     public override void Damaged()
