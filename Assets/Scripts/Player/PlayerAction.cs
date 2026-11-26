@@ -168,6 +168,7 @@ public class PlayerAction : MonoBehaviour, IStateObserver
                 ScanEnemy(hitPosition, out RaycastHit[] hits);
                 transform.position = hitPosition;
                 transform.rotation = _pointList[i - 1]._transform.rotation;
+                Physics.SyncTransforms(); // 물리좌표 동기화
 
                 if (hits.Length > 0)
                 {
@@ -212,7 +213,6 @@ public class PlayerAction : MonoBehaviour, IStateObserver
             TutorialManager.Instance?.OnAttackFinished(); // 튜토리얼용
         }
 
-        Physics.SyncTransforms(); // 물리좌표 동기화
         StageManager.Instance.StateUpdate(GameState.기본);
     }
 
